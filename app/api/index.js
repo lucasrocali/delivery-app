@@ -2,7 +2,7 @@ const production = false;
 
 var API = '';
 
-const Accept = 'application/mediteme-places.v1+json';
+const Accept = 'application/kids-places.v1+json';
 
 function authHeader() {
     return {
@@ -20,7 +20,7 @@ function header(token) {
 }
 
 if (!production) {
-    API = 'http://10.0.0.102:3000';
+    API = 'http://192.168.1.102:3000';
 }
 
 export function loginRequest(user_login) {
@@ -58,6 +58,7 @@ export function signupRequest(user_signup) {
 }
 
 export function getCategoriesRequest(token) {
+    console.log('getCategoriesRequest')
     return fetch(`${API}/categories`, {
         method: 'GET'
     }).then(response => response.json())

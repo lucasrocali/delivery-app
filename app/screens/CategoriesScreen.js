@@ -3,11 +3,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { } from '../store/auth/action'
-import * as selectors from '../store/auth/selector';
+import { loadCategories } from '../store/stores/action'
+import * as selectors from '../store/stores/selector';
 import styled from "styled-components";
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
     flex: 1;
     align-items: center;
     justify-content: center;
@@ -22,26 +22,25 @@ type State = {
 }
 
 type Props = {
-
+    loadCategories: Function
 }
-class Base extends Component<Props, State> {
+class Categories extends Component<Props, State> {
 
     render() {
         return (
-            <Container>
-                <Text>Base</Text>
+            <Container
+                onPress={() => this.props.loadCategories()}
+            >
+                <Text>Categories</Text>
             </Container>
         );
     }
 }
 
-Base.propTypes = {
-
-}
 
 export default connect(
     state => ({
 
     }),
-    {}
-)(Base)
+    { loadCategories }
+)(Categories)

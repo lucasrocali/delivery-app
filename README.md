@@ -1,8 +1,4 @@
-# base-app
+# Delivery App
 
-Base App for React Native
-- react-navigation
-- redux
-- redux-sagas
-- react-native-web
+touch actionType.js action.js reducer.js selector.js
 

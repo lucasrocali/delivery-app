@@ -7,11 +7,12 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import Colors from '../constants/Colors';
 
 import BaseScreen from '../screens/BaseScreen';
+import CategoriesScreen from '../screens/CategoriesScreen';
 
-const BaseStack = StackNavigator(
+const CategoriesStack = StackNavigator(
     {
-        Base: {
-            screen: BaseScreen,
+        Categories: {
+            screen: CategoriesScreen,
         },
     }
 );
@@ -19,7 +20,7 @@ const BaseStack = StackNavigator(
 export const AppNavigator = StackNavigator(
     {
         Main: {
-            screen: BaseStack
+            screen: CategoriesStack
         }
     }, {
         navigationOptions: {
