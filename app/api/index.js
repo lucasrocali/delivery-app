@@ -57,10 +57,9 @@ export function signupRequest(user_signup) {
         .catch((error) => { throw error });
 }
 
-export function getGroupsRequest(token) {
-    return fetch(`${API}/song_groups`, {
-        method: 'GET',
-        headers: header(token)
+export function getCategoriesRequest(token) {
+    return fetch(`${API}/categories`, {
+        method: 'GET'
     }).then(response => response.json())
         .then(data => data)
         .catch((error) => { throw error });
