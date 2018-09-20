@@ -14,5 +14,6 @@ export default {
     noticeText: '#fff',
     baseColorOrange: '#ff9933',
     baseColorViolet: '#5f5f99',
-    baseColorDark: '#333'
+    baseColorDark: '#333',
+    gray10: '#EEE'
 };

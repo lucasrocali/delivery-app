@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadCategories } from '../store/stores/action'
 import * as selectors from '../store/stores/selector';
+import EstabCell from './components/EstabCell';
 import styled from "styled-components";
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.ScrollView`
     flex: 1;
-    align-items: center;
-    justify-content: center;
 `;
 
 export const Text = styled.Text`
@@ -31,7 +30,7 @@ class Categories extends Component<Props, State> {
             <Container
                 onPress={() => this.props.loadCategories()}
             >
-                <Text>Categories</Text>
+                {[1, 2, 3, 4, 5].map((i) => <EstabCell key={i} />)}
             </Container>
         );
     }

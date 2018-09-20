@@ -6,6 +6,7 @@ import { navReducer } from '../navigation/RootNavigation';
 
 const rootReducer = combineReducers({
     authReducer,
+    storesReducer,
     nav: navReducer,
 });
 

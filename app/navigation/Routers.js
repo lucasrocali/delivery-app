@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { StackNavigator, TabNavigator, TabBarBottom, NavigationActions, DrawerNavigator } from 'react-navigation';
 import Ionicon from "react-native-vector-icons/Ionicons";
 
-import Colors from '../constants/Colors';
+import colors from '../constants/colors';
 
 import BaseScreen from '../screens/BaseScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
