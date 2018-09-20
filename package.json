@@ -1,37 +1,48 @@
 {
-  "name": "DeliveryApp",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "prepare": "patch-package",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "run-web": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --inline --hot --colors"
-  },
-  "dependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-react-native-web": "^0.4.0",
-    "file-loader": "^1.1.6",
-    "react": "^16.5.2",
-    "react-art": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-native": "0.55.0",
-    "react-native-web": "^0.9.0"
-  },
-  "devDependencies": {
-    "babel-jest": "22.2.2",
-    "babel-loader": "^7.1.2",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-react-native": "4.0.0",
-    "jest": "22.3.0",
-    "patch-package": "^5.1.1",
-    "postinstall-prepare": "^1.0.1",
-    "react-test-renderer": "16.2.0",
-    "url-loader": "^0.6.2",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.1"
-  },
-  "jest": {
-    "preset": "react-native"
-  }
+    "name": "DeliveryApp",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "prepare": "patch-package",
+        "start": "node node_modules/react-native/local-cli/cli.js start",
+        "test": "jest",
+        "run-web": "./node_modules/.bin/webpack-dev-server -d --config ./web/webpack.config.js --inline --hot --colors"
+    },
+    "dependencies": {
+        "babel-core": "^6.26.0",
+        "babel-plugin-react-native-web": "^0.4.0",
+        "file-loader": "^1.1.6",
+        "firebase": "^5.4.2",
+        "react": "^16.3.2",
+        "react-art": "^16.3.2",
+        "react-dom": "^16.3.2",
+        "react-native": "0.55.3",
+        "react-native-vector-icons": "^5.0.0",
+        "react-native-web": "^0.9.0",
+        "react-navigation": "^2.3.0",
+        "react-navigation-redux-helpers": "^2.0.0-beta",
+        "react-redux": "^5.0.5",
+        "redux": "^3.7.2",
+        "redux-logger": "^3.0.6",
+        "redux-saga": "^0.15.5",
+        "redux-saga-firebase": "^0.14.1",
+        "styled-components": "^3.4.5"
+    },
+    "devDependencies": {
+        "babel-jest": "22.2.2",
+        "babel-loader": "^7.1.2",
+        "babel-polyfill": "^6.26.0",
+        "babel-preset-react-native": "4.0.0",
+        "jest": "22.3.0",
+        "patch-package": "^5.1.1",
+        "postinstall-prepare": "^1.0.1",
+        "prettier": "^1.12.1",
+        "react-test-renderer": "16.2.0",
+        "url-loader": "^0.6.2",
+        "webpack": "^3.11.0",
+        "webpack-dev-server": "^2.11.1"
+    },
+    "jest": {
+        "preset": "react-native"
+    }
 }
