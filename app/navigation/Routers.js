@@ -8,12 +8,16 @@ import colors from '../constants/colors';
 
 import BaseScreen from '../screens/BaseScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
+import StoreScreen from '../screens/StoreScreen';
 
 const CategoriesStack = StackNavigator(
     {
         Categories: {
             screen: CategoriesScreen,
         },
+        Store: {
+            screen: StoreScreen
+        }
     }
 );
 

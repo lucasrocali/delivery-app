@@ -1,18 +1,21 @@
 // @flow
 
 import React, { Component } from 'react';
+import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadCategories } from '../store/stores/action'
-import * as selectors from '../store/stores/selector';
-import EstabCell from './components/EstabCell';
+import { loadCategories, loadStore } from '../store/stores/action'
+import * as storeSelectors from '../store/stores/selector';
+import CategoryCell from './components/CategoryCell';
 import styled from "styled-components";
+import colors from '../constants/colors';
 
-export const Container = styled.ScrollView`
+const Container = styled.ScrollView`
     flex: 1;
+    background-color: ${colors.white};
 `;
 
-export const Text = styled.Text`
+const Text = styled.Text`
     font-size: 20
 `;
 
@@ -25,12 +28,28 @@ type Props = {
 }
 class Categories extends Component<Props, State> {
 
+    componentDidMount() {
+        const { loadCategories } = this.props
+        loadCategories()
+    }
+
     render() {
+        const { categories, navigation, loadStore } = this.props
         return (
-            <Container
-                onPress={() => this.props.loadCategories()}
-            >
-                {[1, 2, 3, 4, 5].map((i) => <EstabCell key={i} />)}
+            <Container>
+                <FlatList
+                    data={categories}
+                    renderItem={({ item: category }, i) => (
+                        <CategoryCell
+                            key={i}
+                            category={category}
+                            onStorePress={(store) => {
+                                loadStore(store)
+                                navigation.navigate({ key: 'Store', routeName: 'Store' })
+                            }}
+                        />
+                    )}
+                />
             </Container>
         );
     }
@@ -39,7 +58,7 @@ class Categories extends Component<Props, State> {
 
 export default connect(
     state => ({
-
+        categories: storeSelectors.getCategories(state)
     }),
-    { loadCategories }
+    { loadCategories, loadStore }
 )(Categories)

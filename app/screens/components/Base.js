@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
 
-export const Container = styled.View`
+const Container = styled.View`
 
 `;
 
-export const Text = styled.Text`
+const Text = styled.Text`
     font-size: 20
 `;
 
