@@ -45,6 +45,13 @@ export const MapProduct = (raw) => {
     }
 }
 
+export type Option = {
+    id: number,
+    name: string,
+    min: number,
+    max: number
+}
+
 export const MapOption = (raw) => {
     return {
         id: raw && raw.id ? raw.id : '',
@@ -62,14 +69,25 @@ export const MapSubOption = (raw) => {
         name: raw && raw.name ? raw.name : '',
         foo: 'sub_option',
         price: raw && raw.price ? raw.price : '',
+        price_text: raw && raw.price ? `R$ ${raw.price}` : '',
     }
 }
 
 export const MapMenuSection = (store) => {
     return store && store.menus ? store.menus.map(menu => {
         return {
-            title: menu.name,
+            ...menu,
             data: menu.products
+        }
+    })
+        : []
+}
+
+export const MapOptionsSection = (product) => {
+    return product && product.options ? product.options.map(option => {
+        return {
+            ...option,
+            data: option.sub_options
         }
     })
         : []

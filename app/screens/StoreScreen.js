@@ -14,6 +14,7 @@ import StoreCellBody from './components/StoreCellBody'
 import { Title, Text, Cell } from './styled/index'
 import { MapMenuSection } from '../constants/objects';
 import ProductCell from './components/ProductCell';
+import MenuCell from './components/MenuCell';
 
 const Container = styled.View`
     flex: 1;
@@ -34,10 +35,6 @@ const HeaderBody = styled(Cell) `
 
 `
 
-const StoreSectionHeader = styled(Cell) `
-    background-color: ${colors.white};
-`
-
 
 type State = {
 
@@ -54,17 +51,21 @@ type Props = {
 class Store extends Component<Props, State> {
 
     render() {
-        const { store } = this.props
-        console.log(MapMenuSection(store))
+        const { store, navigation } = this.props
         return (
             <Container>
                 <SectionList
                     sections={MapMenuSection(store)}
-                    renderSectionHeader={({ section: { title } }) =>
-                        (<StoreSectionHeader><Title>{title}</Title></StoreSectionHeader>)
+                    renderSectionHeader={({ section: menu }) =>
+                        (<MenuCell menu={menu} />)
                     }
                     renderItem={({ item: product }, i) => (
-                        (<ProductCell product={product} />)
+                        (<ProductCell
+                            product={product}
+                            onPress={() => {
+                                navigation.navigate({ key: 'Product', routeName: 'Product', params: { product: product } })
+                            }}
+                        />)
                     )}
                     stickySectionHeadersEnabled
                     ListHeaderComponent={

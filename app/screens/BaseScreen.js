@@ -6,15 +6,12 @@ import { connect } from 'react-redux';
 import { } from '../store/auth/action'
 import * as selectors from '../store/auth/selector';
 import styled from "styled-components";
+import { Title } from './styled/index'
 
 const Container = styled.View`
     flex: 1;
     align-items: center;
     justify-content: center;
-`;
-
-const Text = styled.Text`
-    font-size: 20
 `;
 
 type State = {
@@ -29,7 +26,7 @@ class Base extends Component<Props, State> {
     render() {
         return (
             <Container>
-                <Text>Base</Text>
+                <Title>Base</Title>
             </Container>
         );
     }

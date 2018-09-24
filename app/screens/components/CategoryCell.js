@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import styled from "styled-components";
 import StoreCell from './StoreCell';
 import colors from '../../constants/colors';
-import { Title, SectionHeader } from '../styled/index'
+import { Title, ButtonText, SectionHeader } from '../styled/index'
 
 const Container = styled.View`
     border-bottom-width: 1;
@@ -15,11 +15,6 @@ const Button = styled.TouchableOpacity`
 
 `
 
-const ButtonText = styled.Text` 
-    font-size: 16;
-    color: ${colors.link};
-    font-weight: 600;
-`
 const Header = styled.View`
     flex-direction: row;
     padding-horizontal: 16;

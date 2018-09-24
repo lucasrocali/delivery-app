@@ -8,7 +8,7 @@ const Touchable = styled.TouchableOpacity`
 
 `
 
-const ProductCell = styled(Cell) `
+const Container = styled(Cell) `
     flex-direction: row;
 `
 
@@ -27,13 +27,14 @@ const Image = styled.Image`
 `
 
 type Props = {
-    product: object
+    product: Object,
+    onPress: Function
 }
 export default Base = (props: Props) => {
-    const { product } = props
+    const { product, onPress } = props
     return (
-        <Touchable activeOpacity={0.7}>
-            <ProductCell>
+        <Touchable activeOpacity={onPress ? 0.7 : 1.0} onPress={onPress}>
+            <Container>
                 <InfoView>
                     <Text>{product.name}</Text>
                     {product.descp != '' && <Caption>{product.descp}</Caption>}
@@ -42,7 +43,7 @@ export default Base = (props: Props) => {
                 <ImageView>
                     {product.img_url != '' && <Image source={{ uri: product.img_url }} />}
                 </ImageView>
-            </ProductCell>
+            </Container>
         </Touchable>
     );
 }

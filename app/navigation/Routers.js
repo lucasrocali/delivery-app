@@ -9,6 +9,7 @@ import colors from '../constants/colors';
 import BaseScreen from '../screens/BaseScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import StoreScreen from '../screens/StoreScreen';
+import ProductScreen from '../screens/ProductScreen';
 
 const CategoriesStack = StackNavigator(
     {
@@ -17,7 +18,12 @@ const CategoriesStack = StackNavigator(
         },
         Store: {
             screen: StoreScreen
+        },
+        Product: {
+            screen: ProductScreen
         }
+    }, {
+        initialRouteName: "Product"
     }
 );
 

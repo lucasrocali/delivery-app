@@ -32,8 +32,14 @@ export const Caption = styled.Text`
 export const Number = styled.Text`
     margin-top: ${spacing.tiny};
     font-size: 13;
-    color: ${colors.gray70}
+    color: ${colors.gray50}
     font-weight: 200;
+`
+
+export const ButtonText = styled.Text` 
+    font-size: 16;
+    color: ${colors.link};
+    font-weight: 600;
 `
 
 export const Cell = styled.View` 
