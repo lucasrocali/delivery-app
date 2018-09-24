@@ -39,6 +39,7 @@ export const MapProduct = (raw) => {
         foo: 'product',
         price: raw && raw.price ? raw.price : '',
         promo_price: raw && raw.promo_price ? raw.promo_price : '',
+        price_text: raw && raw.price ? `R$ ${raw.price}` : '',
         img_url: raw && raw.img_url ? raw.img_url : '',
         options: raw && raw.options ? raw.options.map(option => MapOption(option)) : []
     }

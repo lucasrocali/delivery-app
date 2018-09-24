@@ -9,9 +9,11 @@ import styled from "styled-components";
 import * as storeSelectors from '../store/stores/selector';
 import colors from '../constants/colors';
 import dimensions from '../constants/dimensions';
+import spacing from '../constants/spacing';
 import StoreCellBody from './components/StoreCellBody'
-import { Title, Text, SectionHeader } from './styled/index'
+import { Title, Text, Cell } from './styled/index'
 import { MapMenuSection } from '../constants/objects';
+import ProductCell from './components/ProductCell';
 
 const Container = styled.View`
     flex: 1;
@@ -28,12 +30,14 @@ const Header = styled.View`
 
 `
 
-const StoreSectionHeader = styled(SectionHeader) `
-    border-bottom-width: 1;
-    border-top-width: 1;
-    border-color: ${colors.gray5};
+const HeaderBody = styled(Cell) `
+
+`
+
+const StoreSectionHeader = styled(Cell) `
     background-color: ${colors.white};
 `
+
 
 type State = {
 
@@ -60,7 +64,7 @@ class Store extends Component<Props, State> {
                         (<StoreSectionHeader><Title>{title}</Title></StoreSectionHeader>)
                     }
                     renderItem={({ item: product }, i) => (
-                        (<SectionHeader><Text>{product.name}</Text></SectionHeader>)
+                        (<ProductCell product={product} />)
                     )}
                     stickySectionHeadersEnabled
                     ListHeaderComponent={

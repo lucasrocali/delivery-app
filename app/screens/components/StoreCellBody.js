@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import colors from '../../constants/colors';
 import dimensions from '../../constants/dimensions';
-import { Title, Caption } from '../styled/index'
+import { Title, Caption, Cell } from '../styled/index'
 
 
 
@@ -12,9 +12,8 @@ const Tag = styled.Text`
     color: ${colors.gray70};
 `
 
-const Body = styled.View`
-    padding-vertical: 10;
-    padding-horizontal: 10;
+const Body = styled(Cell) `
+    
 `
 
 const Row = styled.View`

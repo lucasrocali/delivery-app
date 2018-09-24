@@ -72,11 +72,12 @@ export function getStoreRequest() {
                         "name": "P2",
                         "price": 10,
                         "promo_price": 10,
-                        "img_url": null,
+                        "img_url": "https://gds.portal5g-media.com/contentFiles/image/2016/12/VEN/principal/97273_w840h0_1482403716jamp-burger-mushroom-burger.jpg",
                     },
                     {
                         "id": 1,
                         "name": "P2",
+                        "descp": "Descp ...",
                         "price": 10,
                         "promo_price": 10,
                         "img_url": null,
@@ -93,7 +94,7 @@ export function getStoreRequest() {
                         "name": "P2",
                         "price": 10,
                         "promo_price": 10,
-                        "img_url": null,
+                        "img_url": "https://gds.portal5g-media.com/contentFiles/image/2016/12/VEN/principal/97273_w840h0_1482403716jamp-burger-mushroom-burger.jpg",
                     },
                     {
                         "id": 1,
@@ -105,6 +106,7 @@ export function getStoreRequest() {
                     {
                         "id": 1,
                         "name": "P2",
+                        "descp": "Descp ...",
                         "price": 10,
                         "promo_price": 10,
                         "img_url": null,
@@ -113,11 +115,12 @@ export function getStoreRequest() {
             },
             {
                 "id": 1,
-                "name": "M1",
+                "name": "M2",
                 "products": [
                     {
                         "id": 1,
                         "name": "P1",
+                        "descp": "Descp ...",
                         "price": 10,
                         "promo_price": 10,
                         "img_url": null,
@@ -183,7 +186,7 @@ export function getStoreRequest() {
             },
             {
                 "id": 1,
-                "name": "M1",
+                "name": "M3",
                 "products": [
                     {
                         "id": 1,
