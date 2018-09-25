@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { LargeTitle, Cell, Caption, Left, Right } from '../styled/index';
+import { TitleH4, Cell, Caption, Left, Right } from '../styled/index';
 import type { Option } from '../../constants/objects';
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
@@ -26,7 +26,7 @@ export default OptionCell = (props: Props) => {
     return (
         <Container>
             <Left>
-                <LargeTitle>{option.name}</LargeTitle>
+                <TitleH4>{option.name}</TitleH4>
                 <Caption>{optionDescp(option)}</Caption>
             </Left>
             <Right>

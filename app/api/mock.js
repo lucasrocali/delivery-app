@@ -55,13 +55,41 @@ export function getStoreRequest() {
                             {
                                 "id": 1,
                                 "name": "O1",
-                                "min": 0,
+                                "min": 1,
                                 "max": 1,
                                 "sub_options": [
                                     {
                                         "id": 1,
-                                        "name": "SO1",
+                                        "name": "SO11",
                                         "price": 0
+                                    },
+                                    {
+                                        "id": 1,
+                                        "name": "SO11",
+                                        "price": 10
+                                    },
+                                ]
+                            },
+                            {
+                                "id": 11,
+                                "name": "O2",
+                                "min": 0,
+                                "max": 3,
+                                "sub_options": [
+                                    {
+                                        "id": 1,
+                                        "name": "SO21",
+                                        "price": 0
+                                    },
+                                    {
+                                        "id": 1,
+                                        "name": "SO22",
+                                        "price": 5
+                                    },
+                                    {
+                                        "id": 1,
+                                        "name": "SO23",
+                                        "price": 10
                                     }
                                 ]
                             }

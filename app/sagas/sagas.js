@@ -5,6 +5,7 @@ import { delay } from 'redux-saga';
 import * as authActionTypes from "../store/auth/actionType";
 import * as storesActionTypes from "../store/stores/actionType";
 import * as storeActions from "../store/stores/action";
+import * as cartActions from "../store/cart/action";
 // import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/"
 import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/mock.js"
 
@@ -66,6 +67,7 @@ const loadStore = function* (action) {
         const store = response
 
         yield put(storeActions.loadStoreSuccess(store))
+        yield put(cartActions.selectStore(store))
     } catch (error) {
         console.log(error);
         yield put(storeActions.setError(error))

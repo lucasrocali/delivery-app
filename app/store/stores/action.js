@@ -29,8 +29,6 @@ export function loadCategoriesSuccess(categories: Array) {
     }
 }
 
-
-
 export function loadStore(store: Object) {
     return {
         type: actionTypes.LOAD_STORE,

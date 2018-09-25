@@ -4,7 +4,7 @@ import { MapCategory, MapStore } from '../../constants/objects';
 
 const initialState = {
     categories: [],
-    current_store: null
+    current_store: null,
 }
 
 export default function storesReducer(state = initialState, action) {

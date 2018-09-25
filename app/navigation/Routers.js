@@ -10,6 +10,7 @@ import BaseScreen from '../screens/BaseScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import StoreScreen from '../screens/StoreScreen';
 import ProductScreen from '../screens/ProductScreen';
+import CartScreen from '../screens/CartScreen';
 
 const baseLeftBtn = (navigation) => (
     <TouchableOpacity style={{
@@ -65,7 +66,7 @@ const CategoriesStack = StackNavigator(
 const CartStack = StackNavigator(
     {
         Cart: {
-            screen: BaseScreen,
+            screen: CartScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Carrinho", false),
         }
     }
@@ -83,7 +84,7 @@ export const AppNavigator = createMaterialTopTabNavigator(
             screen: CartStack
         }
     }, {
-        initialRouteName: "CategoriesStack",
+        initialRouteName: "CartStack",
         navigationOptions: {
             gesturesEnabled: true,
             tabBarVisible: false,

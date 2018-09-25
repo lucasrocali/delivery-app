@@ -1,7 +1,7 @@
 export function getCategories(state) {
-    return state.storesReducer.categories;
+    return state.stores_reducer.categories;
 }
 
 export function getStore(state) {
-    return state.storesReducer.current_store;
+    return state.stores_reducer.current_store;
 }

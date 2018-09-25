@@ -2,16 +2,26 @@ import styled from "styled-components";
 import colors from '../../constants/colors';
 import spacing from '../../constants/spacing';
 
-export const LargeTitle = styled.Text`
-    font-size: 18;
-    color: ${colors.gray70}
-    font-weight: bold;
-`
-
 export const Title = styled.Text`
+    margin-top: 5;
     font-size: 16;
     color: ${colors.gray70}
     font-weight: bold;
+`
+export const TitleH1 = styled(Title) `
+    font-size: 28;
+`
+
+export const TitleH2 = styled(Title) `
+    font-size: 24;
+`
+
+export const TitleH3 = styled(Title) `
+    font-size: 20;
+`
+
+export const TitleH4 = styled(Title) `
+    font-size: 18;
 `
 
 export const Text = styled.Text`
@@ -70,7 +80,7 @@ export const Right = styled.View`
 `
 
 
-// largeTitle: {
+// TitleH4: {
 //     fontSize: 34,
 //     lineHeight: 41,
 //     ...systemWeights.regular,

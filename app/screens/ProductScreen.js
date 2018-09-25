@@ -8,13 +8,14 @@ import SubOptionCell from './components/SubOptionCell';
 import ProductCell from './components/ProductCell';
 import colors from '../constants/colors';
 import { connect } from 'react-redux';
-import { } from '../store/stores/action'
+import { addToCart } from '../store/cart/action'
 import * as selectors from '../store/stores/selector';
 import styled from "styled-components";
-import { Title, LargeTitle, Cell, Left, Right } from './styled/index'
+import { Title, TitleH4, Cell, Left, Right } from './styled/index'
 import Ionicon from "react-native-vector-icons/Ionicons";
 import spacing from '../constants/spacing';
 import { MapOptionsSection } from '../constants/objects'
+import { getCartProductTotal } from '../constants/functions';
 
 const Container = styled.View`
     flex: 1;
@@ -47,7 +48,7 @@ const OptionSectionHeader = styled(Cell) `
     background-color: ${colors.white};
 `
 
-const LightTitle = styled(LargeTitle) `
+const LightTitle = styled(TitleH4) `
     color: ${colors.white};
 `
 
@@ -63,11 +64,6 @@ const AddButton = styled.TouchableOpacity`
     align-items: center;
     border-radius: 5;
 `
-
-const getTotal = (product, quantity, selected_options) => {
-    const options_total = Object.keys(selected_options).reduce((total, key) => total + selected_options[key].reduce((total, so) => total + so.price, 0), 0)
-    return quantity * (product.price + options_total)
-}
 
 const canAdd = (product, quantity, selected_options) => {
     let can = true
@@ -94,8 +90,9 @@ class Product extends Component<Props, State> {
     }
 
     render() {
-        const { product } = this.props.navigation.state.params
+        const { store_id, product } = this.props.navigation.state.params
         const { selected_options, quantity } = this.state
+        const { addToCart, navigation } = this.props
         const canAddProduct = canAdd(product, quantity, selected_options)
         console.log(this.state)
         return (
@@ -165,13 +162,20 @@ class Product extends Component<Props, State> {
                         </Header>)
                     }
                 />
-                <AddButton activeOpacity={0.8} disabled={!canAddProduct} style={{ opacity: canAddProduct ? 1.0 : 0.4 }}>
+                <AddButton
+                    style={{ opacity: canAddProduct ? 1.0 : 0.4 }}
+                    activeOpacity={0.8}
+                    disabled={!canAddProduct}
+                    onPress={() => {
+                        addToCart(store_id, product, quantity, selected_options)
+                        navigation.goBack()
+                    }} >
                     <Left>
                         <LightTitle>{'Adicionar ' + quantity}</LightTitle>
                     </Left>
 
                     <Right>
-                        <LightTitle>{'R$ ' + getTotal(product, quantity, selected_options)}</LightTitle>
+                        <LightTitle>{'R$ ' + getCartProductTotal(product, quantity, selected_options)}</LightTitle>
                     </Right>
                 </AddButton>
             </Container>
@@ -183,5 +187,5 @@ export default connect(
     state => ({
 
     }),
-    {}
+    { addToCart }
 )(Product)
