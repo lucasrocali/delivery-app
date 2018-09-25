@@ -56,8 +56,22 @@ class Cart extends Component<Props, State> {
                         </Header>
                     )}
                     ListFooterComponent={() => <Title>Footer</Title>}
-                    renderItem={({ item: cart_product }) => (
-                        <CartProductCell cart_product={cart_product} />
+                    renderItem={({ item: cart_product, index }) => (
+                        <CartProductCell
+                            cart_product={cart_product}
+                            onPress={() => navigation.navigate({
+                                key: 'Product',
+                                routeName: 'Product',
+                                params: {
+                                    store_id: store.id,
+                                    product: cart_product.product,
+                                    quantity: cart_product.quantity,
+                                    selected_options: cart_product.selected_options,
+                                    cart_product_index: index,
+                                    title: store.name
+                                }
+                            })}
+                        />
                     )}
                 />
             </Container>

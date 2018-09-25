@@ -7,12 +7,13 @@ export function selectStore(store) {
     }
 }
 
-export function addToCart(store_id, product, quantity, selected_options) {
+export function addToCart(store_id, product, quantity, selected_options, cart_product_index) {
     return {
         type: actionTypes.ADD_TO_CART,
         store_id,
         product,
         quantity,
-        selected_options
+        selected_options,
+        cart_product_index
     }
 }

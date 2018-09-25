@@ -54,10 +54,6 @@ const CategoriesStack = StackNavigator(
             screen: StoreScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Loja"),
         },
-        Product: {
-            screen: ProductScreen,
-            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Produto"),
-        }
     }, {
         initialRouteName: "Categories"
     }
@@ -72,7 +68,16 @@ const CartStack = StackNavigator(
     }
 );
 
-export const AppNavigator = createMaterialTopTabNavigator(
+const ProductStack = StackNavigator(
+    {
+        Product: {
+            screen: ProductScreen,
+            // navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Product"),
+        }
+    }
+);
+
+export const MainStack = createMaterialTopTabNavigator(
     {
         PerfilStack: {
             screen: BaseScreen
@@ -92,12 +97,16 @@ export const AppNavigator = createMaterialTopTabNavigator(
     }
 )
 
-// export const AppNavigator = StackNavigator(
-//     {
-//         Main: MainStack
-//     }, {
-//         navigationOptions: {
-//             header: null,
-//         },
-//     }
-// );
+export const AppNavigator = StackNavigator(
+    {
+        Main: MainStack,
+        Product: {
+            screen: ProductStack
+        }
+    }, {
+        mode: 'modal',
+        navigationOptions: {
+            header: null,
+        },
+    }
+);

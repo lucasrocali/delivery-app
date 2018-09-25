@@ -83,15 +83,18 @@ class Product extends Component<Props, State> {
 
     constructor(props, context) {
         super(props, context);
+        const { quantity, selected_options, cart_product_index } = props.navigation.state.params
         this.state = {
-            selected_options: {},
-            quantity: 1
+            selected_options: selected_options ? selected_options : {},
+            quantity: quantity ? quantity : 1,
+            cart_product_index: typeof cart_product_index == 'number' ? cart_product_index : -1
         };
     }
 
     render() {
+        console.log('render product', this.props)
         const { store_id, product } = this.props.navigation.state.params
-        const { selected_options, quantity } = this.state
+        const { selected_options, quantity, cart_product_index } = this.state
         const { addToCart, navigation } = this.props
         const canAddProduct = canAdd(product, quantity, selected_options)
         console.log(this.state)
@@ -167,8 +170,8 @@ class Product extends Component<Props, State> {
                     activeOpacity={0.8}
                     disabled={!canAddProduct}
                     onPress={() => {
-                        addToCart(store_id, product, quantity, selected_options)
-                        navigation.goBack()
+                        addToCart(store_id, product, quantity, selected_options, cart_product_index)
+                        navigation.goBack(null)
                     }} >
                     <Left>
                         <LightTitle>{'Adicionar ' + quantity}</LightTitle>
