@@ -71,7 +71,6 @@ const getTotal = (product, quantity, selected_options) => {
 
 const canAdd = (product, quantity, selected_options) => {
     let can = true
-    // product.options.map(option => console.log(' op ', option, selected_options[option.id], selected_options[option.id] && selected_options[option.id].length >= option.min))
     product.options.map((option) => can = can && (option.min == 0 || selected_options[option.id] && selected_options[option.id].length >= option.min))
     return can
 }
@@ -83,65 +82,6 @@ type State = {
 type Props = {
 
 }
-
-// const product = {
-//     "id": 1,
-//     "name": "P1",
-//     "descp": "",
-//     "foo": "product",
-//     "price": 10,
-//     "promo_price": 10,
-//     "price_text": "R$ 10",
-//     "img_url": "",
-//     "options": [
-//         {
-//             "id": 50,
-//             "name": "O1",
-//             "foo": "option",
-//             "min": 1,
-//             "max": 1,
-//             "sub_options": [
-//                 {
-//                     "id": 51,
-//                     "name": "SO1",
-//                     "foo": "sub_option",
-//                     "price": 5,
-//                     "price_text": " + R$5,00"
-//                 },
-//                 {
-//                     "id": 52,
-//                     "name": "SO2",
-//                     "foo": "sub_option",
-//                     "price": 0,
-//                     "price_text": ""
-//                 }
-//             ]
-//         },
-//         {
-//             "id": 503,
-//             "name": "O1",
-//             "foo": "option",
-//             "min": 2,
-//             "max": 2,
-//             "sub_options": [
-//                 {
-//                     "id": 513,
-//                     "name": "SO1",
-//                     "foo": "sub_option",
-//                     "price": 3,
-//                     "price_text": " + R$3,00"
-//                 },
-//                 {
-//                     "id": 525,
-//                     "name": "SO2",
-//                     "foo": "sub_option",
-//                     "price": 2,
-//                     "price_text": " + R$2,00"
-//                 }
-//             ]
-//         }
-//     ]
-// }
 
 class Product extends Component<Props, State> {
 
