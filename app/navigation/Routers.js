@@ -23,7 +23,7 @@ const CategoriesStack = StackNavigator(
             screen: ProductScreen
         }
     }, {
-        initialRouteName: "Product"
+        initialRouteName: "Categories"
     }
 );
 

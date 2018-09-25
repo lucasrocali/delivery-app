@@ -16,6 +16,8 @@ export default {
     baseColorOrange: '#ff9933',
     baseColorViolet: '#5f5f99',
     baseColorDark: '#333',
+    black: '#000',
+    gray1: '#FEFEFE',
     gray5: '#EEE',
     gray10: '#DDD',
     gray20: '#CCC',

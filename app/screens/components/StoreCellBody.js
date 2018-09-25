@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import colors from '../../constants/colors';
 import dimensions from '../../constants/dimensions';
-import { Title, Caption, Cell } from '../styled/index'
+import { Title, Caption, Cell, Left, Right } from '../styled/index'
 
 
 
@@ -19,16 +19,6 @@ const Body = styled(Cell) `
 const Row = styled.View`
     flex-direction: row;
 `
-
-const Left = styled.View`
-    flex:1;
-    justify-content: flex-start;
-`
-const Right = styled.View`
-    flex:1;
-    align-items: flex-end;
-`
-
 
 type Props = {
     store: object

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { Title, Cell, Caption } from '../styled/index';
+import { LargeTitle, Cell, Caption, Left, Right } from '../styled/index';
 import type { Option } from '../../constants/objects';
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
@@ -10,28 +10,27 @@ const Container = styled(Cell) `
     background-color: ${colors.white};
 `;
 
-const Left = styled.View`
-    flex:1;
-    justify-content: flex-start;
-`
-const Right = styled.View`
-    flex:1;
-    align-items: flex-end;
-`
+const optionDescp = (option) => {
+    if (option.min == 0) return ""
+    if (option.min == 1) return "Escolha 1 opção"
+    return "Escolha " + option.min + " opções"
+}
 
 type Props = {
-    option: Option
+    option: Option,
+    selected_count: number
 }
 export default OptionCell = (props: Props) => {
-    const { option } = props
+    const { option, selected_count } = props
     console.log(option)
     return (
         <Container>
             <Left>
-                <Title>{option.name}</Title>
+                <LargeTitle>{option.name}</LargeTitle>
+                <Caption>{optionDescp(option)}</Caption>
             </Left>
             <Right>
-                <Caption>{option.min + ' / ' + option.max}</Caption>
+                <Caption>{selected_count + ' / ' + option.max}</Caption>
             </Right>
         </Container>
     );

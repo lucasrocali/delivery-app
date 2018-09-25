@@ -68,7 +68,7 @@ export const MapSubOption = (raw) => {
         id: raw && raw.id ? raw.id : '',
         name: raw && raw.name ? raw.name : '',
         foo: 'sub_option',
-        price: raw && raw.price ? raw.price : '',
+        price: raw && raw.price ? raw.price : 0,
         price_text: raw && raw.price ? `R$ ${raw.price}` : '',
     }
 }

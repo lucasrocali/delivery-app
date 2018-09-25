@@ -55,13 +55,13 @@ export function getStoreRequest() {
                             {
                                 "id": 1,
                                 "name": "O1",
-                                "min": null,
-                                "max": null,
+                                "min": 0,
+                                "max": 1,
                                 "sub_options": [
                                     {
                                         "id": 1,
                                         "name": "SO1",
-                                        "price": null
+                                        "price": 0
                                     }
                                 ]
                             }

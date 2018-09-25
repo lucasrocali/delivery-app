@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import styled from "styled-components";
 import StoreCell from './StoreCell';
 import colors from '../../constants/colors';
-import { Title, ButtonText, SectionHeader } from '../styled/index'
+import { Title, ButtonText, SectionHeader, Left, Right } from '../styled/index'
 
 const Container = styled.View`
     border-bottom-width: 1;
@@ -21,15 +21,6 @@ const Header = styled.View`
     padding-vertical: 8;
 `
 
-const HeaderLeft = styled.View`
-    flex:1;
-    justify-content: flex-start;
-`
-const HeaderRight = styled.View`
-    flex:1;
-    align-items: flex-end;
-`
-
 type Props = {
     category: object,
     onStorePress: Function
@@ -39,14 +30,14 @@ export default CategoryCell = (props: Props) => {
     return (
         <Container>
             <SectionHeader>
-                <HeaderLeft>
+                <Left>
                     <Title>{category.name}</Title>
-                </HeaderLeft>
-                <HeaderRight>
+                </Left>
+                <Right>
                     <Button>
                         <ButtonText>Mais</ButtonText>
                     </Button>
-                </HeaderRight>
+                </Right>
             </SectionHeader>
 
             <FlatList

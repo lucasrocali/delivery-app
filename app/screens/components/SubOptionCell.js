@@ -19,6 +19,7 @@ const InfoView = styled.View`
 
 const AddView = styled.View`
     flex:1;
+    height: 25;
     justify-content: center;
     align-items: flex-end;
 `

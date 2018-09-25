@@ -2,6 +2,12 @@ import styled from "styled-components";
 import colors from '../../constants/colors';
 import spacing from '../../constants/spacing';
 
+export const LargeTitle = styled.Text`
+    font-size: 18;
+    color: ${colors.gray70}
+    font-weight: bold;
+`
+
 export const Title = styled.Text`
     font-size: 16;
     color: ${colors.gray70}
@@ -52,6 +58,15 @@ export const Cell = styled.View`
 
 export const SectionHeader = styled(Cell) ` 
     flex-direction: row;
+`
+
+export const Left = styled.View`
+    flex:1;
+    justify-content: flex-start;
+`
+export const Right = styled.View`
+    flex:1;
+    align-items: flex-end;
 `
 
 
