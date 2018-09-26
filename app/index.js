@@ -3,7 +3,8 @@
 import React from 'react';
 import { Provider } from 'react-redux'
 import RootNavigation from './navigation/RootNavigation';
-import store from './store'
+import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './store'
 type State = {
 
 }
@@ -16,7 +17,9 @@ export default class App extends React.Component<Props, State> {
     render() {
         return (
             <Provider store={store}>
-                <RootNavigation />
+                <PersistGate loading={null} persistor={persistor}>
+                    <RootNavigation />
+                </PersistGate>
             </Provider>
         );
     }

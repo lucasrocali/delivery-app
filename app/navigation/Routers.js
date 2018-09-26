@@ -7,6 +7,7 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import colors from '../constants/colors';
 
 import BaseScreen from '../screens/BaseScreen';
+import LaunchScreen from '../screens/LaunchScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import StoreScreen from '../screens/StoreScreen';
 import ProductScreen from '../screens/ProductScreen';
@@ -46,7 +47,7 @@ const baseNavigationOption = (navigation, title, backBtn = true) => ({
     headerLeft: backBtn && baseLeftBtn(navigation)
 })
 
-const CategoryStack = StackNavigator(
+const CategoriesStack = StackNavigator(
     {
         Categories: {
             screen: CategoriesScreen,
@@ -55,10 +56,10 @@ const CategoryStack = StackNavigator(
     }
 )
 
-const CategoriesStack = FluidNavigator(
+const CategoriesNavigator = FluidNavigator(
     {
         Categories: {
-            screen: CategoryStack,
+            screen: CategoriesStack,
         },
         Store: {
             screen: StoreScreen,
@@ -106,14 +107,14 @@ export const MainStack = createMaterialTopTabNavigator(
         PerfilStack: {
             screen: BaseScreen
         },
-        CategoriesStack: {
-            screen: CategoriesStack
+        CategoriesNavigator: {
+            screen: CategoriesNavigator
         },
         CartStack: {
             screen: CartStack
         }
     }, {
-        initialRouteName: "CartStack",
+        initialRouteName: "CategoriesNavigator",
         navigationOptions: {
             gesturesEnabled: true,
             tabBarVisible: false,
@@ -123,6 +124,7 @@ export const MainStack = createMaterialTopTabNavigator(
 
 export const AppNavigator = StackNavigator(
     {
+        Launch: LaunchScreen,
         Main: MainStack,
         Product: {
             screen: ProductStack

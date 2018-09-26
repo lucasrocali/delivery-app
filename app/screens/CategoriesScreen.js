@@ -35,6 +35,7 @@ class Categories extends Component<Props, State> {
 
     render() {
         const { categories, navigation, loadStore } = this.props
+        console.log('categories', categories)
         return (
             <Container>
                 <FlatList

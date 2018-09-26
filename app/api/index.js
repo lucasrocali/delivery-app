@@ -20,7 +20,7 @@ function header(token) {
 }
 
 if (!production) {
-    API = 'http://192.168.1.104:3000';
+    API = 'http://192.168.1.102:3000';
 }
 
 export function loginRequest(user_login) {
@@ -57,7 +57,7 @@ export function signupRequest(user_signup) {
         .catch((error) => { throw error });
 }
 
-export function getCategoriesRequest(token) {
+export function getCategoriesRequest() {
     console.log('getCategoriesRequest')
     return fetch(`${API}/categories`, {
         method: 'GET'
@@ -65,3 +65,13 @@ export function getCategoriesRequest(token) {
         .then(data => data)
         .catch((error) => { throw error });
 }
+
+export function getStoreRequest(store_id) {
+    console.log('getStoreRequest')
+    return fetch(`${API}/stores/${store_id}`, {
+        method: 'GET'
+    }).then(response => response.json())
+        .then(data => data)
+        .catch((error) => { throw error });
+}
+

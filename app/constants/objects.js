@@ -1,4 +1,32 @@
 
+export const MapAddress = (raw) => {
+    return {
+        id: 6,
+        name: raw.name ? raw.name : '',
+        state: raw.state ? raw.state : '',
+        city: raw.city ? raw.city : '',
+        neighborhood: raw.neighborhood ? raw.neighborhood : '',
+        street: raw.street ? raw.street : '',
+        zipcode: raw.zipcode ? raw.zipcode : '',
+        number: raw.number ? raw.number : '',
+        complement: raw.complement ? raw.complement : '',
+        reference: raw.reference ? raw.reference : '',
+        lat: raw.lat ? raw.lat : '',
+        lng: raw.lng ? raw.lng : '',
+    }
+}
+
+export const MapUser = (raw) => {
+    return {
+        id: raw.id ? raw.id : 0,
+        email: raw.email ? raw.email : '',
+        auth_token: raw.auth_token ? raw.auth_token : '',
+        name: raw.name ? raw.name : '',
+        user_type: raw.user_type ? raw.user_type : '',
+        addresses: raw.addresses ? raw.addresses.map(address => MapAddress(address)) : [],
+        orders: raw.orders ? raw.orders : [], //Map Orders
+    }
+}
 
 export const MapCategory = (raw) => {
     return {
@@ -8,7 +36,6 @@ export const MapCategory = (raw) => {
         stores: raw && raw.stores ? raw.stores.map(store => MapStore(store)) : []
     }
 }
-
 
 export const MapStore = (raw) => {
     return {
@@ -92,51 +119,3 @@ export const MapOptionsSection = (product) => {
     })
         : []
 }
-/*
-  "id": 1,
-                                            "name": "O1",
-                                            "min": null,
-                                            "max": null,
-*/
-// "id": 1,
-//     "name": "P1",
-//         "price": 10,
-//             "promo_price": 10,
-//                 "img_url": null,
-//                     "options": [
-
-// "id": 1,
-//     "name": "S1",
-//         "img_url": "https://gds.portal5g-media.com/contentFiles/image/2016/12/VEN/principal/97273_w840h0_1482403716jamp-burger-mushroom-burger.jpg",
-//             "price_type": "$$",
-//                 "delivery_estimation": "30 min",
-//                     "menus": [
-//                         {
-//                             "id": 1,
-//                             "name": "M1",
-//                             "products": [
-//                                 {
-//                                     "id": 1,
-//                                     "name": "P1",
-//                                     "price": 10,
-//                                     "promo_price": 10,
-//                                     "img_url": null,
-//                                     "options": [
-//                                         {
-//                                             "id": 1,
-//                                             "name": "O1",
-//                                             "min": null,
-//                                             "max": null,
-//                                             "sub_options": [
-//                                                 {
-//                                                     "id": 1,
-//                                                     "name": "SO1",
-//                                                     "price": null
-//                                                 }
-//                                             ]
-//                                         }
-//                                     ]
-//                                 }
-//                             ]
-//                         }
-//                     ],

@@ -6,15 +6,25 @@ import createSagaMiddleware from 'redux-saga'
 import logger from 'redux-logger'
 import reducer from './reducers';
 import { navMiddleware } from './../navigation/RootNavigation'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['auth_reducer']
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer)
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
-    reducer,
+export const store = createStore(
+    persistedReducer,
     applyMiddleware(sagaMiddleware, logger, navMiddleware),
     // other store enhancers if any
 );
 
 sagaMiddleware.run(root);
 
-export default store;
+export const persistor = persistStore(store)

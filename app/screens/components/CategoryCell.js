@@ -27,6 +27,7 @@ type Props = {
 }
 export default CategoryCell = (props: Props) => {
     const { category, onStorePress } = props
+    console.log('CategoryCell', category)
     return (
         <Container>
             <SectionHeader>

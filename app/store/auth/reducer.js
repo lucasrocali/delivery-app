@@ -1,23 +1,24 @@
 import * as actionTypes from './actionType'
-
-const initial_uthentication = {
-    loading: false,
-    message: "",
-    success: false,
-    user: {}
-}
+import { MapUser } from '../../constants/objects'
 
 const initialState = {
-    authentication: initial_uthentication,
+    loading: false,
+    user: {},
 }
 
 export default function authReducer(state = initialState, action) {
     switch (action.type) {
-        case actionTypes.AUTHENTIFICATION:
-
+        case actionTypes.AUTHENTICATE_LOADING:
+            const { loading } = action
             return {
                 ...state,
-                authentication: initial_uthentication
+                loading
+            }
+        case actionTypes.AUTHENTICATE_SUCCESS:
+            const { user } = action
+            return {
+                loading: false,
+                user: MapUser(user)
             }
         default:
             return state
