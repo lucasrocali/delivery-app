@@ -33,6 +33,24 @@ export function signupRequest(user_login) {
     //     };
 }
 
+export function getAddressesRequest() {
+    return [
+        {
+            "id": 6,
+            "name": "Casa",
+            "state": "SP",
+            "city": "São Paulo",
+            "neighborhood": "Itaim",
+            "street": "Av. São Gabriel",
+            "zipcode": 1010010,
+            "number": 663,
+            "complement": "APT 104",
+            "reference": null,
+            "lat": null,
+            "lng": null
+        }
+    ]
+}
 export function getStoreRequest() {
     return {
         "id": 1,

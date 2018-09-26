@@ -4,6 +4,8 @@ import { Text, Number, Caption, Cell } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
 
+import FastImage from 'react-native-fast-image'
+
 const Touchable = styled.TouchableOpacity`
 
 `
@@ -20,7 +22,7 @@ const ImageView = styled.View`
     flex:1
 `
 
-const Image = styled.Image`
+const Image = styled(FastImage) `
     background-color: ${colors.gray5};
     width: 50;
     height: 50;

@@ -4,6 +4,8 @@ import colors from '../../constants/colors';
 import dimensions from '../../constants/dimensions';
 import StoreCellBody from './StoreCellBody'
 
+import FastImage from 'react-native-fast-image'
+
 const Container = styled.TouchableOpacity`
     width: ${dimensions.estabCellWidth}
     background-color: ${colors.white};
@@ -20,7 +22,7 @@ const Body = styled.View`
     overflow: hidden;
 `
 
-const Image = styled.Image`
+const Image = styled(FastImage)`
     background-color: ${colors.gray10};
     width: ${dimensions.estabCellWidth}
     height: ${dimensions.estabCellImgHeigth};

@@ -13,7 +13,7 @@ const Tag = styled.Text`
 `
 
 const Body = styled(Cell) `
-    
+    background-color: ${colors.white}
 `
 
 const Row = styled.View`

@@ -12,6 +12,8 @@ import StoreScreen from '../screens/StoreScreen';
 import ProductScreen from '../screens/ProductScreen';
 import CartScreen from '../screens/CartScreen';
 
+import { FluidNavigator } from 'react-navigation-fluid-transitions'
+
 const baseLeftBtn = (navigation) => (
     <TouchableOpacity style={{
         flex: 1,
@@ -44,11 +46,19 @@ const baseNavigationOption = (navigation, title, backBtn = true) => ({
     headerLeft: backBtn && baseLeftBtn(navigation)
 })
 
-const CategoriesStack = StackNavigator(
+const CategoryStack = StackNavigator(
     {
         Categories: {
             screen: CategoriesScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Categorias", false),
+        }
+    }
+)
+
+const CategoriesStack = FluidNavigator(
+    {
+        Categories: {
+            screen: CategoryStack,
         },
         Store: {
             screen: StoreScreen,
@@ -58,6 +68,20 @@ const CategoriesStack = StackNavigator(
         initialRouteName: "Categories"
     }
 );
+// const CategoriesStack = StackNavigator(
+//     {
+//         Categories: {
+//             screen: CategoriesScreen,
+//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Categorias", false),
+//         },
+//         Store: {
+//             screen: StoreScreen,
+//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Loja"),
+//         },
+//     }, {
+//         initialRouteName: "Categories"
+//     }
+// );
 
 const CartStack = StackNavigator(
     {
