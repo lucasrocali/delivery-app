@@ -29,7 +29,7 @@ const autoLogin = function* (action) {
     try {
         const user_credentials = yield select(getCredentials)
 
-        if (user_credentials && user_credentials.email && user_credentials.password) {
+        if (user_credentials && user_credentials.email) {
 
             const response = yield call(loginRequest, user_credentials)
 

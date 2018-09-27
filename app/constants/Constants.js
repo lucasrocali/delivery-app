@@ -1,6 +1,5 @@
-export const facebookId = "612143372510759";
+export const facebookId = "295589654504537";
+export const googleClientIdIOS = "123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g.apps.googleusercontent.com"
+export const googleClientIdAndroid = "123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g.apps.googleusercontent.com"
+export const googleClientIdAndroidProd = "123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g.apps.googleusercontent.com"
 
-export const storeEmailKey = '@deliveryStoreEmail:key';
-export const storePasswordKey = '@deliveryStorePassword:key';
-export const storeLoginTypeKey = '@deliveryStoreLoginType:key';
-export const storeSocialIdKey = '@deliveryStoreSocialId:key';
