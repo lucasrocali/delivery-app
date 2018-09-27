@@ -2,6 +2,8 @@ const tintColor = '#2f95dc';
 
 //0 2 4 6 8 A C D F
 export default {
+    facebook: '#3B5998',
+    google: '#DD4B39',
     tintColor,
     white: '#FFF',
     tabIconDefault: '#ccc',

@@ -11,14 +11,14 @@ import colors from '../constants/colors';
 import dimensions from '../constants/dimensions';
 import spacing from '../constants/spacing';
 import StoreCellBody from './components/StoreCellBody'
-import { Title, Text, Cell } from './styled/index'
+import { Title, Text, Cell, CloseView } from './styled/index'
 import { MapMenuSection } from '../constants/objects';
 import ProductCell from './components/ProductCell';
 import MenuCell from './components/MenuCell';
+import CloseBtn from './components/CloseBtn';
 
 import FastImage from 'react-native-fast-image'
-import Ionicon from "react-native-vector-icons/Ionicons";
-import { Transition } from 'react-navigation-fluid-transitions'
+// import { Transition } from 'react-navigation-fluid-transitions'
 
 const Container = styled.View`
     flex: 1;
@@ -52,17 +52,7 @@ const HeaderBody = styled.View`
     left: ${spacing.small};
     right: ${spacing.small};
 `
-const CloseView = styled.TouchableOpacity`
-    position: absolute;
-    top: ${spacing.large};
-    left: ${spacing.small};
-    background-color: ${colors.white};
-    width: 34;
-    height: 34;
-    border-radius: 17;
-    align-items: center;
-    justify-content: center;
-`
+
 
 type State = {
 
@@ -98,25 +88,16 @@ class Store extends Component<Props, State> {
                     )}
                     ListHeaderComponent={() => (
                         <SectionHeader>
-                            <Transition appear={'top'}>
-                                <Image source={{ uri: store.img_url }} />
-                            </Transition>
+                            {/* <Transition appear={'top'}> */}
+                            <Image source={{ uri: store.img_url }} />
+                            {/* </Transition> */}
 
                             <HeaderBody>
-                                <Transition appear={'bottom'}>
-                                    <StoreCellBody store={store} />
-                                </Transition>
+                                {/* <Transition appear={'bottom'}> */}
+                                <StoreCellBody store={store} />
+                                {/* </Transition> */}
                             </HeaderBody>
-                            <CloseView
-                                onPress={() => navigation.goBack(null)}
-                            >
-                                <Ionicon
-                                    name={"ios-close"}
-                                    size={34}
-                                    color={colors.link}
-                                    backgroundColor={"transparent"}
-                                />
-                            </CloseView>
+                            <CloseBtn onPress={() => navigation.goBack(null)} />
                         </SectionHeader>
                     )}
                     stickySectionHeadersEnabled={true}

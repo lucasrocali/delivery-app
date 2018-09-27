@@ -3,7 +3,7 @@ import colors from '../../constants/colors';
 import spacing from '../../constants/spacing';
 
 export const Title = styled.Text`
-    margin-top: 5;
+    margin-vertical: ${spacing.tiny2};
     font-size: 16;
     color: ${colors.gray70}
     font-weight: bold;
@@ -25,28 +25,28 @@ export const TitleH4 = styled(Title) `
 `
 
 export const Text = styled.Text`
-    margin-top: 3;
+    margin-vertical: ${spacing.tiny2};
     font-size: 16;
     color: ${colors.gray70}
     font-weight: 400;
 `
 
 export const Text1 = styled.Text`
-    margin-top: 3;
+    margin-vertical: ${spacing.tiny2};
     font-size: 14;
     color: ${colors.gray70}
     font-weight: 400;
 `
 
 export const Caption = styled.Text`
-    margin-top: 5;
+    margin-vertical: ${spacing.tiny2};
     font-size: 13;
     color: ${colors.gray40};
     font-weight: 200;
 `
 
 export const Number = styled.Text`
-    margin-top: ${spacing.tiny};
+    margin-vertical: ${spacing.tiny2};
     font-size: 13;
     color: ${colors.gray50}
     font-weight: 200;
@@ -54,8 +54,8 @@ export const Number = styled.Text`
 
 export const ButtonText = styled.Text` 
     font-size: 16;
-    color: ${colors.link};
-    font-weight: 600;
+    color: ${colors.gray30};
+    font-weight: 400;
 `
 
 export const Cell = styled.View` 
@@ -79,7 +79,32 @@ export const Right = styled.View`
     align-items: flex-end;
 `
 
+export const CloseView = styled.TouchableOpacity`
+    position: absolute;
+    top: ${spacing.large};
+    left: ${spacing.small};
+    background-color: ${colors.white};
+    width: 34;
+    height: 34;
+    border-radius: 17;
+    align-items: center;
+    justify-content: center;
+`
 
+export const InputText = styled.TextInput`
+
+`
+
+export const Button = styled.TouchableOpacity`
+    margin-vertical: ${spacing.medium};
+    margin-horizontal: ${spacing.medium};
+    background-color: ${colors.link};
+    padding-horizontal: ${spacing.small};
+    padding-vertical: ${spacing.small};
+    align-items: center;
+    justify-content: center;
+    border-radius: 6;
+`
 // TitleH4: {
 //     fontSize: 34,
 //     lineHeight: 41,

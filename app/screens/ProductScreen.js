@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { addToCart } from '../store/cart/action'
 import * as selectors from '../store/stores/selector';
 import styled from "styled-components";
-import { Title, TitleH4, Cell, Left, Right } from './styled/index'
+import { Title, TitleH4, Cell, Left, Right, InputText } from './styled/index'
 import Ionicon from "react-native-vector-icons/Ionicons";
 import spacing from '../constants/spacing';
 import { MapOptionsSection } from '../constants/objects'
@@ -38,10 +38,6 @@ const InfoView = styled(Cell) `
 
 const Touchable = styled.TouchableOpacity`
     margin-horizontal: ${spacing.small}
-`
-
-const Comment = styled.TextInput`
-
 `
 
 const OptionSectionHeader = styled(Cell) `
@@ -157,7 +153,7 @@ class Product extends Component<Props, State> {
                                 </Touchable>
                             </InfoView>
                             <InfoView>
-                                <Comment
+                                <InputText
                                     placeholder={'Observação'}
                                     onChangeText={(text) => console.log('text', text)}
                                 />

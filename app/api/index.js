@@ -4,14 +4,14 @@ var API = '';
 
 const Accept = 'application/kids-places.v1+json';
 
-function authHeader() {
+const authHeader = () => {
     return {
         'Accept': Accept,
         'Content-Type': 'application/json'
     }
 }
 
-function header(token) {
+const header = (token) => {
     return {
         'Content-Type': 'application/json',
         'Accept': Accept,
@@ -23,22 +23,32 @@ if (!production) {
     API = 'http://192.168.1.102:3000';
 }
 
-export function loginRequest(user_login) {
-    return fetch(`${API}/auth/login`, {
+function post(path, header, data) {
+    const url = `${API}/${path}`
+    console.log('post =>', url, header, data)
+    return fetch(url, {
         method: 'POST',
-        headers: authHeader(),
-        body: JSON.stringify({
-            email: user_login.email.toLowerCase(),
-            password: user_login.password,
-            login_type: user_login.login_type,
-            name: user_login.name,
-            img_url: user_login.img_url,
-            social_id: user_login.social_id
-        })
+        headers: header,
+        body: JSON.stringify(data)
     })
         .then(response => response.json())
-        .then(data => data)
+        .then(data => {
+            console.log('post <=', url, data)
+            return data
+        })
         .catch((error) => { throw error });
+}
+
+export function loginRequest(user_login) {
+    const post_data = {
+        email: user_login.email.toLowerCase(),
+        password: user_login.password,
+        login_type: user_login.login_type,
+        name: user_login.name,
+        img_url: user_login.img_url,
+        social_id: user_login.social_id
+    }
+    return post('auth/login', authHeader(), post_data)
 }
 
 export function signupRequest(user_signup) {
