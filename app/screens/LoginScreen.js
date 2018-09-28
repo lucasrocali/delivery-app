@@ -47,22 +47,18 @@ class Login extends Component<Props, State> {
                     }>
                     {({ handleChange, handleSubmit, values }) => (
                         <Content>
-                            <Cell>
-                                <InputText
-                                    onChangeText={handleChange('email')}
-                                    value={values.email}
-                                    label="Email"
-                                    placeholder="Email"
-                                />
-                            </Cell>
-                            <Cell>
-                                <InputText
-                                    onChangeText={handleChange('password')}
-                                    value={values.password}
-                                    label="Senha"
-                                    placeholder="Senha"
-                                />
-                            </Cell>
+                            <InputText
+                                onChangeText={handleChange('email')}
+                                value={values.email}
+                                label="Email"
+                                placeholder="Email"
+                            />
+                            <InputText
+                                onChangeText={handleChange('password')}
+                                value={values.password}
+                                label="Senha"
+                                placeholder="Senha"
+                            />
                             <Button onPress={handleSubmit} >
                                 <LoginText>Login</LoginText>
                             </Button>

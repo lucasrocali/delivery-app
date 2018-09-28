@@ -12,6 +12,7 @@ import SocialLoginScreen from '../screens/SocialLoginScreen';
 import LoginScreen from '../screens/LoginScreen';
 import PerfilScreen from '../screens/PerfilScreen';
 import AddressesScreen from '../screens/AddressesScreen';
+import AddressScreen from '../screens/AddressScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import StoreScreen from '../screens/StoreScreen';
 import ProductScreen from '../screens/ProductScreen';
@@ -156,6 +157,16 @@ export const screens = {
             }),
         }
     },
+    Address: {
+        name: 'Address',
+        component: {
+            screen: AddressScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: "Endereço",
+                leftIcon: icon_names.back
+            }),
+        }
+    },
     Addresses: {
         name: 'Addresses',
         component: {
@@ -230,7 +241,8 @@ export const stacks = {
         name: 'AddressesStack',
         component: StackNavigator(
             {
-                [screens.Addresses.name]: screens.Addresses.component
+                [screens.Addresses.name]: screens.Addresses.component,
+                [screens.Address.name]: screens.Address.component
             }
         )
     },

@@ -16,6 +16,9 @@ const Container = styled.View`
     background-color: ${colors.white};
 `;
 
+const Content = styled.View`
+`
+
 const PerfilView = styled(Cell) `
     align-items: center;
     justify-content: center;
@@ -52,26 +55,27 @@ class Perfil extends Component<Props, State> {
         return (
             <Container>
                 {user && user.name && user.email &&
-                    <PerfilView>
-                        <Title>{user.name}</Title>
-                        <Caption>{user.email}</Caption>
-                    </PerfilView>
+                    <Content>
+                        <PerfilView>
+                            <Title>{user.name}</Title>
+                            <Caption>{user.email}</Caption>
+                        </PerfilView>
+                        <Cell>
+                            <Touchable onPress={() => navigation.navigate({
+                                key: stacks.AddressesStack.name,
+                                routeName: stacks.AddressesStack.name
+                            })} >
+                                <Text>Endereços</Text>
+                            </Touchable>
+                        </Cell>
+                        <Cell>
+                            <Touchable onPress={this.handlePress}>
+                                <Text>Logout</Text>
+                            </Touchable>
+                        </Cell>
+                    </Content>
                 }
-                <Cell>
-                    <Touchable onPress={() => navigation.navigate({
-                        key: stacks.AddressesStack.name,
-                        routeName: stacks.AddressesStack.name
-                    })} >
-                        <Text>Endereços</Text>
-                    </Touchable>
-                </Cell>
-                {user && user.name && user.email &&
-                    <Cell>
-                        <Touchable onPress={this.handlePress}>
-                            <Text>Logout</Text>
-                        </Touchable>
-                    </Cell>
-                }
+
             </Container>
         );
     }
