@@ -15,6 +15,7 @@ import CloseBtn from './components/CloseBtn';
 import GoogleSignIn from 'react-native-google-sign-in';
 import { LoginButton, LoginManager, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
 import { facebookId, googleClientIdIOS, googleClientIdAndroid, googleClientIdAndroidProd } from '../constants/constants';
+import { screens } from '../navigation/Routers';
 
 const Container = styled.View`
     flex: 1;
@@ -170,7 +171,7 @@ class SocialLogin extends Component<Props, State> {
                     <BtnText>Google</BtnText>
                 </GoogleBtn>
                 <BottomView>
-                    <ManualBtn onPress={() => navigation.navigate({ routeName: 'Login' })}>
+                    <ManualBtn onPress={() => navigation.navigate({ routeName: screens.Login.name, key: screens.Login.name })}>
                         <ButtonText>Login com email e senha</ButtonText>
                     </ManualBtn>
                     <RegisterBtn>

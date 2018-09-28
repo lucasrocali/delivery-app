@@ -9,6 +9,7 @@ import * as storeSelectors from '../store/stores/selector';
 import CategoryCell from './components/CategoryCell';
 import styled from "styled-components";
 import colors from '../constants/colors';
+import { screens } from '../navigation/Routers';
 
 const Container = styled.ScrollView`
     flex: 1;
@@ -46,7 +47,7 @@ class Categories extends Component<Props, State> {
                             category={category}
                             onStorePress={(store) => {
                                 loadStore(store)
-                                navigation.navigate({ key: 'Store', routeName: 'Store', params: { title: store.name } })
+                                navigation.navigate({ key: screens.Store.name, routeName: screens.Store.name, params: { title: store.name } })
                             }}
                         />
                     )}

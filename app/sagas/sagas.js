@@ -17,6 +17,8 @@ import * as authSelectors from '../store/auth/selector'
 import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/"
 // import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/mock.js"
 
+import { mainStack } from '../navigation/Routers';
+
 const getToken = state => authSelectors.getAuthToken(state);
 const getCredentials = state => appSelectors.getCredentials(state);
 const getUser = state => authSelectors.getUser(state);
@@ -41,11 +43,11 @@ const autoLogin = function* (action) {
 
         }
 
-        yield put(NavigationActions.navigate({ routeName: 'Main' }))
+        yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
 
     } catch (error) {
         console.log(error);
-        yield put(NavigationActions.navigate({ routeName: 'Main' }))
+        yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
         //TODO: Handle Error
     }
 };
@@ -64,7 +66,7 @@ const authenticate = function* (action) {
 
             yield put(authActions.setSuccess(response))
 
-            yield put(NavigationActions.navigate({ routeName: 'Main' }))
+            yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
         } else {
             yield put(authActions.setLoading(false))
         }

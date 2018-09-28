@@ -16,6 +16,7 @@ import { MapMenuSection } from '../constants/objects';
 import ProductCell from './components/ProductCell';
 import MenuCell from './components/MenuCell';
 import CloseBtn from './components/CloseBtn';
+import { stacks } from '../navigation/Routers';
 
 import FastImage from 'react-native-fast-image'
 // import { Transition } from 'react-navigation-fluid-transitions'
@@ -82,7 +83,7 @@ class Store extends Component<Props, State> {
                         (<ProductCell
                             product={product}
                             onPress={() => {
-                                navigation.navigate({ key: 'Product', routeName: 'Product', params: { store_id: store.id, product: product, title: store.name } })
+                                navigation.navigate({ key: stacks.ProductStack.name, routeName: stacks.ProductStack.name, params: { store_id: store.id, product: product, title: store.name } })
                             }}
                         />)
                     )}

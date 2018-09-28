@@ -20,6 +20,10 @@ export default function authReducer(state = initialState, action) {
                 loading: false,
                 user: MapUser(user)
             }
+        case actionTypes.LOGOUT:
+            return {
+                user: {},
+            }
         default:
             return state
     }

@@ -11,6 +11,7 @@ import styled from "styled-components";
 import StoreCellBody from './components/StoreCellBody';
 import CartProductCell from './components/CartProductCell'
 import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4 } from './styled/index';
+import { stacks } from '../navigation/Routers';
 
 const Container = styled.View`
     flex: 1;
@@ -60,8 +61,8 @@ class Cart extends Component<Props, State> {
                         <CartProductCell
                             cart_product={cart_product}
                             onPress={() => navigation.navigate({
-                                key: 'Product',
-                                routeName: 'Product',
+                                key: stacks.ProductStack.name,
+                                routeName: stacks.ProductStack.name,
                                 params: {
                                     store_id: store.id,
                                     product: cart_product.product,

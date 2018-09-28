@@ -6,6 +6,7 @@ export function autoLogin() {
         type: actionTypes.AUTO_LOGIN
     }
 }
+
 export function login(user_credentials) {
     return {
         type: actionTypes.AUTHENTICATE,
@@ -20,6 +21,12 @@ export function signup(user_credentials) {
         login: false,
         user_credentials
 
+    }
+}
+
+export function logout() {
+    return {
+        type: actionTypes.LOGOUT
     }
 }
 

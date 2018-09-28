@@ -20,7 +20,7 @@ const header = (token) => {
 }
 
 if (!production) {
-    API = 'http://192.168.1.102:3000';
+    API = 'http://192.168.1.104:3000';
 }
 
 function post(path, header, data) {
