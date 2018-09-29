@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createAddress, loadAddressByZipcode } from '../store/user/action'
+import { createAddress, loadAddressInfo } from '../store/user/action'
 import * as userSelectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title, Cell, Button, ButtonText, Caption } from './styled/index'
@@ -39,6 +39,7 @@ const SearchButton = styled.TouchableOpacity`
     flex: 1;
     align-items: center;
     justify-content: center;
+    padding-vertical: ${spacing.medium};
 `
 
 const Touchable = styled.TouchableOpacity`
@@ -88,7 +89,7 @@ class Address extends Component<Props, State> {
         this.setState({ city: city })
     }
     render() {
-        const { navigation, createAddress, loadAddressByZipcode } = this.props
+        const { navigation, createAddress, loadAddressInfo } = this.props
         const address = navigation.state.params && navigation.state.params.address ? navigation.state.params.address : null
         const { state, city } = this.state
         console.log('formik', this.props, this.state, this.initialValues)
@@ -126,7 +127,7 @@ class Address extends Component<Props, State> {
                                 />
                                 <SearchButton
                                     onPress={() => {
-                                        loadAddressByZipcode(values.zipcode)
+                                        loadAddressInfo({ zip: values.zipcode })
                                     }}
                                 >
                                     <Caption>Buscar Endereço</Caption>
@@ -200,6 +201,18 @@ class Address extends Component<Props, State> {
                                 value={values.reference}
                                 label="Referencia"
                             />
+                            <SearchButton
+                                onPress={() => {
+                                    loadAddressInfo({
+                                        uf: state,
+                                        city: city,
+                                        neighborhood: values.neighborhood,
+                                        street: values.street,
+                                    })
+                                }}
+                            >
+                                <Caption>Buscar Cep</Caption>
+                            </SearchButton>
                             <Button onPress={handleSubmit} >
                                 <SubmitText>Salvar</SubmitText>
                             </Button>
@@ -216,5 +229,5 @@ export default connect(
     state => ({
         search_address: userSelectors.getSearchAddress(state)
     }),
-    { createAddress, loadAddressByZipcode }
+    { createAddress, loadAddressInfo }
 )(Address)

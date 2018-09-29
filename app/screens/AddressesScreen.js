@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { } from '../store/user/action'
+import { selectedAddress } from '../store/user/action'
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title, Text, TouchableCell } from './styled/index';
@@ -28,23 +28,27 @@ type Props = {
 class Addresses extends Component<Props, State> {
 
     render() {
-        const { user, navigation } = this.props
+        const { user, selected_address_id, selectedAddress, navigation } = this.props
         const { addresses } = user
         return (
             <Container>
-                <TouchableCell
-                    onPress={() => navigation.navigate({
-                        key: screens.Address.name,
-                        routeName: screens.Address.name
-                    })}>
-                    <Text>Novo endereço</Text>
-                </TouchableCell>
                 <FlatList
+                    ListHeaderComponent={() => (
+                        <TouchableCell
+                            onPress={() => navigation.navigate({
+                                key: screens.Address.name,
+                                routeName: screens.Address.name
+                            })}>
+                            <Text>Novo endereço</Text>
+                        </TouchableCell>
+                    )}
                     data={addresses}
                     renderItem={({ item: address, index }) => (
                         <AddressCell
                             address={address}
-                            onPress={() => navigation.navigate({
+                            checked={address.id == selected_address_id}
+                            onPress={() => selectedAddress(address.id)}
+                            onOptionsPress={() => navigation.navigate({
                                 key: screens.Address.name,
                                 routeName: screens.Address.name,
                                 params: {
@@ -61,7 +65,8 @@ class Addresses extends Component<Props, State> {
 
 export default connect(
     state => ({
-        user: selectors.getUser(state)
+        user: selectors.getUser(state),
+        selected_address_id: selectors.getSelectedAddressId(state)
     }),
-    {}
+    { selectedAddress }
 )(Addresses)

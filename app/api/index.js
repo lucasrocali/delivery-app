@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 const production = false;
 
 var API = '';
@@ -55,7 +57,7 @@ function put(path, header, data) {
 }
 
 function get(path, header, query_data = {}) {
-    const url = `${API}/${path}`
+    const url = `${API}/${path}?${queryString.stringify(query_data)}`
     console.log('get =>', url, header, query_data)
     return fetch(url, {
         method: 'GET',
@@ -111,6 +113,6 @@ export function getAddressRequest(auth_token) {
     return get('addresses', authHeader(auth_token))
 }
 
-export function getAddressByZipcodeRequest(auth_token, zip_code) {
-    return get(`zip_codes?zip=${zip_code}`, authHeader(auth_token))
+export function getAddressByZipcodeRequest(auth_token, address) {
+    return get(`zip_codes`, authHeader(auth_token), address)
 }

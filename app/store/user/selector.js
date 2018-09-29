@@ -9,3 +9,7 @@ export function getAuthToken(state) {
 export function getSearchAddress(state) {
     return state.user_reducer.search_address;
 }
+
+export function getSelectedAddressId(state) {
+    return state.user_reducer.selected_address_id;
+}

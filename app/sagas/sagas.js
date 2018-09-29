@@ -155,11 +155,11 @@ const loadAddressByZipCode = function* (action) {
 
         const token = yield select(getToken)
 
-        const { zipcode } = action
+        const { address } = action
 
-        const response = yield call(getAddressByZipcodeRequest, token, zipcode)
+        const response = yield call(getAddressByZipcodeRequest, token, address)
 
-        yield put(userActions.loadAddressByZipcodeSuccess(response))
+        yield put(userActions.loadAddressInfoSuccess(response))
     } catch (error) {
         console.log(error);
         yield put(userActions.setLoading(false))
@@ -174,5 +174,5 @@ export function* root(): Saga<void> {
     yield takeLatest(storesActionTypes.LOAD_STORE, loadStore)
     yield takeLatest(userActionTypes.CREATE_ADDRESS, createAddress)
     yield takeLatest(userActionTypes.LOAD_ADDRESSES, loadAddresses)
-    yield takeLatest(userActionTypes.LOAD_ADDRESS_BY_ZIPCODE, loadAddressByZipCode)
+    yield takeLatest(userActionTypes.LOAD_ADDRESS_INFO, loadAddressByZipCode)
 };

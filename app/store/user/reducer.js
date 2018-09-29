@@ -4,7 +4,8 @@ import { MapUser, MapAddress } from '../../constants/objects'
 const initialState = {
     loading: false,
     user: {},
-    search_address: {}
+    search_address: {},
+    selected_address_id: 0
 }
 
 export default function userReducer(state = initialState, action) {
@@ -34,11 +35,17 @@ export default function userReducer(state = initialState, action) {
                     addresses: addresses.map(address => MapAddress(address))
                 }
             }
-        case actionTypes.LOAD_ADDRESS_BY_ZIPCODE_SUCCESS:
+        case actionTypes.LOAD_ADDRESS_INFO_SUCCESS:
             const address = action.response
             return {
                 ...state,
                 search_address: MapAddress(address)
+            }
+        case actionTypes.SELECTED_ADDRESS:
+            const { address_id } = action
+            return {
+                ...state,
+                selected_address_id: address_id
             }
         default:
             return state
