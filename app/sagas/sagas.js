@@ -14,9 +14,10 @@ import * as cartActions from "../store/cart/action";
 
 import * as appSelectors from '../store/app/selector'
 import * as userSelectors from '../store/user/selector'
-import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest, getAddressRequest, getAddressByZipcodeRequest, postAddressRequest } from "../api/"
-// import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest, postAddressRequest } from "../api/mock.js"
+import * as realApi from "../api/"
+import * as mockApi from "../api/mock.js"
 
+const api = mockApi
 import { mainStack } from '../navigation/Routers';
 
 const getToken = state => userSelectors.getAuthToken(state);
@@ -41,7 +42,7 @@ const autoLogin = function* (action) {
 
         if (user_credentials && user_credentials.email) {
 
-            const response = yield call(loginRequest, user_credentials)
+            const response = yield call(api.loginRequest, user_credentials)
 
             if (response && response.id && response.id > 0) {
                 yield put(userActions.setSuccess(response))
@@ -66,7 +67,7 @@ const authenticate = function* (action) {
 
         const { login, user_credentials } = action
 
-        const response = yield call(login ? loginRequest : signupRequest, user_credentials)
+        const response = yield call(login ? api.loginRequest : api.signupRequest, user_credentials)
 
         const error_msg = getErrorMsg(response)
 
@@ -95,7 +96,7 @@ const loadCategories = function* (action) {
     try {
         yield put(storeActions.setLoading())
 
-        const response = yield call(getCategoriesRequest)
+        const response = yield call(api.getCategoriesRequest)
 
         console.log(response)
 
@@ -114,7 +115,7 @@ const loadStore = function* (action) {
 
         const { store } = action
 
-        const response = yield call(getStoreRequest, store.id)
+        const response = yield call(api.getStoreRequest, store.id)
 
         console.log(response)
 
@@ -136,7 +137,7 @@ const createAddress = function* (action) {
 
         const token = yield select(getToken)
 
-        const response = yield call(postAddressRequest, token, address)
+        const response = yield call(api.postAddressRequest, token, address)
 
         const error_msg = getErrorMsg(response)
 
@@ -161,7 +162,7 @@ const loadAddresses = function* (action) {
 
         const token = yield select(getToken)
 
-        const response = yield call(getAddressRequest, token)
+        const response = yield call(api.getAddressRequest, token)
 
         yield put(userActions.loadAddressSuccess(response))
     } catch (error) {
@@ -178,7 +179,7 @@ const loadAddressByZipCode = function* (action) {
 
         const { address } = action
 
-        const response = yield call(getAddressByZipcodeRequest, token, address)
+        const response = yield call(api.getAddressByZipcodeRequest, token, address)
 
         yield put(userActions.loadAddressInfoSuccess(response))
     } catch (error) {

@@ -31,15 +31,17 @@ export default AddressCell = (props: Props) => {
     const { address, checked, onPress, onOptionsPress } = props
     return (
         <Container>
-            <CheckView>
-                {checked &&
-                    <Ionicon
-                        name={'ios-checkmark'}
-                        size={25}
-                        color={colors.link}
-                    />
-                }
-            </CheckView>
+            {typeof checked == 'boolean' &&
+                <CheckView>
+                    {checked &&
+                        <Ionicon
+                            name={'ios-checkmark'}
+                            size={25}
+                            color={colors.link}
+                        />
+                    }
+                </CheckView>
+            }
             {address &&
                 <Touchable onPress={onPress}>
                     <Text>{address.street + ', ' + address.number}</Text>

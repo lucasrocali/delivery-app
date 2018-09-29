@@ -18,9 +18,12 @@ export default function userReducer(state = initialState, action) {
             }
         case actionTypes.AUTHENTICATE_SUCCESS:
             const { user } = action
+            const mapped_user = MapUser(user)
+            const first_address_id = mapped_user.addresses && mapped_user.addresses.length > 0 ? mapped_user.addresses[0].id : 0
             return {
                 loading: false,
-                user: MapUser(user)
+                user: mapped_user,
+                selected_address_id: first_address_id
             }
         case actionTypes.LOGOUT:
             return {

@@ -58,12 +58,15 @@ export const ButtonText = styled.Text`
     font-weight: 400;
 `
 
-export const Cell = styled.View` 
+export const PaddedView = styled.View`
     padding-horizontal: ${spacing.small};
     padding-vertical: ${spacing.medium};
+    margin-horizontal: ${spacing.small};
+`
+
+export const Cell = styled(PaddedView) ` 
     border-bottom-width: 1;
     border-color: ${colors.gray5};
-    margin-horizontal: ${spacing.small};
 `
 
 export const TouchableCell = styled.TouchableOpacity`

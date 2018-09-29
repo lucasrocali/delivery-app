@@ -13,3 +13,10 @@ export function getSearchAddress(state) {
 export function getSelectedAddressId(state) {
     return state.user_reducer.selected_address_id;
 }
+
+export function getSelectedAddress(state) {
+    const { selected_address_id, user } = state.user_reducer
+    const { addresses } = user
+    const match_addresses = addresses && addresses.length > 0 ? addresses.filter(address => address.id == selected_address_id) : null
+    return match_addresses && match_addresses.length > 0 ? match_addresses[0] : null
+}

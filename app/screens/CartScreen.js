@@ -6,11 +6,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { } from '../store/user/action'
 import * as cartSelectors from '../store/cart/selector';
+import * as userSelectors from '../store/user/selector';
 import colors from '../constants/colors';
 import styled from "styled-components";
 import StoreCellBody from './components/StoreCellBody';
 import CartProductCell from './components/CartProductCell'
-import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4 } from './styled/index';
+import AddressCell from './components/AddressCell';
+import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView } from './styled/index';
 import { stacks } from '../navigation/Routers';
 
 const Container = styled.View`
@@ -20,6 +22,14 @@ const Container = styled.View`
 
 const Header = styled.View`
 
+`
+
+const View = styled.View`
+
+`
+
+const TextView = styled(PaddedView) `
+    padding-bottom: 0;
 `
 
 type State = {
@@ -32,7 +42,7 @@ type Props = {
 class Cart extends Component<Props, State> {
 
     render() {
-        const { cart, navigation } = this.props
+        const { cart, selected_address, navigation } = this.props
         // console.log(JSON.stringify(cart))
         const { store, cart_products } = cart
         console.log(cart, store, cart_products)
@@ -48,11 +58,15 @@ class Cart extends Component<Props, State> {
                                     <Caption>{store.delivery_estimation}</Caption>
                                 </Cell>
                             }
-                            <Cell>
-                                <Text>{'Entregar em'}</Text>
-                                <TitleH4>{'Av. São Gabriel, 661'}</TitleH4>
-                                <TitleH4>{'Itaim Bibi - São Paulo'}</TitleH4>
-                            </Cell>
+                            {selected_address &&
+                                <View>
+                                    <TextView>
+                                        <Title>{'Entregar em:'}</Title>
+                                    </TextView>
+                                    <AddressCell address={selected_address} />
+                                </View>
+
+                            }
 
                         </Header>
                     )}
@@ -83,7 +97,7 @@ class Cart extends Component<Props, State> {
 export default connect(
     state => ({
         cart: cartSelectors.getCart(state),
-
+        selected_address: userSelectors.getSelectedAddress(state)
     }),
     {}
 )(Cart)
