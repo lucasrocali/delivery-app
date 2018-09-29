@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { } from '../store/auth/action'
+import { } from '../store/user/action'
 import * as cartSelectors from '../store/cart/selector';
 import colors from '../constants/colors';
 import styled from "styled-components";

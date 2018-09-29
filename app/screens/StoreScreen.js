@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { SectionList, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { } from '../store/auth/action'
+import { } from '../store/user/action'
 import styled from "styled-components";
 import * as storeSelectors from '../store/stores/selector';
 import colors from '../constants/colors';

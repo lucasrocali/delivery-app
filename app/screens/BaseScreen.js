@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { } from '../store/auth/action'
-import * as selectors from '../store/auth/selector';
+import { } from '../store/user/action'
+import * as selectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title } from './styled/index'
 

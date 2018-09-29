@@ -64,7 +64,7 @@ export function loginRequest(user_login) {
         img_url: user_login.img_url,
         social_id: user_login.social_id
     }
-    return post('auth/login', header(), post_data)
+    return post('authh/login', header(), post_data)
 }
 
 export function signupRequest(user_signup) {
@@ -74,7 +74,7 @@ export function signupRequest(user_signup) {
         password_confirmation: user_signup.password_confirmation,
         name: user_signup.name,
     }
-    return post('auth/login', header(), sign_data)
+    return post('signup', header(), sign_data)
 }
 
 export function getCategoriesRequest() {

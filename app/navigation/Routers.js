@@ -412,7 +412,8 @@ export const AppNavigator = StackNavigator(
         [stacks.AddressesStack.name]: stacks.AddressesStack.component,
         [stacks.PickerStack.name]: stacks.PickerStack.component
     }, {
-        initialRouteName: stacks.AddressesStack.name,
+        initialRouteName: screens.Launch.name,
+        // initialRouteName: stacks.AddressesStack.name,
         mode: 'modal',
         navigationOptions: {
             header: null,

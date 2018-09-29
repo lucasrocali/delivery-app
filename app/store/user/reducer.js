@@ -6,7 +6,7 @@ const initialState = {
     user: {},
 }
 
-export default function authReducer(state = initialState, action) {
+export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.AUTHENTICATE_LOADING:
             const { loading } = action

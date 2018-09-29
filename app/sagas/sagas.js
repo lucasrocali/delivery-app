@@ -4,24 +4,24 @@ import { call, takeEvery, takeLatest, put, select } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { NavigationActions } from "react-navigation";
 
-import * as authActionTypes from "../store/auth/actionType";
+import * as userActionTypes from "../store/user/actionType";
 import * as storesActionTypes from "../store/stores/actionType";
 
 import * as appActions from "../store/app/action";
-import * as authActions from "../store/auth/action";
+import * as userActions from "../store/user/action";
 import * as storeActions from "../store/stores/action";
 import * as cartActions from "../store/cart/action";
 
 import * as appSelectors from '../store/app/selector'
-import * as authSelectors from '../store/auth/selector'
+import * as userSelectors from '../store/user/selector'
 // import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/"
 import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/mock.js"
 
 import { mainStack } from '../navigation/Routers';
 
-const getToken = state => authSelectors.getAuthToken(state);
+const getToken = state => userSelectors.getAuthToken(state);
 const getCredentials = state => appSelectors.getCredentials(state);
-const getUser = state => authSelectors.getUser(state);
+const getUser = state => userSelectors.getUser(state);
 
 const handleError = (response) => {
 
@@ -36,7 +36,7 @@ const autoLogin = function* (action) {
             const response = yield call(loginRequest, user_credentials)
 
             if (response && response.id && response.id > 0) {
-                yield put(authActions.setSuccess(response))
+                yield put(userActions.setSuccess(response))
             } else {
                 yield put(appActions.clearCredentials())
             }
@@ -54,7 +54,7 @@ const autoLogin = function* (action) {
 
 const authenticate = function* (action) {
     try {
-        yield put(authActions.setLoading(true))
+        yield put(userActions.setLoading(true))
 
         const { login, user_credentials } = action
 
@@ -64,18 +64,18 @@ const authenticate = function* (action) {
 
             yield put(appActions.setCredentials(user_credentials))
 
-            yield put(authActions.setSuccess(response))
+            yield put(userActions.setSuccess(response))
 
             yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
         } else {
-            yield put(authActions.setLoading(false))
+            yield put(userActions.setLoading(false))
         }
 
         handleError(response)
     } catch (error) {
         console.log(error);
         //TODO: Handle Error
-        yield put(authActions.setLoading(false))
+        yield put(userActions.setLoading(false))
     }
 };
 
@@ -117,8 +117,8 @@ const loadStore = function* (action) {
 };
 
 export function* root(): Saga<void> {
-    yield takeLatest(authActionTypes.AUTO_LOGIN, autoLogin)
-    yield takeLatest(authActionTypes.AUTHENTICATE, authenticate)
+    yield takeLatest(userActionTypes.AUTO_LOGIN, autoLogin)
+    yield takeLatest(userActionTypes.AUTHENTICATE, authenticate)
     yield takeLatest(storesActionTypes.LOAD_CATEGORIES, loadCategories)
     yield takeLatest(storesActionTypes.LOAD_STORE, loadStore)
 };

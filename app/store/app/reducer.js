@@ -1,5 +1,5 @@
 import * as actionTypes from './actionType';
-import * as authActionTypes from '../auth/actionType';
+import * as userActionTypes from '../user/actionType';
 
 const initialState = {
     user_credentials: {},
@@ -17,7 +17,7 @@ export default function appReducer(state = initialState, action) {
             return {
                 user_credentials: {}
             }
-        case authActionTypes.LOGOUT:
+        case userActionTypes.LOGOUT:
             return {
                 user_credentials: {},
             }

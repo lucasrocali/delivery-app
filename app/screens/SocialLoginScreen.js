@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Platform } from 'react-native';
 import { connect } from 'react-redux';
-import { login } from '../store/auth/action'
-import * as selectors from '../store/auth/selector';
+import { login } from '../store/user/action'
+import * as selectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title, Text, Cell, ButtonText } from './styled/index';
 import colors from '../constants/colors';
