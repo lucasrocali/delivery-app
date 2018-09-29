@@ -23,8 +23,16 @@ const getToken = state => userSelectors.getAuthToken(state);
 const getCredentials = state => appSelectors.getCredentials(state);
 const getUser = state => userSelectors.getUser(state);
 
-const handleError = (response) => {
+//{message: "Missing token"}
+const getErrorMsg = (response) => {
+    return response && response.message ? response.message : null
+}
 
+const displayErrorMsg = function* (error_msg) {
+    console.log('displayErrorMsg', error_msg)
+    yield put(appActions.setErrorMsg(error_msg))
+    yield delay(3000)
+    yield put(appActions.clearErrorMsg())
 }
 
 const autoLogin = function* (action) {
@@ -60,18 +68,22 @@ const authenticate = function* (action) {
 
         const response = yield call(login ? loginRequest : signupRequest, user_credentials)
 
-        if (response && response.id && response.id > 0) {
+        const error_msg = getErrorMsg(response)
+
+        if (!error_msg && response && response.id && response.id > 0) {
 
             yield put(appActions.setCredentials(user_credentials))
 
             yield put(userActions.setSuccess(response))
 
             yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
+        } else if (error_msg) {
+            yield call(displayErrorMsg, error_msg)
         } else {
             yield put(userActions.setLoading(false))
         }
 
-        handleError(response)
+        // handleError(response)
     } catch (error) {
         console.log(error);
         //TODO: Handle Error
@@ -126,8 +138,17 @@ const createAddress = function* (action) {
 
         const response = yield call(postAddressRequest, token, address)
 
-        yield put(userActions.setCreateAddressSuccess(response))
-        yield put(userActions.loadAddress())
+        const error_msg = getErrorMsg(response)
+
+        if (error_msg) {
+            yield call(displayErrorMsg, error_msg)
+        } else {
+            yield put(userActions.setCreateAddressSuccess(response))
+            yield put(userActions.loadAddress())
+            yield put(NavigationActions.back())
+        }
+
+
     } catch (error) {
         yield put(userActions.setLoading(false))
         console.log(error);

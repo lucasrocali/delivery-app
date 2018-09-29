@@ -113,7 +113,7 @@ class Address extends Component<Props, State> {
                             }
                         console.log('values', values, new_address)
                         createAddress(new_address)
-                        navigation.goBack(null)
+                        // navigation.goBack(null)
 
                     }
                     }>

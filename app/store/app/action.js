@@ -12,3 +12,14 @@ export function setCredentials(user_credentials) {
         user_credentials
     }
 }
+
+export function setErrorMsg(error_msg) {
+    return {
+        type: actionTypes.SET_ERROR_MSG,
+        error_msg
+    }
+}
+
+export function clearErrorMsg() {
+    return setErrorMsg('')
+}

@@ -3,6 +3,7 @@ import * as userActionTypes from '../user/actionType';
 
 const initialState = {
     user_credentials: {},
+    error_msg: null
 }
 
 export default function appReducer(state = initialState, action) {
@@ -20,6 +21,12 @@ export default function appReducer(state = initialState, action) {
         case userActionTypes.LOGOUT:
             return {
                 user_credentials: {},
+            }
+        case actionTypes.SET_ERROR_MSG:
+            const { error_msg } = action
+            return {
+                ...state,
+                error_msg
             }
         default:
             return state
