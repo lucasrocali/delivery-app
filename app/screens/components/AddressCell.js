@@ -22,8 +22,8 @@ export default AddressCell = (props: Props) => {
         <Container>
             {address &&
                 <Touchable onPress={onPress}>
-                    <Text>{address.name}</Text>
-                    <Caption>{address.street + ', ' + address.neighborhood + ' - ' + address.city + ' - ' + address.state}</Caption>
+                    <Text>{address.street + ', ' + address.number}</Text>
+                    <Caption>{address.neighborhood + ' - ' + address.city + ' - ' + address.state}</Caption>
                 </Touchable>
             }
         </Container>

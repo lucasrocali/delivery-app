@@ -93,7 +93,7 @@ export const screens = {
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: 'Categorias',
                 leftIcon: icon_names.person,
-                leftRouteName: stacks.PickerStack.name,
+                leftRouteName: stacks.LoginStack.name,
                 rightIcon: icon_names.cart,
                 rightRouteName: screens.Cart.name
             }),
@@ -251,9 +251,8 @@ export const stacks = {
         name: 'AddressesStack',
         component: StackNavigator(
             {
-                [screens.Address.name]: screens.Address.component,
                 [screens.Addresses.name]: screens.Addresses.component,
-
+                [screens.Address.name]: screens.Address.component,
             }
         )
     },

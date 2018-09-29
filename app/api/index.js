@@ -39,6 +39,21 @@ function post(path, header, data) {
         .catch((error) => { throw error });
 }
 
+function put(path, header, data) {
+    const url = `${API}/${path}`
+    console.log('put =>', url, header, data)
+    return fetch(url, {
+        method: 'PUT',
+        headers: header,
+        body: JSON.stringify(data)
+    })
+        .then(data => {
+            console.log('put <=', url, data)
+            return data
+        })
+        .catch((error) => { throw error });
+}
+
 function get(path, header, query_data = {}) {
     const url = `${API}/${path}`
     console.log('get =>', url, header, query_data)
@@ -64,7 +79,7 @@ export function loginRequest(user_login) {
         img_url: user_login.img_url,
         social_id: user_login.social_id
     }
-    return post('authh/login', header(), post_data)
+    return post('auth/login', header(), post_data)
 }
 
 export function signupRequest(user_signup) {
@@ -85,17 +100,13 @@ export function getStoreRequest(store_id) {
     return get(`stores/${store_id}`, header())
 }
 
-export function postAddressRequest(address) {
-    const sign_data = {
-        name: address.name,
-        zipcode: address.zipcode,
-        street: address.street,
-        number: address.number,
-        complement: address.complement,
-        neighborhood: address.neighborhood,
-        state: address.state,
-        reference: address.reference,
+export function postAddressRequest(auth_token, address) {
+    if (address.id && address.id > 0) {
+        return put(`addresses/${address.id}`, authHeader(auth_token), address)
     }
-    return post('addresses', header(), sign_data)
+    return post('addresses', authHeader(auth_token), address)
 }
 
+export function getAddressRequest(auth_token) {
+    return get('addresses', authHeader(auth_token))
+}

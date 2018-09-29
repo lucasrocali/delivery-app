@@ -413,3 +413,6 @@ export function getCategoriesRequest() {
     ]
 }
 
+export function postAddressRequest() {
+    return {}
+}

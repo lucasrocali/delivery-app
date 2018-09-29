@@ -14,8 +14,8 @@ import * as cartActions from "../store/cart/action";
 
 import * as appSelectors from '../store/app/selector'
 import * as userSelectors from '../store/user/selector'
-// import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/"
-import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/mock.js"
+import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest, getAddressRequest, postAddressRequest } from "../api/"
+// import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest, postAddressRequest } from "../api/mock.js"
 
 import { mainStack } from '../navigation/Routers';
 
@@ -116,9 +116,44 @@ const loadStore = function* (action) {
     }
 };
 
+const createAddress = function* (action) {
+    try {
+        yield put(userActions.setLoading(true))
+
+        const { address } = action
+
+        const token = yield select(getToken)
+
+        const response = yield call(postAddressRequest, token, address)
+
+        yield put(userActions.setCreateAddressSuccess(response))
+        yield put(userActions.loadAddress())
+    } catch (error) {
+        yield put(userActions.setLoading(false))
+        console.log(error);
+    }
+};
+
+const loadAddresses = function* (action) {
+    try {
+        yield put(userActions.setLoading(true))
+
+        const token = yield select(getToken)
+
+        const response = yield call(getAddressRequest, token)
+
+        yield put(userActions.loadAddressSuccess(response))
+    } catch (error) {
+        console.log(error);
+        yield put(userActions.setLoading(false))
+    }
+};
+
 export function* root(): Saga<void> {
     yield takeLatest(userActionTypes.AUTO_LOGIN, autoLogin)
     yield takeLatest(userActionTypes.AUTHENTICATE, authenticate)
     yield takeLatest(storesActionTypes.LOAD_CATEGORIES, loadCategories)
     yield takeLatest(storesActionTypes.LOAD_STORE, loadStore)
+    yield takeLatest(userActionTypes.CREATE_ADDRESS, createAddress)
+    yield takeLatest(userActionTypes.LOAD_ADDRESSES, loadAddresses)
 };

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { } from '../store/user/action'
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
-import { Title } from './styled/index';
+import { Title, Text, TouchableCell } from './styled/index';
 import colors from '../constants/colors';
 import AddressCell from './components/AddressCell';
 import { screens } from '../navigation/Routers';
@@ -16,6 +16,7 @@ const Container = styled.View`
     flex: 1;
     background-color: ${colors.white};
 `;
+
 
 type State = {
 
@@ -31,12 +32,25 @@ class Addresses extends Component<Props, State> {
         const { addresses } = user
         return (
             <Container>
+                <TouchableCell
+                    onPress={() => navigation.navigate({
+                        key: screens.Address.name,
+                        routeName: screens.Address.name
+                    })}>
+                    <Text>Novo endereço</Text>
+                </TouchableCell>
                 <FlatList
                     data={addresses}
                     renderItem={({ item: address, index }) => (
                         <AddressCell
                             address={address}
-                            onPress={() => navigation.navigate({ key: screens.Address.name, routeName: screens.Address.name })}
+                            onPress={() => navigation.navigate({
+                                key: screens.Address.name,
+                                routeName: screens.Address.name,
+                                params: {
+                                    address: address
+                                }
+                            })}
                         />
                     )}
                 />

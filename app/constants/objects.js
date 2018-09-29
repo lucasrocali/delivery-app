@@ -1,14 +1,14 @@
 
 export const MapAddress = (raw) => {
     return {
-        id: 6,
+        id: raw.id ? raw.id : 0,
         name: raw.name ? raw.name : '',
         state: raw.state ? raw.state : '',
         city: raw.city ? raw.city : '',
         neighborhood: raw.neighborhood ? raw.neighborhood : '',
         street: raw.street ? raw.street : '',
-        zipcode: raw.zipcode ? raw.zipcode : '',
-        number: raw.number ? raw.number : '',
+        zipcode: raw.zipcode ? raw.zipcode.toString() : '',
+        number: raw.number ? raw.number.toString() : '',
         complement: raw.complement ? raw.complement : '',
         reference: raw.reference ? raw.reference : '',
         lat: raw.lat ? raw.lat : '',

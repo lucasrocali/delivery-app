@@ -66,6 +66,14 @@ export const Cell = styled.View`
     margin-horizontal: ${spacing.small};
 `
 
+export const TouchableCell = styled.TouchableOpacity`
+    padding-horizontal: ${spacing.small};
+    padding-vertical: ${spacing.medium};
+    border-bottom-width: 1;
+    border-color: ${colors.gray5};
+    margin-horizontal: ${spacing.small};
+`
+
 export const SectionHeader = styled(Cell) ` 
     flex-direction: row;
 `

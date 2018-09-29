@@ -12,7 +12,7 @@ import spacing from '../constants/spacing';
 import { Formik } from 'formik';
 import InputText from './components/InputText';
 
-const Container = styled.View`
+const Container = styled.ScrollView`
     flex: 1;
     padding-top:  ${spacing.large};
     background-color: ${colors.white};
@@ -23,7 +23,7 @@ const LoginText = styled(ButtonText) `
 `
 
 const Content = styled.View`
-
+    flex: 1;
 `
 
 type State = {
