@@ -17,6 +17,7 @@ import CategoriesScreen from '../screens/CategoriesScreen';
 import StoreScreen from '../screens/StoreScreen';
 import ProductScreen from '../screens/ProductScreen';
 import CartScreen from '../screens/CartScreen';
+import PickerScreen from '../screens/PickerScreen';
 
 import { } from '../screens/styled'
 // import { FluidNavigator } from 'react-navigation-fluid-transitions'
@@ -92,7 +93,7 @@ export const screens = {
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: 'Categorias',
                 leftIcon: icon_names.person,
-                leftRouteName: stacks.LoginStack.name,
+                leftRouteName: stacks.PickerStack.name,
                 rightIcon: icon_names.cart,
                 rightRouteName: screens.Cart.name
             }),
@@ -176,6 +177,15 @@ export const screens = {
             }),
         }
     },
+    Picker: {
+        name: 'Picker',
+        component: {
+            screen: PickerScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: 'Picker',
+            }),
+        }
+    },
     Base: {
         name: 'Base',
         component: {
@@ -241,8 +251,17 @@ export const stacks = {
         name: 'AddressesStack',
         component: StackNavigator(
             {
+                [screens.Address.name]: screens.Address.component,
                 [screens.Addresses.name]: screens.Addresses.component,
-                [screens.Address.name]: screens.Address.component
+
+            }
+        )
+    },
+    PickerStack: {
+        name: 'PickerStack',
+        component: StackNavigator(
+            {
+                [screens.Picker.name]: screens.Picker.component
             }
         )
     },
@@ -391,9 +410,9 @@ export const AppNavigator = StackNavigator(
         [screens.Store.name]: screens.Store.component,
         [stacks.LoginStack.name]: stacks.LoginStack.component,
         [stacks.AddressesStack.name]: stacks.AddressesStack.component,
-
+        [stacks.PickerStack.name]: stacks.PickerStack.component
     }, {
-        initialRouteName: screens.Launch.name,
+        initialRouteName: stacks.AddressesStack.name,
         mode: 'modal',
         navigationOptions: {
             header: null,

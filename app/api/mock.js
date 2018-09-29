@@ -4,15 +4,30 @@ export function loginRequest(user_login) {
     //     "error": true
     // }
     return {
-        "id": 3,
-        "name": "lucas",
-        "email": "rocali@facebook.commmdd3",
-        "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozLCJleHAiOjE1MTk2MDkwODF9.Z5W8s0SdnehZgiG6jTWoP_gGWKyFmyqlvLx_TQJeflE",
-        "login_type": "Facebook",
-        "lists": [],
-        "liked_spots": [],
-        "checked_spots": [],
-        "rated_spots": []
+        "id": 2,
+        "email": "rocali@driver.com",
+        "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE1MzgxOTAwOTV9.PqPOtf7WFcTmkd7-YCJSRa2Q8T2n1P201Vt0a6oMmms",
+        "name": "driver",
+        "user_type": "Client",
+        "addresses": [
+            {
+                "id": 6,
+                "name": "Casa",
+                "state": "SP",
+                "city": "São Paulo",
+                "neighborhood": "Itaim",
+                "street": "Av. São Gabriel",
+                "zipcode": 1010010,
+                "number": 663,
+                "complement": "APT 104",
+                "reference": null,
+                "lat": null,
+                "lng": null
+            }
+        ],
+        "orders": [],
+        "managed_store": null,
+        "drove_store": null
     };
 }
 

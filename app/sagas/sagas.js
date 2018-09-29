@@ -14,8 +14,8 @@ import * as cartActions from "../store/cart/action";
 
 import * as appSelectors from '../store/app/selector'
 import * as authSelectors from '../store/auth/selector'
-import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/"
-// import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/mock.js"
+// import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/"
+import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest } from "../api/mock.js"
 
 import { mainStack } from '../navigation/Routers';
 
