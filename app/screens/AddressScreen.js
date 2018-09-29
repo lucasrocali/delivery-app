@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createAddress } from '../store/user/action'
-import * as selectors from '../store/user/selector';
+import { createAddress, loadAddressByZipcode } from '../store/user/action'
+import * as userSelectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title, Cell, Button, ButtonText, Caption } from './styled/index'
 import colors from '../constants/colors'
@@ -52,6 +52,16 @@ type State = {
 type Props = {
 
 }
+const MapSearchAddress = (address) => {
+    return {
+        zipcode: address ? address.zipcode : '',
+        street: address ? address.street : '',
+        number: address ? address.number : '',
+        complement: address ? address.complement : '',
+        neighborhood: address ? address.neighborhood : '',
+        reference: address ? address.reference : ''
+    }
+}
 class Address extends Component<Props, State> {
 
     constructor(props, context) {
@@ -61,34 +71,34 @@ class Address extends Component<Props, State> {
             state: address ? address.state : '',
             city: address ? address.city : '',
         };
+        this.initialValues = MapSearchAddress(address)
     }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.search_address && nextProps.search_address.state && nextProps.search_address.city) {
+            this.setState({ state: nextProps.search_address.state, city: nextProps.search_address.city })
+            this.initialValues = MapSearchAddress(nextProps.search_address)
+        }
+    }
+
     onSelectedState = (state) => {
-        console.log('onSelectedState')
         this.setState({ state: state })
     }
 
     onSelectedCity = (city) => {
-        console.log('onSelectedCity')
         this.setState({ city: city })
     }
     render() {
-        const { navigation, createAddress } = this.props
+        const { navigation, createAddress, loadAddressByZipcode } = this.props
         const address = navigation.state.params && navigation.state.params.address ? navigation.state.params.address : null
         const { state, city } = this.state
-        console.log('formik', this.props, this.state)
+        console.log('formik', this.props, this.state, this.initialValues)
         return (
             <Container>
                 <Formik
 
                     ref={el => (this.form = el)}
-                    initialValues={{
-                        zipcode: address ? address.zipcode : '',
-                        street: address ? address.street : '',
-                        number: address ? address.number : '',
-                        complement: address ? address.complement : '',
-                        neighborhood: address ? address.neighborhood : '',
-                        reference: address ? address.reference : '',
-                    }}
+                    initialValues={this.initialValues}
+                    enableReinitialize
                     onSubmit={values => {
                         const new_address = address && address.id ? {
                             id: address.id,
@@ -106,7 +116,7 @@ class Address extends Component<Props, State> {
 
                     }
                     }>
-                    {({ handleChange, handleSubmit, values }) => (
+                    {({ handleChange, handleSubmit, values, setFieldValue }) => (
                         <Content>
                             <Row>
                                 <AddressInput
@@ -114,7 +124,11 @@ class Address extends Component<Props, State> {
                                     value={values.zipcode}
                                     label="Cep"
                                 />
-                                <SearchButton>
+                                <SearchButton
+                                    onPress={() => {
+                                        loadAddressByZipcode(values.zipcode)
+                                    }}
+                                >
                                     <Caption>Buscar Endereço</Caption>
                                 </SearchButton>
                             </Row>
@@ -200,7 +214,7 @@ class Address extends Component<Props, State> {
 
 export default connect(
     state => ({
-
+        search_address: userSelectors.getSearchAddress(state)
     }),
-    { createAddress }
+    { createAddress, loadAddressByZipcode }
 )(Address)

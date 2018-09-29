@@ -14,7 +14,7 @@ import * as cartActions from "../store/cart/action";
 
 import * as appSelectors from '../store/app/selector'
 import * as userSelectors from '../store/user/selector'
-import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest, getAddressRequest, postAddressRequest } from "../api/"
+import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest, getAddressRequest, getAddressByZipcodeRequest, postAddressRequest } from "../api/"
 // import { loginRequest, signupRequest, getCategoriesRequest, getStoreRequest, postAddressRequest } from "../api/mock.js"
 
 import { mainStack } from '../navigation/Routers';
@@ -149,6 +149,24 @@ const loadAddresses = function* (action) {
     }
 };
 
+const loadAddressByZipCode = function* (action) {
+    try {
+        yield put(userActions.setLoading(true))
+
+        const token = yield select(getToken)
+
+        const { zipcode } = action
+
+        const response = yield call(getAddressByZipcodeRequest, token, zipcode)
+
+        yield put(userActions.loadAddressByZipcodeSuccess(response))
+    } catch (error) {
+        console.log(error);
+        yield put(userActions.setLoading(false))
+    }
+};
+
+
 export function* root(): Saga<void> {
     yield takeLatest(userActionTypes.AUTO_LOGIN, autoLogin)
     yield takeLatest(userActionTypes.AUTHENTICATE, authenticate)
@@ -156,4 +174,5 @@ export function* root(): Saga<void> {
     yield takeLatest(storesActionTypes.LOAD_STORE, loadStore)
     yield takeLatest(userActionTypes.CREATE_ADDRESS, createAddress)
     yield takeLatest(userActionTypes.LOAD_ADDRESSES, loadAddresses)
+    yield takeLatest(userActionTypes.LOAD_ADDRESS_BY_ZIPCODE, loadAddressByZipCode)
 };

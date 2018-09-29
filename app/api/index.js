@@ -110,3 +110,7 @@ export function postAddressRequest(auth_token, address) {
 export function getAddressRequest(auth_token) {
     return get('addresses', authHeader(auth_token))
 }
+
+export function getAddressByZipcodeRequest(auth_token, zip_code) {
+    return get(`zip_codes?zip=${zip_code}`, authHeader(auth_token))
+}

@@ -69,3 +69,17 @@ export function setCreateAddressSuccess(response) {
         response
     }
 }
+
+export function loadAddressByZipcode(zipcode) {
+    return {
+        type: actionTypes.LOAD_ADDRESS_BY_ZIPCODE,
+        zipcode
+    }
+}
+
+export function loadAddressByZipcodeSuccess(response) {
+    return {
+        type: actionTypes.LOAD_ADDRESS_BY_ZIPCODE_SUCCESS,
+        response
+    }
+}

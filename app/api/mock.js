@@ -416,3 +416,7 @@ export function getCategoriesRequest() {
 export function postAddressRequest() {
     return {}
 }
+
+export function getAddressByZipcodeRequest() {
+    return {}
+}

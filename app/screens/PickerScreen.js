@@ -43,11 +43,11 @@ const TextContainsSearchText = (text, search_text) => {
 }
 
 const WrapStates = () => {
-    return cities.estados.map(estado => estado.nome)
+    return cities.estados.map(estado => estado.sigla)
 }
 
 const WrapCities = (state) => {
-    const estados_macth = cities.estados.filter(estado => estado.nome == state)
+    const estados_macth = cities.estados.filter(estado => estado.sigla == state)
     const estado = estados_macth && estados_macth.length > 0 ? estados_macth[0] : null
     console.log('WrapCities', estados_macth, estado, state)
     return estado && estado.cidades ? estado.cidades.map(city => city) : []
