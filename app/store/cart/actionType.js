@@ -1,4 +1,5 @@
 export const SELECT_STORE = 'SELECT_STORE'
 export const ADD_TO_CART = 'ADD_TO_CART'
 
+export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 export const HANDLE_NEW_PRODUCT = 'HANDLE_NEW_PRODUCT'

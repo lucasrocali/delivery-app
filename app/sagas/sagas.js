@@ -221,12 +221,12 @@ const navigate = function* (action) {
 
 const handleNewProduct = function* (action) {
     try {
-        const { store_id, cart_product, cart_product_index } = action
+        const { store_id, cart_product } = action
 
         const cartStore = yield select(getCartStore)
 
         if (cartStore.id == store_id) {
-            yield put(cartActions.addToCart(cart_product, cart_product_index))
+            yield put(cartActions.addToCart(cart_product))
             yield put(appActions.displayToastMsg('Item adicionado ao carrinho'))
             yield put(NavigationActions.back())
         } else {

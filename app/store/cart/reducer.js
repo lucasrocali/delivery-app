@@ -91,19 +91,27 @@ export default function cartReducer(state = initialState, action) {
             return state
         case actionTypes.ADD_TO_CART:
 
-            const { cart_product, cart_product_index } = action
+            const { cart_product } = action
             let { cart_products } = state
 
-            if (cart_product_index >= 0) {
-                cart_products[cart_product_index] = cart_product
+            if (cart_product.id > 0) {
+
+                var index = cart_products.map(cp => cp.id).indexOf(cart_product.id);
+                cart_products[index] = cart_product
+
             } else {
+
+                cart_product.id = cart_products.length + 1
                 cart_products.push(cart_product)
+
             }
             return {
                 ...state,
                 cart_products
             }
-
+        case actionTypes.REMOVE_PRODUCT:
+            const { cart_product_id } = action
+            return state
         default:
             return state
     }

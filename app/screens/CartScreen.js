@@ -124,10 +124,7 @@ class Cart extends Component<Props, State> {
                                 routeName: screenNames.ProductStack,
                                 params: {
                                     store_id: store.id,
-                                    product: cart_product.product,
-                                    quantity: cart_product.quantity,
-                                    selected_options: cart_product.selected_options,
-                                    cart_product_index: index,
+                                    cart_product: cart_product,
                                     title: store.name
                                 }
                             })}

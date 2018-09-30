@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { handleNewProduct } from '../store/cart/action'
 import * as selectors from '../store/stores/selector';
 import styled from "styled-components";
-import { Title, TitleH4, Cell, Left, Right, InputText } from './styled/index'
+import { Title, TitleH4, Cell, Left, Right, InputText, TouchableCell, Caption } from './styled/index'
 import Ionicon from "react-native-vector-icons/Ionicons";
 import spacing from '../constants/spacing';
 import { MapOptionsSection } from '../constants/objects'
@@ -62,6 +62,13 @@ const AddButton = styled.TouchableOpacity`
     border-radius: 5;
 `
 
+const View = styled.View`
+
+`
+const RemoveBtn = styled(TouchableCell) `
+    align-items: center;
+    justify-content: center;
+`
 const canAdd = (product, quantity, selected_options) => {
     let can = true
     product.options.map((option) => can = can && (option.min == 0 || selected_options[option.id] && selected_options[option.id].length >= option.min))
@@ -80,22 +87,23 @@ class Product extends Component<Props, State> {
 
     constructor(props, context) {
         super(props, context);
-        const { quantity, selected_options, cart_product_index } = props.navigation.state.params
+        const { cart_product } = props.navigation.state.params
         this.state = {
-            selected_options: selected_options ? selected_options : {},
-            quantity: quantity ? quantity : 1,
-            cart_product_index: typeof cart_product_index == 'number' ? cart_product_index : -1
+            selected_options: cart_product && cart_product.selected_options ? cart_product.selected_options : {},
+            quantity: cart_product && cart_product.quantity ? cart_product.quantity : 1,
+            cart_product_id: cart_product && typeof cart_product.id == 'number' ? cart_product.id : -1
         };
     }
 
     render() {
-        console.log('render product', this.props)
-        const { store_id, product } = this.props.navigation.state.params
-        const { selected_options, quantity, cart_product_index } = this.state
+
+        const { store_id, cart_product } = this.props.navigation.state.params
+        const { product } = cart_product
+        const { selected_options, quantity, cart_product_id } = this.state
         const { handleNewProduct, navigation } = this.props
         const canAddProduct = canAdd(product, quantity, selected_options)
         const cart_product_total = getCartProductTotal({ product: product, quantity: quantity, selected_options: selected_options })
-        console.log(this.state)
+        console.log('render product == >', this.props, cart_product_id)
         return (
             <Container>
                 <OptionsList
@@ -162,13 +170,23 @@ class Product extends Component<Props, State> {
                             </InfoView>
                         </Header>)
                     }
+                    ListFooterComponent={(
+                        <View>
+                            {cart_product_id >= 0 &&
+                                <RemoveBtn>
+                                    <Caption>Remover item</Caption>
+                                </RemoveBtn>
+                            }
+                        </View>
+                    )}
                 />
                 <AddButton
                     style={{ opacity: canAddProduct ? 1.0 : 0.4 }}
                     activeOpacity={0.8}
                     disabled={!canAddProduct}
                     onPress={() => {
-                        handleNewProduct(store_id, { product: product, quantity: quantity, selected_options: selected_options }, cart_product_index)
+                        console.log(' handleNewProduct => ', cart_product_id)
+                        handleNewProduct(store_id, { id: cart_product_id, product: product, quantity: quantity, selected_options: selected_options })
                     }} >
                     <Left>
                         <LightTitle>{'Adicionar ' + quantity}</LightTitle>
