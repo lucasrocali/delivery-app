@@ -13,20 +13,27 @@ export function setCredentials(user_credentials) {
     }
 }
 
-export function setErrorMsg(error_msg) {
+export function setToastMsg(toast_msg) {
     return {
-        type: actionTypes.SET_ERROR_MSG,
-        error_msg
+        type: actionTypes.SET_TOAST_MSG,
+        toast_msg
     }
 }
 
-export function clearErrorMsg() {
-    return setErrorMsg('')
+export function clearToastMsg() {
+    return setToastMsg('')
 }
 
 export function navigateTo(route_name) {
     return {
         type: actionTypes.NAVIGATE,
         route_name
+    }
+}
+
+export function displayToastMsg(toast_msg) {
+    return {
+        type: actionTypes.DISPLAY_TOAST_MSG,
+        toast_msg
     }
 }

@@ -23,17 +23,17 @@ type Props = {
 class Base extends Component<Props, State> {
 
     render() {
-        const { error_msg } = this.props
+        const { toast_msg } = this.props
         return (
             <Container>
                 <RootNavigation />
                 <Toast
-                    visible={error_msg ? true : false}
+                    visible={toast_msg ? true : false}
                     position={Toast.positions.BOTTOM}
                     shadow={false}
                     animation={false}
                     hideOnPress={true}
-                >{error_msg}</Toast>
+                >{toast_msg}</Toast>
             </Container >
         );
     }
@@ -41,7 +41,7 @@ class Base extends Component<Props, State> {
 
 export default connect(
     state => ({
-        error_msg: appSelectors.getErrorMsg(state),
+        toast_msg: appSelectors.getToastMsg(state),
     }),
     {}
 )(Base)

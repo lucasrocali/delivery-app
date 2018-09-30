@@ -3,6 +3,6 @@ export function getCredentials(state) {
 }
 
 
-export function getErrorMsg(state) {
-    return state.app_reducer.error_msg
+export function getToastMsg(state) {
+    return state.app_reducer.toast_msg
 }

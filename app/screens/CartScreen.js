@@ -81,8 +81,10 @@ class Cart extends Component<Props, State> {
                     )}
                     ListFooterComponent={() =>
                         <View>
-                            <AddMoreBtn>
-                                <Caption>Adicionar mais items</Caption>
+                            <AddMoreBtn
+                                onPress={() => navigation.navigate({ key: screenNames.Store, routeName: screenNames.Store, params: { title: store.name } })}
+                            >
+                                <Caption>Adicionar mais itens</Caption>
                             </AddMoreBtn>
                             <Cell>
                                 <Row>

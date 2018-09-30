@@ -26,15 +26,16 @@ const getCredentials = state => appSelectors.getCredentials(state);
 const getUser = state => userSelectors.getUser(state);
 
 //{message: "Missing token"}
-const getErrorMsg = (response) => {
+const getToastMsg = (response) => {
     return response && response.message ? response.message : null
 }
 
-const displayErrorMsg = function* (error_msg) {
-    console.log('displayErrorMsg', error_msg)
-    yield put(appActions.setErrorMsg(error_msg))
+const displayToastMsg = function* (action) {
+    const { toast_msg } = action
+    console.log('displayToastMsg', toast_msg)
+    yield put(appActions.setToastMsg(toast_msg))
     yield delay(3000)
-    yield put(appActions.clearErrorMsg())
+    yield put(appActions.clearToastMsg())
 }
 
 const autoLogin = function* (action) {
@@ -70,17 +71,17 @@ const authenticate = function* (action) {
 
         const response = yield call(login ? api.loginRequest : api.signupRequest, user_credentials)
 
-        const error_msg = getErrorMsg(response)
+        const toast_msg = getToastMsg(response)
 
-        if (!error_msg && response && response.id && response.id > 0) {
+        if (!toast_msg && response && response.id && response.id > 0) {
 
             yield put(appActions.setCredentials(user_credentials))
 
             yield put(userActions.setSuccess(response))
 
             yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
-        } else if (error_msg) {
-            yield call(displayErrorMsg, error_msg)
+        } else if (toast_msg) {
+            yield put(appActions.displayToastMsg(toast_msg))
         } else {
             yield put(userActions.setLoading(false))
         }
@@ -140,10 +141,10 @@ const createAddress = function* (action) {
 
         const response = yield call(api.postAddressRequest, token, address)
 
-        const error_msg = getErrorMsg(response)
+        const toast_msg = getToastMsg(response)
 
-        if (error_msg) {
-            yield call(displayErrorMsg, error_msg)
+        if (toast_msg) {
+            yield put(appActions.displayToastMsg(toast_msg))
         } else {
             yield put(userActions.setCreateAddressSuccess(response))
             yield put(userActions.loadAddress())
@@ -200,6 +201,7 @@ const navigate = function* (action) {
 
 
 export function* root(): Saga<void> {
+    yield takeLatest(appActionTypes.DISPLAY_TOAST_MSG, displayToastMsg)
     yield takeLatest(appActionTypes.NAVIGATE, navigate)
     yield takeLatest(userActionTypes.AUTO_LOGIN, autoLogin)
     yield takeLatest(userActionTypes.AUTHENTICATE, authenticate)

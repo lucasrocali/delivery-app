@@ -3,7 +3,7 @@ import * as userActionTypes from '../user/actionType';
 
 const initialState = {
     user_credentials: {},
-    error_msg: null
+    toast_msg: null
 }
 
 export default function appReducer(state = initialState, action) {
@@ -22,11 +22,11 @@ export default function appReducer(state = initialState, action) {
             return {
                 user_credentials: {},
             }
-        case actionTypes.SET_ERROR_MSG:
-            const { error_msg } = action
+        case actionTypes.SET_TOAST_MSG:
+            const { toast_msg } = action
             return {
                 ...state,
-                error_msg
+                toast_msg
             }
         default:
             return state
