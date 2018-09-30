@@ -19,7 +19,7 @@ export default OrderCell = (props: Props) => {
         <Container>
             <Text>{order.store.name}</Text>
             <Caption>{order.address.street + ', ' + order.address.number}</Caption>
-            <Caption>{getCartTotal(order)}</Caption>
+            <Caption>{order.total_text}</Caption>
         </Container>
     );
 }

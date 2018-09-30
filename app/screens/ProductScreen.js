@@ -88,23 +88,23 @@ class Product extends Component<Props, State> {
 
     constructor(props, context) {
         super(props, context);
-        const { cart_product } = props.navigation.state.params
+        const { order_product } = props.navigation.state.params
         this.state = {
-            selected_options: cart_product && cart_product.selected_options ? cart_product.selected_options : {},
-            quantity: cart_product && cart_product.quantity ? cart_product.quantity : 1,
-            cart_product_id: cart_product && typeof cart_product.id == 'number' ? cart_product.id : -1
+            selected_options: order_product && order_product.selected_options ? order_product.selected_options : {},
+            quantity: order_product && order_product.quantity ? order_product.quantity : 1,
+            order_product_id: order_product && typeof order_product.id == 'number' ? order_product.id : -1
         };
     }
 
     render() {
 
-        const { store_id, cart_product } = this.props.navigation.state.params
-        const { product } = cart_product
-        const { selected_options, quantity, cart_product_id } = this.state
+        const { store_id, order_product } = this.props.navigation.state.params
+        const { product } = order_product
+        const { selected_options, quantity, order_product_id } = this.state
         const { handleNewProduct, navigation } = this.props
         const canAddProduct = canAdd(product, quantity, selected_options)
-        const cart_product_total = getCartProductTotal({ product: product, quantity: quantity, selected_options: selected_options })
-        console.log('render product == >', this.props, cart_product_id)
+        const order_product_total = getCartProductTotal({ product: product, quantity: quantity, selected_options: selected_options })
+        console.log('render product == >', this.props, order_product_id)
         return (
             <Container>
                 <OptionsList
@@ -173,9 +173,9 @@ class Product extends Component<Props, State> {
                     }
                     ListFooterComponent={(
                         <View>
-                            {cart_product_id >= 0 &&
+                            {order_product_id >= 0 &&
                                 <RemoveBtn
-                                    onPress={() => handleNewProduct(store_id, { id: cart_product_id, product: product, quantity: quantity, selected_options: selected_options }, true)}
+                                    onPress={() => handleNewProduct(store_id, { id: order_product_id, product: product, quantity: quantity, selected_options: selected_options }, true)}
                                 >
                                     <Caption>Remover item</Caption>
                                 </RemoveBtn>
@@ -185,10 +185,10 @@ class Product extends Component<Props, State> {
                 />
                 <RoundedButton
                     leftText={'Adicionar ' + quantity}
-                    rightText={MapPrice(cart_product_total)}
+                    rightText={MapPrice(order_product_total)}
                     disabled={!canAddProduct}
                     onPress={() => {
-                        handleNewProduct(store_id, { id: cart_product_id, product: product, quantity: quantity, selected_options: selected_options })
+                        handleNewProduct(store_id, { id: order_product_id, product: product, quantity: quantity, selected_options: selected_options })
                     }}
                 />
             </Container >

@@ -2,7 +2,7 @@ import * as actionTypes from './actionType'
 import { MapStore } from '../../constants/objects';
 const initialState = {
     store: null,
-    cart_products: []
+    order_products: []
 }
 
 // const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
 //         "price_type": "$$",
 //         "delivery_estimation": "30 min",
 //     },
-//     "cart_products": [
+//     "order_products": [
 //         {
 //             "product": {
 //                 "id": 1,
@@ -80,8 +80,14 @@ const initialState = {
 
 export default function cartReducer(state = initialState, action) {
     switch (action.type) {
+        case actionTypes.CLEAR_CART:
+            return {
+                ...state,
+                store: null,
+                order_products: []
+            }
         case actionTypes.SELECT_STORE:
-            if (state.cart_products.length == 0) {
+            if (state.order_products.length == 0) {
                 const { store } = action
                 return {
                     ...state,
@@ -91,28 +97,28 @@ export default function cartReducer(state = initialState, action) {
             return state
         case actionTypes.ADD_TO_CART:
 
-            const { cart_product, remove } = action
-            let { cart_products } = state
+            const { order_product, remove } = action
+            let { order_products } = state
 
-            if (cart_product.id > 0) {
+            if (order_product.id > 0) {
 
                 if (remove) {
-                    cart_products = cart_products.filter(cp => cp.id !== cart_product.id);
+                    order_products = order_products.filter(cp => cp.id !== order_product.id);
                 } else {
 
-                    var index = cart_products.map(cp => cp.id).indexOf(cart_product.id);
-                    cart_products[index] = cart_product
+                    var index = order_products.map(cp => cp.id).indexOf(order_product.id);
+                    order_products[index] = order_product
                 }
 
             } else {
 
-                cart_product.id = cart_products.length + 1
-                cart_products.push(cart_product)
+                order_product.id = order_products.length + 1
+                order_products.push(order_product)
 
             }
             return {
                 ...state,
-                cart_products
+                order_products
             }
         default:
             return state

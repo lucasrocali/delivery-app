@@ -83,7 +83,7 @@ class Store extends Component<Props, State> {
                         (<ProductCell
                             product={product}
                             onPress={() => {
-                                navigation.navigate({ key: screenNames.ProductStack, routeName: screenNames.ProductStack, params: { store_id: store.id, cart_product: { product: product }, title: store.name } })
+                                navigation.navigate({ key: screenNames.ProductStack, routeName: screenNames.ProductStack, params: { store_id: store.id, order_product: { product: product }, title: store.name } })
                             }}
                         />)
                     )}

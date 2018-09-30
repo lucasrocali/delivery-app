@@ -25,7 +25,7 @@ import * as mockApi from "../api/mock.js"
 import { MapCart } from '../constants/objects';
 
 const api = realApi
-import { mainStack } from '../navigation/Routers';
+import { mainStack, screenNames } from '../navigation/Routers';
 
 const getToken = state => userSelectors.getAuthToken(state);
 const getCredentials = state => appSelectors.getCredentials(state);
@@ -236,21 +236,28 @@ const navigate = function* (action) {
 
 const handleNewProduct = function* (action) {
     try {
-        const { store_id, cart_product, remove } = action
+        const { store_id, order_product, remove } = action
 
         const cartStore = yield select(getCartStore)
 
-        if (cartStore.id == store_id) {
-            yield put(cartActions.addToCart(cart_product, remove))
-            if (remove) {
-                yield put(appActions.displayToastMsg('Item removido do carrinho'))
-            } else {
-                yield put(appActions.displayToastMsg('Item adicionado ao carrinho'))
-            }
+        const address = yield select(getCurrentAddress)
 
-            yield put(NavigationActions.back())
+        if (address && address.id > 0) {
+
+            if (cartStore.id == store_id) {
+                yield put(cartActions.addToCart(order_product, remove))
+                if (remove) {
+                    yield put(appActions.displayToastMsg('Item removido do carrinho'))
+                } else {
+                    yield put(appActions.displayToastMsg('Item adicionado ao carrinho'))
+                }
+
+                yield put(NavigationActions.back())
+            } else {
+                yield put(appActions.displayToastMsg('Carrinho aberto em outra loja'))
+            }
         } else {
-            yield put(appActions.displayToastMsg('Carrinho aberto em outra loja'))
+            yield put(appActions.displayToastMsg('Selecione seu endereço'))
         }
         // yield put(NavigationActions.navigate({ routeName: route_name, key: route_name }))
     } catch (error) {
@@ -294,8 +301,9 @@ const placeOrder = function* (action) {
         if (toast_msg) {
             yield put(appActions.displayToastMsg(toast_msg))
         } else {
-            // yield put(userActions.setCreateAddressSuccess(response))
-            yield put(userActions.loadOrders())
+            yield put(cartActions.clearCart())
+            // yield put(userActions.loadOrders())
+            yield put(NavigationActions.navigate({ routeName: screenNames.OrdersStack, key: screenNames.OrdersStack }))
         }
 
 

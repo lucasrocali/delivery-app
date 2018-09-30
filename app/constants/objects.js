@@ -1,4 +1,4 @@
-import { getCartProductOptionTotal, getCartProductSubOptionsText } from './functions'
+import { getCartProductOptionTotal, getCartProductSubOptionsText, getCartProductTotal, getCartTotal } from './functions'
 
 
 export const MapAddress = (raw) => {
@@ -23,7 +23,9 @@ export const MapOrder = (raw) => {
         id: raw.id ? raw.id : 0,
         store: raw.store ? MapStore(raw.store) : {},
         address: raw.address ? MapAddress(raw.address) : {},
-        order_products: raw.order_products ? raw.order_products.map(order_product => MapOrderProduct(order_product, true)) : [],
+        total: raw.total ? raw.total : 0,
+        total_text: MapPrice(raw.total ? raw.total : 0),
+        order_products: raw.order_products ? raw.order_products.map(order_product => MapOrderProduct(order_product)) : [],
     }
 }
 
@@ -222,26 +224,33 @@ export const MapPrice = (price) => {
 }
 
 export const MapCart = (cart, address) => {
+    console.log('MapCart', cart)
     return {
         store_id: cart.store.id,
         address_id: address.id,
-        order_products_attributes: cart.cart_products.map(cart_product => MapOrderProduct(cart_product))
+        total: getCartTotal(cart.order_products),
+        order_products_attributes: cart.order_products.map(order_product => MapCartOrderProduct(order_product))
     }
 }
 
-export const MapOrderProduct = (raw, product = false) => {
-    if (product) {
-        return {
-            product: raw.product ? MapProduct(raw.product) : {},
-            quantity: raw.quantity ? raw.quantity : 0,
-            sub_options_txt: raw.sub_options_txt ? raw.sub_options_txt : '',
-            sub_options_total: raw.sub_options_total ? raw.sub_options_total : 0,
-        }
+export const MapOrderProduct = (raw) => {
+    console.log('MapOrderProduct', raw)
+    return {
+        product: raw.product ? MapProduct(raw.product) : {},
+        quantity: raw.quantity ? raw.quantity : 0,
+        sub_options_txt: raw.sub_options_txt ? raw.sub_options_txt : '',
+        sub_options_total: raw.sub_options_total ? raw.sub_options_total : 0,
+        product_total: raw.product_total ? raw.product_total : 0,
     }
+}
+
+export const MapCartOrderProduct = (raw) => {
+    console.log('MapOrderProduct', raw)
     return {
         product_id: raw.product ? raw.product.id : 0,
         quantity: raw.quantity ? raw.quantity : 0,
         sub_options_txt: raw ? getCartProductSubOptionsText(raw) : '',
-        sub_options_total: raw ? getCartProductOptionTotal(raw) : 0
+        sub_options_total: raw ? getCartProductOptionTotal(raw) : 0,
+        product_total: raw ? getCartProductTotal(raw) : 0
     }
 }

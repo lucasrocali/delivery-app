@@ -56,13 +56,13 @@ class Cart extends Component<Props, State> {
     render() {
         const { cart, selected_address, placeOrder, navigation } = this.props
         // console.log(JSON.stringify(cart))
-        const { store, cart_products } = cart
-        const cart_total = getCartTotal(cart_products)
-        console.log(cart, store, cart_products)
+        const { store, order_products } = cart
+        const cart_total = getCartTotal(order_products)
+        console.log(cart, store, order_products)
         return (
             <Container>
                 <CartList
-                    data={cart_products}
+                    data={order_products}
                     ListHeaderComponent={() => (
                         <Header>
 
@@ -125,15 +125,15 @@ class Cart extends Component<Props, State> {
                             }
                         </View>
                     )}
-                    renderItem={({ item: cart_product, index }) => (
+                    renderItem={({ item: order_product, index }) => (
                         <CartProductCell
-                            cart_product={cart_product}
+                            order_product={order_product}
                             onPress={() => navigation.navigate({
                                 key: screenNames.ProductStack,
                                 routeName: screenNames.ProductStack,
                                 params: {
                                     store_id: store.id,
-                                    cart_product: cart_product,
+                                    order_product: order_product,
                                     title: store.name
                                 }
                             })}
@@ -143,7 +143,7 @@ class Cart extends Component<Props, State> {
                 <RoundedButton
                     leftText={'Finalizar pedido'}
                     rightText={MapPrice(cart_total)}
-                    disabled={cart_products.length == 0}
+                    disabled={order_products.length == 0}
                     onPress={() => placeOrder()}
                 />
             </Container>

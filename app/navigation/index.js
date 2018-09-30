@@ -58,13 +58,13 @@ const getBottomInfo = (user, selected_address, cart, navigateTo) => {
             evil_icon: 'user',
             onPress: () => navigateTo(screenNames.LoginStack)
         }
-    } else if (cart && cart.cart_products && cart.cart_products.length > 0) {
+    } else if (cart && cart.order_products && cart.order_products.length > 0) {
 
-        const cart_products_count = cart.cart_products.length
+        const order_products_count = cart.order_products.length
 
         return {
-            title: `${cart_products_count} ${cart_products_count == 1 ? 'item' : 'itens'}`,
-            number: MapPrice(getCartTotal(cart.cart_products)),
+            title: `${order_products_count} ${order_products_count == 1 ? 'item' : 'itens'}`,
+            number: MapPrice(getCartTotal(cart.order_products)),
             evil_icon: 'cart',
             onPress: () => navigateTo(screenNames.CartStack)
         }

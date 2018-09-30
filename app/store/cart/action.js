@@ -7,19 +7,19 @@ export function selectStore(store) {
     }
 }
 
-export function handleNewProduct(store_id, cart_product, remove = false) {
+export function handleNewProduct(store_id, order_product, remove = false) {
     return {
         type: actionTypes.HANDLE_NEW_PRODUCT,
         store_id,
-        cart_product,
+        order_product,
         remove
     }
 }
 
-export function addToCart(cart_product, remove = false) {
+export function addToCart(order_product, remove = false) {
     return {
         type: actionTypes.ADD_TO_CART,
-        cart_product,
+        order_product,
         remove
     }
 }
@@ -34,5 +34,11 @@ export function placeOrderLoading(loading) {
     return {
         type: actionTypes.PLACE_ORDER_LOADING,
         loading
+    }
+}
+
+export function clearCart() {
+    return {
+        type: actionTypes.CLEAR_CART
     }
 }
