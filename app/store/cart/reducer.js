@@ -90,29 +90,19 @@ export default function cartReducer(state = initialState, action) {
             }
             return state
         case actionTypes.ADD_TO_CART:
-            const { store_id, product, quantity, selected_options, cart_product_index } = action
-            let { cart_products } = state
-            if (cart_product_index >= 0) {
-                cart_products[cart_product_index] = {
-                    product,
-                    quantity,
-                    selected_options
-                }
-            } else {
-                cart_products.push({
-                    product,
-                    quantity,
-                    selected_options
-                })
-            }
 
-            if (state.store.id == store_id) {
-                return {
-                    ...state,
-                    cart_products
-                }
+            const { cart_product, cart_product_index } = action
+            let { cart_products } = state
+
+            if (cart_product_index >= 0) {
+                cart_products[cart_product_index] = cart_product
+            } else {
+                cart_products.push(cart_product)
             }
-            return state
+            return {
+                ...state,
+                cart_products
+            }
 
         default:
             return state

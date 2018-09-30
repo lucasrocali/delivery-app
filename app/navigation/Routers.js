@@ -20,7 +20,6 @@ import ProductScreen from '../screens/ProductScreen';
 import CartScreen from '../screens/CartScreen';
 import PickerScreen from '../screens/PickerScreen';
 
-import MainNavigator from './MainNavigator';
 import ButtonIcon from '../screens/components/ButtonIcon'
 // import { FluidNavigator } from 'react-navigation-fluid-transitions'
 
@@ -319,15 +318,7 @@ export const TabNavigator = createMaterialTopTabNavigator(
 export const mainStack = {
     Main: {
         name: 'Main',
-        component: StackNavigator(
-            {
-                Main2: MainNavigator
-            }, {
-                navigationOptions: {
-                    header: null,
-                }
-            }
-        )
+        component: TabNavigator
     }
 }
 

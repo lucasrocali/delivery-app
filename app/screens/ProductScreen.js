@@ -8,8 +8,7 @@ import SubOptionCell from './components/SubOptionCell';
 import ProductCell from './components/ProductCell';
 import colors from '../constants/colors';
 import { connect } from 'react-redux';
-import { displayToastMsg } from '../store/app/action';
-import { addToCart } from '../store/cart/action'
+import { handleNewProduct } from '../store/cart/action'
 import * as selectors from '../store/stores/selector';
 import styled from "styled-components";
 import { Title, TitleH4, Cell, Left, Right, InputText } from './styled/index'
@@ -93,7 +92,7 @@ class Product extends Component<Props, State> {
         console.log('render product', this.props)
         const { store_id, product } = this.props.navigation.state.params
         const { selected_options, quantity, cart_product_index } = this.state
-        const { addToCart, displayToastMsg, navigation } = this.props
+        const { handleNewProduct, navigation } = this.props
         const canAddProduct = canAdd(product, quantity, selected_options)
         const cart_product_total = getCartProductTotal({ product: product, quantity: quantity, selected_options: selected_options })
         console.log(this.state)
@@ -169,9 +168,7 @@ class Product extends Component<Props, State> {
                     activeOpacity={0.8}
                     disabled={!canAddProduct}
                     onPress={() => {
-                        addToCart(store_id, product, quantity, selected_options, cart_product_index)
-                        displayToastMsg('Item adicionado ao carrinho')
-                        navigation.goBack(null)
+                        handleNewProduct(store_id, { product: product, quantity: quantity, selected_options: selected_options }, cart_product_index)
                     }} >
                     <Left>
                         <LightTitle>{'Adicionar ' + quantity}</LightTitle>
@@ -190,5 +187,5 @@ export default connect(
     state => ({
 
     }),
-    { addToCart, displayToastMsg }
+    { handleNewProduct }
 )(Product)

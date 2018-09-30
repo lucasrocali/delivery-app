@@ -7,6 +7,7 @@ import { NavigationActions } from "react-navigation";
 import * as appActionTypes from "../store/app/actionType";
 import * as userActionTypes from "../store/user/actionType";
 import * as storesActionTypes from "../store/stores/actionType";
+import * as cartActionTypes from "../store/cart/actionType";
 
 import * as appActions from "../store/app/action";
 import * as userActions from "../store/user/action";
@@ -15,6 +16,7 @@ import * as cartActions from "../store/cart/action";
 
 import * as appSelectors from '../store/app/selector'
 import * as userSelectors from '../store/user/selector'
+import * as cartSelectors from '../store/cart/selector'
 import * as realApi from "../api/"
 import * as mockApi from "../api/mock.js"
 
@@ -24,6 +26,7 @@ import { mainStack } from '../navigation/Routers';
 const getToken = state => userSelectors.getAuthToken(state);
 const getCredentials = state => appSelectors.getCredentials(state);
 const getUser = state => userSelectors.getUser(state);
+const getCartStore = state => cartSelectors.getCartStore(state)
 
 //{message: "Missing token"}
 const getToastMsg = (response) => {
@@ -216,6 +219,24 @@ const navigate = function* (action) {
     }
 };
 
+const handleNewProduct = function* (action) {
+    try {
+        const { store_id, cart_product, cart_product_index } = action
+
+        const cartStore = yield select(getCartStore)
+
+        if (cartStore.id == store_id) {
+            yield put(cartActions.addToCart(cart_product, cart_product_index))
+            yield put(appActions.displayToastMsg('Item adicionado ao carrinho'))
+            yield put(NavigationActions.back())
+        } else {
+            yield put(appActions.displayToastMsg('Carrinho aberto em outra loja'))
+        }
+        // yield put(NavigationActions.navigate({ routeName: route_name, key: route_name }))
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 export function* root(): Saga<void> {
     yield takeLatest(appActionTypes.DISPLAY_TOAST_MSG, displayToastMsg)
@@ -228,4 +249,5 @@ export function* root(): Saga<void> {
     yield takeLatest(userActionTypes.CREATE_ADDRESS, createAddress)
     yield takeLatest(userActionTypes.LOAD_ADDRESSES, loadAddresses)
     yield takeLatest(userActionTypes.LOAD_ADDRESS_INFO, loadAddressByZipCode)
+    yield takeLatest(cartActionTypes.HANDLE_NEW_PRODUCT, handleNewProduct)
 };

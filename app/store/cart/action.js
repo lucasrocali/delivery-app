@@ -7,13 +7,19 @@ export function selectStore(store) {
     }
 }
 
-export function addToCart(store_id, product, quantity, selected_options, cart_product_index) {
+export function handleNewProduct(store_id, cart_product, cart_product_index) {
+    return {
+        type: actionTypes.HANDLE_NEW_PRODUCT,
+        store_id,
+        cart_product,
+        cart_product_index
+    }
+}
+
+export function addToCart(cart_product, cart_product_index) {
     return {
         type: actionTypes.ADD_TO_CART,
-        store_id,
-        product,
-        quantity,
-        selected_options,
+        cart_product,
         cart_product_index
     }
 }
