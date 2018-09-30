@@ -23,10 +23,11 @@ const Header = styled.View`
 
 type Props = {
     category: object,
-    onStorePress: Function
+    onStorePress: Function,
+    onMorePress: Function
 }
 export default CategoryCell = (props: Props) => {
-    const { category, onStorePress } = props
+    const { category, onStorePress, onMorePress } = props
     console.log('CategoryCell', category)
     return (
         <Container>
@@ -35,7 +36,7 @@ export default CategoryCell = (props: Props) => {
                     <Title>{category.name}</Title>
                 </Left>
                 <Right>
-                    <Button>
+                    <Button onPress={onMorePress}>
                         <ButtonText>Mais</ButtonText>
                     </Button>
                 </Right>

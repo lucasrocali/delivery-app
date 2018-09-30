@@ -42,3 +42,17 @@ export function loadStoreSuccess(store: Object) {
         store
     }
 }
+
+
+export function loadStores() {
+    return {
+        type: actionTypes.LOAD_STORES,
+    }
+}
+
+export function loadStoresSuccess(stores: Object) {
+    return {
+        type: actionTypes.LOAD_STORES_SUCCESS,
+        stores
+    }
+}

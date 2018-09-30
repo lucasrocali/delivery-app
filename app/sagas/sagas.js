@@ -111,6 +111,23 @@ const loadCategories = function* (action) {
     }
 };
 
+const loadStores = function* (action) {
+    try {
+        yield put(storeActions.setLoading())
+
+        const response = yield call(api.getStoresRequest)
+
+        console.log(response)
+
+        const stores = response
+
+        yield put(storeActions.loadStoresSuccess(stores))
+    } catch (error) {
+        console.log(error);
+        yield put(storeActions.setError(error))
+    }
+};
+
 const loadStore = function* (action) {
     try {
         yield put(storeActions.setLoading())
@@ -192,7 +209,7 @@ const loadAddressByZipCode = function* (action) {
 
 const navigate = function* (action) {
     try {
-        const { route_name } = action
+        const { route_name, params } = action
         yield put(NavigationActions.navigate({ routeName: route_name, key: route_name }))
     } catch (error) {
         console.log(error);
@@ -205,6 +222,7 @@ export function* root(): Saga<void> {
     yield takeLatest(appActionTypes.NAVIGATE, navigate)
     yield takeLatest(userActionTypes.AUTO_LOGIN, autoLogin)
     yield takeLatest(userActionTypes.AUTHENTICATE, authenticate)
+    yield takeLatest(storesActionTypes.LOAD_STORES, loadCategories)
     yield takeLatest(storesActionTypes.LOAD_CATEGORIES, loadCategories)
     yield takeLatest(storesActionTypes.LOAD_STORE, loadStore)
     yield takeLatest(userActionTypes.CREATE_ADDRESS, createAddress)

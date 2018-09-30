@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { navigateTo } from '../store/app/action';
 import colors from '../constants/colors';
 import { logout } from '../store/user/action';
 import * as selectors from '../store/user/selector';
@@ -51,26 +52,31 @@ class Perfil extends Component<Props, State> {
     }
 
     render() {
-        const { user, navigation } = this.props
+        const { user, navigateTo } = this.props
         return (
             <Container>
-                {user && user.name && user.email &&
+                {user && user.name && user.email ?
                     <Content>
                         <PerfilView>
                             <Title>{user.name}</Title>
                             <Caption>{user.email}</Caption>
                         </PerfilView>
                         <Cell>
-                            <Touchable onPress={() => navigation.navigate({
-                                key: screenNames.AddressesStack,
-                                routeName: screenNames.AddressesStack
-                            })} >
+                            <Touchable onPress={() => navigateTo(screenNames.AddressesStack)} >
                                 <Text>Endereços</Text>
                             </Touchable>
                         </Cell>
                         <Cell>
                             <Touchable onPress={this.handlePress}>
                                 <Text>Logout</Text>
+                            </Touchable>
+                        </Cell>
+                    </Content>
+                    :
+                    <Content>
+                        <Cell>
+                            <Touchable onPress={() => navigateTo(screenNames.LoginStack)}>
+                                <Text>Login</Text>
                             </Touchable>
                         </Cell>
                     </Content>
@@ -85,5 +91,5 @@ export default connect(
     state => ({
         user: selectors.getUser(state)
     }),
-    { logout }
+    { logout, navigateTo }
 )(Perfil)

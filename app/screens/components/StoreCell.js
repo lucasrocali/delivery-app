@@ -7,7 +7,7 @@ import StoreCellBody from './StoreCellBody'
 import FastImage from 'react-native-fast-image'
 
 const Container = styled.TouchableOpacity`
-    width: ${dimensions.estabCellWidth}
+    width: ${props => props.full ? dimensions.estabCellFullWidth : dimensions.estabCellWidth}
     background-color: ${colors.white};
     margin-vertical: 10;
     margin-horizontal: 10; 
@@ -22,22 +22,23 @@ const Body = styled.View`
     overflow: hidden;
 `
 
-const Image = styled(FastImage)`
+const Image = styled(FastImage) `
     background-color: ${colors.gray10};
-    width: ${dimensions.estabCellWidth}
-    height: ${dimensions.estabCellImgHeigth};
+    width: ${props => props.full ? dimensions.estabCellFullWidth : dimensions.estabCellWidth}
+    height: ${props => props.full ? dimensions.estabCellFullHeigth : dimensions.estabCellHeigth};
 `
 
 type Props = {
     store: object,
+    full: boolean,
     onPress: Function
 }
 export default StoreCell = (props: Props) => {
-    const { store, onPress } = props
+    const { store, full, onPress } = props
     return (
-        <Container activeOpacity={0.9} onPress={onPress}>
+        <Container full={full} activeOpacity={0.9} onPress={onPress}>
             <Body>
-                <Image source={{ uri: store.img_url }} />
+                <Image full={full} source={{ uri: store.img_url }} />
                 <StoreCellBody store={store} />
             </Body>
         </ Container>

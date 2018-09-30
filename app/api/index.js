@@ -98,6 +98,10 @@ export function getCategoriesRequest() {
     return get('categories', header())
 }
 
+export function getStoresRequest() {
+    return get('stores', header())
+}
+
 export function getStoreRequest(store_id) {
     return get(`stores/${store_id}`, header())
 }

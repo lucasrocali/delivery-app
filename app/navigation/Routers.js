@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Platform, Image, Icon, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { StackNavigator, TabNavigator, TabBarBottom, NavigationActions, DrawerNavigator, createMaterialTopTabNavigator } from 'react-navigation';
-import Ionicon from "react-native-vector-icons/Ionicons";
+import { StackNavigator, TabBarBottom, NavigationActions, DrawerNavigator, createMaterialTopTabNavigator } from 'react-navigation';
+
 
 import colors from '../constants/colors';
 
@@ -13,13 +13,15 @@ import LoginScreen from '../screens/LoginScreen';
 import PerfilScreen from '../screens/PerfilScreen';
 import AddressesScreen from '../screens/AddressesScreen';
 import AddressScreen from '../screens/AddressScreen';
+import StoresScreen from '../screens/StoresScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import StoreScreen from '../screens/StoreScreen';
 import ProductScreen from '../screens/ProductScreen';
 import CartScreen from '../screens/CartScreen';
 import PickerScreen from '../screens/PickerScreen';
 
-import { } from '../screens/styled'
+import MainNavigator from './MainNavigator';
+import ButtonIcon from '../screens/components/ButtonIcon'
 // import { FluidNavigator } from 'react-navigation-fluid-transitions'
 
 const icon_names = {
@@ -30,56 +32,39 @@ const icon_names = {
     cart: 'ios-cart'
 }
 
-const ButtonIcon = (props: Props) => {
-    const { onPress, icon_name } = props
-    return (
-        <TouchableOpacity
-            style={{
-                flex: 1,
-                marginHorizontal: 10,
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center"
-            }}
-            onPress={onPress}>
-            <Ionicon
-                name={icon_name}
-                size={25}
-                color={colors.link}
-                backgroundColor={"transparent"}
-            />
-        </TouchableOpacity>
-    );
-}
 
 //title, backBtn = true, routeName = null
-const baseNavigationOption = (navigation, options: { title: string, leftIcon: boolean, leftRouteName: string, rightIcon: boolean, rightRouteName: string }) => ({
-    title: navigation.state.params && navigation.state.params.title ? navigation.state.params.title : options.title,
-    gesturesEnabled: false,
-    headerTintColor: colors.link,
-    tintColor: colors.link,
-    headerStyle: {
-        backgroundColor: colors.white,
-        elevation: null,
-    },
-    headerLeft: options.leftIcon && (
-        <ButtonIcon
-            icon_name={options.leftIcon}
-            onPress={() => options.leftRouteName ? navigation.navigate({ routeName: options.leftRouteName }) : navigation.goBack(null)}
-        />
-    ),
-    headerRight: options.rightIcon && (
-        <ButtonIcon
-            icon_name={options.rightIcon}
-            onPress={() => options.rightRouteName ? navigation.navigate({ routeName: options.rightRouteName }) : navigation.goBack(null)}
-        />
-    )
-})
+const baseNavigationOption = (navigation, options: { title: string, leftIcon: boolean, leftRouteName: string, rightIcon: boolean, rightRouteName: string }, navigateTo) => {
+    console.log('baseNavigationOption', navigation, options, navigateTo)
+    return ({
+        title: navigation.state.params && navigation.state.params.title ? navigation.state.params.title : options.title,
+        gesturesEnabled: false,
+        headerTintColor: colors.link,
+        tintColor: colors.link,
+        headerStyle: {
+            backgroundColor: colors.white,
+            elevation: null,
+        },
+        headerLeft: options.leftIcon && (
+            <ButtonIcon
+                icon_name={options.leftIcon}
+                onPress={() => options.leftRouteName ? navigation.navigate({ routeName: options.leftRouteName }) : navigation.goBack(null)}
+            />
+        ),
+        headerRight: options.rightIcon && (
+            <ButtonIcon
+                icon_name={options.rightIcon}
+                onPress={() => options.rightRouteName ? navigation.navigate({ routeName: options.rightRouteName }) : navigation.goBack(null)}
+            />
+        )
+    })
+}
 
 
 export const screenNames = {
     Launch: 'Launch',
     Categories: 'Categories',
+    Stores: 'Stores',
     Store: 'Store',
     Cart: 'Cart',
     Product: 'Product',
@@ -116,12 +101,22 @@ export const screens = {
         name: screenNames.Categories,
         component: {
             screen: CategoriesScreen,
-            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+            navigationOptions: ({ navigation, navigateTo }) => baseNavigationOption(navigation, {
                 title: 'Categorias',
                 leftIcon: icon_names.person,
-                leftRouteName: screenNames.LoginStack,
+                leftRouteName: screenNames.PerfilStack,
                 rightIcon: icon_names.cart,
                 rightRouteName: screenNames.CartStack
+            }, navigateTo),
+        }
+    },
+    [screenNames.Stores]: {
+        name: screenNames.Stores,
+        component: {
+            screen: StoresScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: 'Lojas',
+                leftIcon: icon_names.back
             }),
         }
     },
@@ -228,7 +223,8 @@ export const stacks = {
         name: screenNames.CategoriesStack,
         component: StackNavigator(
             {
-                [screens.Categories.name]: screens.Categories.component
+                [screens.Categories.name]: screens.Categories.component,
+                [screens.Stores.name]: screens.Stores.component
             }
         )
     },
@@ -300,25 +296,35 @@ export const stacks = {
     }
 }
 
+export const TabNavigator = createMaterialTopTabNavigator(
+    {
+        [stacks.PerfilStack.name]: {
+            screen: stacks.PerfilStack.component
+        },
+        [stacks.CategoriesStack.name]: {
+            screen: stacks.CategoriesStack.component
+        },
+        [stacks.CartStack.name]: {
+            screen: stacks.CartStack.component
+        }
+    }, {
+        initialRouteName: stacks.CategoriesStack.name,
+        navigationOptions: {
+            gesturesEnabled: true,
+            tabBarVisible: false,
+        }
+    }
+)
+
 export const mainStack = {
     Main: {
         name: 'Main',
-        component: createMaterialTopTabNavigator(
+        component: StackNavigator(
             {
-                [stacks.PerfilStack.name]: {
-                    screen: stacks.PerfilStack.component
-                },
-                [stacks.CategoriesStack.name]: {
-                    screen: stacks.CategoriesStack.component
-                },
-                [stacks.CartStack.name]: {
-                    screen: stacks.CartStack.component
-                }
+                Main2: MainNavigator
             }, {
-                initialRouteName: stacks.CategoriesStack.name,
                 navigationOptions: {
-                    gesturesEnabled: true,
-                    tabBarVisible: false,
+                    header: null,
                 }
             }
         )

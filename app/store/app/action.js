@@ -24,10 +24,11 @@ export function clearToastMsg() {
     return setToastMsg('')
 }
 
-export function navigateTo(route_name) {
+export function navigateTo(route_name, params) {
     return {
         type: actionTypes.NAVIGATE,
-        route_name
+        route_name,
+        params
     }
 }
 
