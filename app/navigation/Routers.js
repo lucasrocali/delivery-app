@@ -76,9 +76,35 @@ const baseNavigationOption = (navigation, options: { title: string, leftIcon: bo
     )
 })
 
+
+export const screenNames = {
+    Launch: 'Launch',
+    Categories: 'Categories',
+    Store: 'Store',
+    Cart: 'Cart',
+    Product: 'Product',
+    SocialLogin: 'SocialLogin',
+    Login: 'Login',
+    Perfil: 'Perfil',
+    Address: 'Address',
+    Addresses: 'Addresses',
+    Picker: 'Picker',
+    Base: 'Base',
+    CategoriesStack: 'CategoriesStack',
+    StoreStack: 'StoreStack',
+    CartStack: 'CartStack',
+    ProductStack: 'ProductStack',
+    LoginStack: 'LoginStack',
+    PerfilStack: 'PerfilStack',
+    AddressesStack: 'AddressesStack',
+    PickerStack: 'PickerStack',
+    BaseStack: 'BaseStack',
+
+
+}
 export const screens = {
-    Launch: {
-        name: 'Launch',
+    [screenNames.Launch]: {
+        name: screenNames.Launch,
         component: {
             screen: LaunchScreen,
             navigationOptions: {
@@ -86,21 +112,21 @@ export const screens = {
             }
         }
     },
-    Categories: {
-        name: 'Categories',
+    [screenNames.Categories]: {
+        name: screenNames.Categories,
         component: {
             screen: CategoriesScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: 'Categorias',
                 leftIcon: icon_names.person,
-                leftRouteName: stacks.LoginStack.name,
+                leftRouteName: screenNames.LoginStack,
                 rightIcon: icon_names.cart,
-                rightRouteName: screens.Cart.name
+                rightRouteName: screenNames.CartStack
             }),
         }
     },
-    Store: {
-        name: 'Store',
+    [screenNames.Store]: {
+        name: screenNames.Store,
         component: {
             screen: StoreScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
@@ -108,19 +134,19 @@ export const screens = {
             }),
         }
     },
-    Cart: {
-        name: 'Cart',
+    [screenNames.Cart]: {
+        name: screenNames.Cart,
         component: {
             screen: CartScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: "Carrinho",
                 leftIcon: icon_names.back,
-                leftRouteName: screens.Categories.name,
+                leftRouteName: screenNames.Categories,
             }),
         }
     },
-    Product: {
-        name: 'Product',
+    [screenNames.Product]: {
+        name: screenNames.Product,
         component: {
             screen: ProductScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
@@ -128,8 +154,8 @@ export const screens = {
             }),
         }
     },
-    SocialLogin: {
-        name: 'SocialLogin',
+    [screenNames.SocialLogin]: {
+        name: screenNames.SocialLogin,
         component: {
             screen: SocialLoginScreen,
             navigationOptions: {
@@ -137,8 +163,8 @@ export const screens = {
             }
         }
     },
-    Login: {
-        name: 'Login',
+    [screenNames.Login]: {
+        name: screenNames.Login,
         component: {
             screen: LoginScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
@@ -147,19 +173,19 @@ export const screens = {
             }),
         }
     },
-    Perfil: {
-        name: 'Perfil',
+    [screenNames.Perfil]: {
+        name: screenNames.Perfil,
         component: {
             screen: PerfilScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: "Perfil",
                 rightIcon: icon_names.forward,
-                rightRouteName: screens.Categories.name,
+                rightRouteName: screenNames.Categories,
             }),
         }
     },
-    Address: {
-        name: 'Address',
+    [screenNames.Address]: {
+        name: screenNames.Address,
         component: {
             screen: AddressScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
@@ -168,8 +194,8 @@ export const screens = {
             }),
         }
     },
-    Addresses: {
-        name: 'Addresses',
+    [screenNames.Addresses]: {
+        name: screenNames.Addresses,
         component: {
             screen: AddressesScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
@@ -177,8 +203,8 @@ export const screens = {
             }),
         }
     },
-    Picker: {
-        name: 'Picker',
+    [screenNames.Picker]: {
+        name: screenNames.Picker,
         component: {
             screen: PickerScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
@@ -186,8 +212,8 @@ export const screens = {
             }),
         }
     },
-    Base: {
-        name: 'Base',
+    [screenNames.Base]: {
+        name: screenNames.Base,
         component: {
             screen: BaseScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
@@ -198,40 +224,40 @@ export const screens = {
 }
 
 export const stacks = {
-    CategoriesStack: {
-        name: 'CategoriesStack',
+    [screenNames.CategoriesStack]: {
+        name: screenNames.CategoriesStack,
         component: StackNavigator(
             {
                 [screens.Categories.name]: screens.Categories.component
             }
         )
     },
-    StoreStack: {
-        name: 'StoreStack',
+    [screenNames.StoreStack]: {
+        name: screenNames.StoreStack,
         component: StackNavigator(
             {
                 [screens.Store.name]: screens.Store.component
             }
         )
     },
-    CartStack: {
-        name: 'CartStack',
+    [screenNames.CartStack]: {
+        name: screenNames.CartStack,
         component: StackNavigator(
             {
                 [screens.Cart.name]: screens.Cart.component
             }
         )
     },
-    ProductStack: {
-        name: 'ProductStack',
+    [screenNames.ProductStack]: {
+        name: screenNames.ProductStack,
         component: StackNavigator(
             {
                 [screens.Product.name]: screens.Product.component
             }
         )
     },
-    LoginStack: {
-        name: 'LoginStack',
+    [screenNames.LoginStack]: {
+        name: screenNames.LoginStack,
         component: StackNavigator(
             {
                 [screens.SocialLogin.name]: screens.SocialLogin.component,
@@ -239,16 +265,16 @@ export const stacks = {
             }
         )
     },
-    PerfilStack: {
-        name: 'PerfilStack',
+    [screenNames.PerfilStack]: {
+        name: screenNames.PerfilStack,
         component: StackNavigator(
             {
                 [screens.Perfil.name]: screens.Perfil.component
             }
         )
     },
-    AddressesStack: {
-        name: 'AddressesStack',
+    [screenNames.AddressesStack]: {
+        name: screenNames.AddressesStack,
         component: StackNavigator(
             {
                 [screens.Addresses.name]: screens.Addresses.component,
@@ -256,16 +282,16 @@ export const stacks = {
             }
         )
     },
-    PickerStack: {
-        name: 'PickerStack',
+    [screenNames.PickerStack]: {
+        name: screenNames.PickerStack,
         component: StackNavigator(
             {
                 [screens.Picker.name]: screens.Picker.component
             }
         )
     },
-    BaseStack: {
-        name: 'BaseStack',
+    [screenNames.BaseStack]: {
+        name: screenNames.BaseStack,
         component: StackNavigator(
             {
                 [screens.Base.name]: screens.Base.component
@@ -273,108 +299,6 @@ export const stacks = {
         )
     }
 }
-
-
-// const StoreStack = StackNavigator(
-//     {
-//         Store: {
-//             screen: StoreScreen,
-//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-//                 title: "Loja",
-//             }),
-//         }
-//     }
-// )
-
-// const CategoriesNavigator = StackNavigator(
-//     {
-//         Categories: {
-//             screen: CategoriesStack,
-//         },
-//         Store: {
-//             screen: StoreScreen,
-//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-//                 title: "Loja",
-//             }),
-//         },
-//     }, {
-//         mode: 'modal',
-//         initialRouteName: "Categories",
-//         navigationOptions: {
-//             header: null,
-//         },
-//     }
-// );
-// const CategoriesStack = StackNavigator(
-//     {
-//         Categories: {
-//             screen: CategoriesScreen,
-//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Categorias", false),
-//         },
-//         Store: {
-//             screen: StoreScreen,
-//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, "Loja"),
-//         },
-//     }, {
-//         initialRouteName: "Categories"
-//     }
-// );
-
-// const CartStack = StackNavigator(
-//     {
-//         Cart: {
-//             screen: CartScreen,
-//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-//                 title: "Loja",
-//                 leftIcon: icon_names.back,
-//                 leftRouteName: 'Categories',
-//             }),
-//         }
-//     }
-// );
-
-
-// const LoginStack = StackNavigator(
-//     {
-//         SocialLogin: {
-//             screen: SocialLoginScreen,
-//             navigationOptions: {
-//                 header: null,
-//             }
-//         },
-//         Login: {
-//             screen: LoginScreen,
-//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-//                 title: "Fazer Login",
-//                 leftIcon: icon_names.back,
-//             }),
-//         }
-//     },
-// );
-
-// const PerfilStack = StackNavigator(
-//     {
-//         Perfil: {
-//             screen: PerfilScreen,
-//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-//                 title: "Perfil",
-//                 rightIcon: icon_names.forward,
-//                 rightRouteName: 'Categories',
-//             }),
-//         }
-//     }
-// );
-
-// const AddressesStack = StackNavigator(
-//     {
-//         Addresses: {
-//             screen: AddressesScreen,
-//             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-//                 title: "Endereços",
-//             }),
-//         }
-//     }
-// );
 
 export const mainStack = {
     Main: {

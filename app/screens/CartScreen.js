@@ -13,7 +13,7 @@ import StoreCellBody from './components/StoreCellBody';
 import CartProductCell from './components/CartProductCell'
 import AddressCell from './components/AddressCell';
 import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView, Row, Left, Right, TouchableCell } from './styled/index';
-import { stacks } from '../navigation/Routers';
+import { screenNames } from '../navigation/Routers';
 import { getCartTotal } from '../constants/functions';
 import { MapPrice } from '../constants/objects';
 
@@ -118,8 +118,8 @@ class Cart extends Component<Props, State> {
                         <CartProductCell
                             cart_product={cart_product}
                             onPress={() => navigation.navigate({
-                                key: stacks.ProductStack.name,
-                                routeName: stacks.ProductStack.name,
+                                key: screenNames.ProductStack,
+                                routeName: screenNames.ProductStack,
                                 params: {
                                     store_id: store.id,
                                     product: cart_product.product,

@@ -11,7 +11,7 @@ import colors from '../constants/colors'
 import spacing from '../constants/spacing';
 import { Formik } from 'formik';
 import InputText from './components/InputText';
-import { stacks } from '../navigation/Routers';
+import { screenNames } from '../navigation/Routers';
 
 const Container = styled.ScrollView`
     flex: 1;
@@ -39,7 +39,7 @@ const SearchButton = styled.TouchableOpacity`
     flex: 1;
     align-items: center;
     justify-content: center;
-    padding-vertical: ${spacing.medium};
+    padding-top: ${spacing.medium};
 `
 
 const Touchable = styled.TouchableOpacity`
@@ -159,8 +159,8 @@ class Address extends Component<Props, State> {
 
                             <Touchable
                                 onPress={() => navigation.navigate({
-                                    key: stacks.PickerStack.name,
-                                    routeName: stacks.PickerStack.name,
+                                    key: screenNames.PickerStack,
+                                    routeName: screenNames.PickerStack,
                                     params: {
                                         onSelected: this.onSelectedState,
                                         title: 'Selecione o estado'
@@ -179,8 +179,8 @@ class Address extends Component<Props, State> {
 
                             <Touchable
                                 onPress={() => values.state != '' && navigation.navigate({
-                                    key: stacks.PickerStack.name,
-                                    routeName: stacks.PickerStack.name,
+                                    key: screenNames.PickerStack,
+                                    routeName: screenNames.PickerStack,
                                     params: {
                                         state: state,
                                         onSelected: this.onSelectedCity,

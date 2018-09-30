@@ -8,6 +8,10 @@ const initialState = {
     selected_address_id: 0
 }
 
+const getLastAddressId = (addresses) => {
+    return addresses && addresses.length > 0 ? addresses[addresses.length - 1].id : 0
+}
+
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.USER_LOADING:
@@ -19,7 +23,7 @@ export default function userReducer(state = initialState, action) {
         case actionTypes.AUTHENTICATE_SUCCESS:
             const { user } = action
             const mapped_user = MapUser(user)
-            const first_address_id = mapped_user.addresses && mapped_user.addresses.length > 0 ? mapped_user.addresses[0].id : 0
+            const first_address_id = getLastAddressId(mapped_user.addresses)
             return {
                 loading: false,
                 user: mapped_user,
@@ -31,12 +35,14 @@ export default function userReducer(state = initialState, action) {
             }
         case actionTypes.LOAD_ADDRESSES_SUCCESS:
             const addresses = action.response
+            const sel_address_id = getLastAddressId(addresses)
             return {
                 ...state,
                 user: {
                     ...state.user,
                     addresses: addresses.map(address => MapAddress(address))
-                }
+                },
+                selected_address_id: sel_address_id
             }
         case actionTypes.LOAD_ADDRESS_INFO_SUCCESS:
             const address = action.response

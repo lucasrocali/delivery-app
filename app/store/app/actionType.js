@@ -2,3 +2,5 @@ export const SET_CREDENTIALS = 'SET_CREDENTIALS'
 export const CLEAR_CREDENTIALS = 'CLEAR_CREDENTIALS'
 
 export const SET_ERROR_MSG = 'SET_ERROR_MSG'
+
+export const NAVIGATE = 'NAVIGATE'

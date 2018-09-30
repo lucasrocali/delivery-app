@@ -9,7 +9,7 @@ import { logout } from '../store/user/action';
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title, Caption, Text, Cell } from './styled/index';
-import { stacks } from '../navigation/Routers';
+import { screenNames } from '../navigation/Routers';
 
 const Container = styled.View`
     flex: 1;
@@ -62,8 +62,8 @@ class Perfil extends Component<Props, State> {
                         </PerfilView>
                         <Cell>
                             <Touchable onPress={() => navigation.navigate({
-                                key: stacks.AddressesStack.name,
-                                routeName: stacks.AddressesStack.name
+                                key: screenNames.AddressesStack,
+                                routeName: screenNames.AddressesStack
                             })} >
                                 <Text>Endereços</Text>
                             </Touchable>

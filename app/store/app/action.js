@@ -23,3 +23,10 @@ export function setErrorMsg(error_msg) {
 export function clearErrorMsg() {
     return setErrorMsg('')
 }
+
+export function navigateTo(route_name) {
+    return {
+        type: actionTypes.NAVIGATE,
+        route_name
+    }
+}

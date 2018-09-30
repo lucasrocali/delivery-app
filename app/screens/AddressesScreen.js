@@ -10,7 +10,7 @@ import styled from "styled-components";
 import { Title, Text, TouchableCell } from './styled/index';
 import colors from '../constants/colors';
 import AddressCell from './components/AddressCell';
-import { screens } from '../navigation/Routers';
+import { screenNames } from '../navigation/Routers';
 
 const Container = styled.View`
     flex: 1;
@@ -36,8 +36,8 @@ class Addresses extends Component<Props, State> {
                     ListHeaderComponent={() => (
                         <TouchableCell
                             onPress={() => navigation.navigate({
-                                key: screens.Address.name,
-                                routeName: screens.Address.name
+                                key: screenNames.Address,
+                                routeName: screenNames.Address
                             })}>
                             <Text>Novo endereço</Text>
                         </TouchableCell>
@@ -49,8 +49,8 @@ class Addresses extends Component<Props, State> {
                             checked={address.id == selected_address_id}
                             onPress={() => selectedAddress(address.id)}
                             onOptionsPress={() => navigation.navigate({
-                                key: screens.Address.name,
-                                routeName: screens.Address.name,
+                                key: screenNames.Address,
+                                routeName: screenNames.Address,
                                 params: {
                                     address: address
                                 }

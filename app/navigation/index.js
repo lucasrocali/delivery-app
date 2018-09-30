@@ -13,13 +13,6 @@ const Container = styled.View`
     flex: 1;
 `;
 
-const BottomView = styled.View`
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-`
-
 type State = {
 
 }
@@ -40,15 +33,15 @@ class Base extends Component<Props, State> {
                     shadow={false}
                     animation={false}
                     hideOnPress={true}
-                >{error_msg}</Toast>;
-            </Container>
+                >{error_msg}</Toast>
+            </Container >
         );
     }
 }
 
 export default connect(
     state => ({
-        error_msg: appSelectors.getErrorMsg(state)
+        error_msg: appSelectors.getErrorMsg(state),
     }),
     {}
 )(Base)
