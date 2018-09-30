@@ -23,3 +23,16 @@ export function addToCart(cart_product, remove = false) {
         remove
     }
 }
+
+export function placeOrder() {
+    return {
+        type: actionTypes.PLACE_ORDER
+    }
+}
+
+export function placeOrderLoading(loading) {
+    return {
+        type: actionTypes.PLACE_ORDER_LOADING,
+        loading
+    }
+}

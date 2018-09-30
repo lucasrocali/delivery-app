@@ -22,6 +22,8 @@ import * as storeSelectors from '../store/stores/selector'
 import * as realApi from "../api/"
 import * as mockApi from "../api/mock.js"
 
+import { MapCart } from '../constants/objects';
+
 const api = realApi
 import { mainStack } from '../navigation/Routers';
 
@@ -30,6 +32,8 @@ const getCredentials = state => appSelectors.getCredentials(state);
 const getUser = state => userSelectors.getUser(state);
 const getCurrentStore = state => storeSelectors.getStore(state)
 const getCartStore = state => cartSelectors.getCartStore(state)
+const getCart = state => cartSelectors.getCart(state)
+const getCurrentAddress = state => userSelectors.getSelectedAddress(state)
 
 //{message: "Missing token"}
 const getToastMsg = (response) => {
@@ -254,6 +258,54 @@ const handleNewProduct = function* (action) {
     }
 };
 
+const loadOrders = function* (action) {
+    try {
+        yield put(userActions.setLoading(true))
+
+        const token = yield select(getToken)
+
+        const response = yield call(api.getOrdersRequest, token)
+
+        yield put(userActions.loaOrdersSuccess(response))
+    } catch (error) {
+        console.log(error);
+        yield put(userActions.setLoading(false))
+    }
+};
+
+const placeOrder = function* (action) {
+    try {
+        yield put(cartActions.placeOrderLoading(true))
+
+        const cart = yield select(getCart)
+
+        const address = yield select(getCurrentAddress)
+
+        const token = yield select(getToken)
+
+        const mapped_cart = MapCart(cart, address)
+
+        console.log('mapped_cart ==> ', mapped_cart)
+
+        const response = yield call(api.postOrderRequest, token, mapped_cart)
+
+        const toast_msg = getToastMsg(response)
+
+        if (toast_msg) {
+            yield put(appActions.displayToastMsg(toast_msg))
+        } else {
+            // yield put(userActions.setCreateAddressSuccess(response))
+            yield put(userActions.loadOrders())
+        }
+
+
+    } catch (error) {
+        yield put(userActions.setLoading(false))
+        console.log(error);
+    }
+};
+
+
 export function* root(): Saga<void> {
     yield takeLatest(appActionTypes.DISPLAY_TOAST_MSG, displayToastMsg)
     yield takeLatest(appActionTypes.NAVIGATE, navigate)
@@ -264,6 +316,8 @@ export function* root(): Saga<void> {
     yield takeLatest(storesActionTypes.LOAD_STORE, loadStore)
     yield takeLatest(userActionTypes.CREATE_ADDRESS, createAddress)
     yield takeLatest(userActionTypes.LOAD_ADDRESSES, loadAddresses)
+    yield takeLatest(userActionTypes.LOAD_ORDERS, loadOrders)
     yield takeLatest(userActionTypes.LOAD_ADDRESS_INFO, loadAddressByZipCode)
     yield takeLatest(cartActionTypes.HANDLE_NEW_PRODUCT, handleNewProduct)
+    yield takeLatest(cartActionTypes.PLACE_ORDER, placeOrder)
 };

@@ -120,3 +120,11 @@ export function getAddressRequest(auth_token) {
 export function getAddressByZipcodeRequest(auth_token, address) {
     return get(`zip_codes`, authHeader(auth_token), address)
 }
+
+export function postOrderRequest(auth_token, cart) {
+    return post('orders', authHeader(auth_token), cart)
+}
+
+export function getOrdersRequest(auth_token) {
+    return get('orders', authHeader(auth_token))
+}

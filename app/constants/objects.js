@@ -1,3 +1,5 @@
+import { getCartProductOptionTotal, getCartProductSubOptionsText } from './functions'
+
 
 export const MapAddress = (raw) => {
     return {
@@ -16,6 +18,93 @@ export const MapAddress = (raw) => {
     }
 }
 
+export const MapOrder = (raw) => {
+    return {
+        id: raw.id ? raw.id : 0,
+        store: raw.store ? MapStore(raw.store) : {},
+        address: raw.address ? MapAddress(raw.address) : {},
+        order_products: raw.order_products ? raw.order_products.map(order_product => MapOrderProduct(order_product, true)) : [],
+    }
+}
+
+// {
+//     "id": 1,
+//     "store": {
+//         "id": 1,
+//         "establishment_id": 1,
+//         "address_id": 2,
+//         "name": "Salty Steakhouse",
+//         "cnpj": "",
+//         "img_url": "http://loremflickr.com/100/100/food",
+//         "price_type": null,
+//         "phone_number": "611.796.5619",
+//         "delivery_estimation": "34",
+//         "delivery_price": 2,
+//         "delivery_min_price": 36,
+//         "delivery_zero_price": 95,
+//         "delivery_max_distance": 101,
+//         "created_at": "2018-09-30T02:20:54.887Z",
+//         "updated_at": "2018-09-30T02:20:54.887Z"
+//     },
+//     "address": {
+//         "id": 1,
+//         "name": null,
+//         "state": "Kentucky",
+//         "city": "West Arlinda",
+//         "neighborhood": "",
+//         "street": "Brendan Throughway",
+//         "zipcode": 90308,
+//         "number": 709,
+//         "complement": "Apt. 226",
+//         "reference": "",
+//         "lat": "-22.73201",
+//         "lng": "-43.3603",
+//         "created_at": "2018-09-30T02:20:54.598Z",
+//         "updated_at": "2018-09-30T02:20:54.598Z"
+//     },
+//     "status": null,
+//     "order_products": [
+//         {
+//             "id": 1,
+//             "product": {
+//                 "id": 1,
+//                 "establishment_id": 1,
+//                 "name": "Ricotta Stuffed Ravioli",
+//                 "descp": "28-day aged 300g USDA Certified Prime Ribeye, rosemary-thyme garlic butter, with choice of two sides.",
+//                 "img_url": "",
+//                 "price": 95,
+//                 "stock": 18,
+//                 "expiration": "",
+//                 "promo_price": 42,
+//                 "promo_stock": 49,
+//                 "promo_expiration": "",
+//                 "created_at": "2018-09-30T02:20:54.958Z",
+//                 "updated_at": "2018-09-30T02:20:54.958Z"
+//             },
+//             "quantity": 1
+//         },
+//         {
+//             "id": 2,
+//             "product": {
+//                 "id": 1,
+//                 "establishment_id": 1,
+//                 "name": "Ricotta Stuffed Ravioli",
+//                 "descp": "28-day aged 300g USDA Certified Prime Ribeye, rosemary-thyme garlic butter, with choice of two sides.",
+//                 "img_url": "",
+//                 "price": 95,
+//                 "stock": 18,
+//                 "expiration": "",
+//                 "promo_price": 42,
+//                 "promo_stock": 49,
+//                 "promo_expiration": "",
+//                 "created_at": "2018-09-30T02:20:54.958Z",
+//                 "updated_at": "2018-09-30T02:20:54.958Z"
+//             },
+//             "quantity": 2
+//         }
+//     ]
+// }
+
 export const MapUser = (raw) => {
     return {
         id: raw.id ? raw.id : 0,
@@ -24,7 +113,7 @@ export const MapUser = (raw) => {
         name: raw.name ? raw.name : '',
         user_type: raw.user_type ? raw.user_type : '',
         addresses: raw.addresses ? raw.addresses.map(address => MapAddress(address)) : [],
-        orders: raw.orders ? raw.orders : [], //Map Orders
+        orders: raw.orders ? raw.orders.map(order => MapOrder(order)) : [],
     }
 }
 
@@ -130,4 +219,29 @@ export const MapOptionsSection = (product) => {
 
 export const MapPrice = (price) => {
     return `R$ ${price}`
+}
+
+export const MapCart = (cart, address) => {
+    return {
+        store_id: cart.store.id,
+        address_id: address.id,
+        order_products_attributes: cart.cart_products.map(cart_product => MapOrderProduct(cart_product))
+    }
+}
+
+export const MapOrderProduct = (raw, product = false) => {
+    if (product) {
+        return {
+            product: raw.product ? MapProduct(raw.product) : {},
+            quantity: raw.quantity ? raw.quantity : 0,
+            sub_options_txt: raw.sub_options_txt ? raw.sub_options_txt : '',
+            sub_options_total: raw.sub_options_total ? raw.sub_options_total : 0,
+        }
+    }
+    return {
+        product_id: raw.product ? raw.product.id : 0,
+        quantity: raw.quantity ? raw.quantity : 0,
+        sub_options_txt: raw ? getCartProductSubOptionsText(raw) : '',
+        sub_options_total: raw ? getCartProductOptionTotal(raw) : 0
+    }
 }

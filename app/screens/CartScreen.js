@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { } from '../store/user/action'
+import { placeOrder } from '../store/cart/action'
 import * as cartSelectors from '../store/cart/selector';
 import * as userSelectors from '../store/user/selector';
 import colors from '../constants/colors';
@@ -54,7 +54,7 @@ type Props = {
 class Cart extends Component<Props, State> {
 
     render() {
-        const { cart, selected_address, navigation } = this.props
+        const { cart, selected_address, placeOrder, navigation } = this.props
         // console.log(JSON.stringify(cart))
         const { store, cart_products } = cart
         const cart_total = getCartTotal(cart_products)
@@ -144,7 +144,7 @@ class Cart extends Component<Props, State> {
                     leftText={'Finalizar pedido'}
                     rightText={MapPrice(cart_total)}
                     disabled={cart_products.length == 0}
-                    onPress={() => console.log('finalizar')}
+                    onPress={() => placeOrder()}
                 />
             </Container>
         );
@@ -156,5 +156,5 @@ export default connect(
         cart: cartSelectors.getCart(state),
         selected_address: userSelectors.getSelectedAddress(state)
     }),
-    {}
+    { placeOrder }
 )(Cart)

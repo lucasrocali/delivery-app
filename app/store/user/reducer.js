@@ -1,5 +1,5 @@
 import * as actionTypes from './actionType'
-import { MapUser, MapAddress } from '../../constants/objects'
+import { MapUser, MapAddress, MapOrder } from '../../constants/objects'
 
 const initialState = {
     loading: false,
@@ -32,6 +32,15 @@ export default function userReducer(state = initialState, action) {
         case actionTypes.LOGOUT:
             return {
                 user: {},
+            }
+        case actionTypes.LOAD_ORDERS_SUCCESS:
+            const orders = action.response
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    orders: orders.map(order => MapOrder(order))
+                },
             }
         case actionTypes.LOAD_ADDRESSES_SUCCESS:
             const addresses = action.response

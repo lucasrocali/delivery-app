@@ -11,6 +11,7 @@ import LaunchScreen from '../screens/LaunchScreen';
 import SocialLoginScreen from '../screens/SocialLoginScreen';
 import LoginScreen from '../screens/LoginScreen';
 import PerfilScreen from '../screens/PerfilScreen';
+import OrdersScreen from '../screens/OrdersScreen';
 import AddressesScreen from '../screens/AddressesScreen';
 import AddressScreen from '../screens/AddressScreen';
 import StoresScreen from '../screens/StoresScreen';
@@ -72,6 +73,7 @@ export const screenNames = {
     Perfil: 'Perfil',
     Address: 'Address',
     Addresses: 'Addresses',
+    Orders: 'Orders',
     Picker: 'Picker',
     Base: 'Base',
     CategoriesStack: 'CategoriesStack',
@@ -81,6 +83,7 @@ export const screenNames = {
     LoginStack: 'LoginStack',
     PerfilStack: 'PerfilStack',
     AddressesStack: 'AddressesStack',
+    OrdersStack: 'OrdersStack',
     PickerStack: 'PickerStack',
     BaseStack: 'BaseStack',
 
@@ -206,6 +209,15 @@ export const screens = {
             }),
         }
     },
+    [screenNames.Orders]: {
+        name: screenNames.Orders,
+        component: {
+            screen: OrdersScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: 'Orders',
+            }),
+        }
+    },
     [screenNames.Base]: {
         name: screenNames.Base,
         component: {
@@ -277,6 +289,14 @@ export const stacks = {
             }
         )
     },
+    [screenNames.OrdersStack]: {
+        name: screenNames.OrdersStack,
+        component: StackNavigator(
+            {
+                [screens.Orders.name]: screens.Orders.component
+            }
+        )
+    },
     [screenNames.PickerStack]: {
         name: screenNames.PickerStack,
         component: StackNavigator(
@@ -330,6 +350,7 @@ export const AppNavigator = StackNavigator(
         [screens.Store.name]: screens.Store.component,
         [stacks.LoginStack.name]: stacks.LoginStack.component,
         [stacks.AddressesStack.name]: stacks.AddressesStack.component,
+        [stacks.OrdersStack.name]: stacks.OrdersStack.component,
         [stacks.PickerStack.name]: stacks.PickerStack.component
     }, {
         initialRouteName: screens.Launch.name,

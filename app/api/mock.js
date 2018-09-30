@@ -420,3 +420,11 @@ export function postAddressRequest() {
 export function getAddressByZipcodeRequest() {
     return {}
 }
+
+export function postOrderRequest(auth_token, cart) {
+    return {}
+}
+
+export function getOrdersRequest() {
+    return {}
+}

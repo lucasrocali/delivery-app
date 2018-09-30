@@ -56,6 +56,20 @@ export function loadAddressSuccess(response) {
         response
     }
 }
+
+export function loadOrders() {
+    return {
+        type: actionTypes.LOAD_ORDERS
+    }
+}
+
+export function loaOrdersSuccess(response) {
+    return {
+        type: actionTypes.LOAD_ORDERS_SUCCESS,
+        response
+    }
+}
+
 export function createAddress(address) {
     return {
         type: actionTypes.CREATE_ADDRESS,

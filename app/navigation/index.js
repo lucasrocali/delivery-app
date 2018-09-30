@@ -115,7 +115,7 @@ class Base extends Component<Props, State> {
                 }
                 <Toast
                     visible={toast_msg ? true : false}
-                    position={Toast.positions.BOTTOM}
+                    position={-60}
                     shadow={false}
                     animation={false}
                     hideOnPress={true}
