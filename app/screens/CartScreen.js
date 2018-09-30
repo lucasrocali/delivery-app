@@ -12,6 +12,7 @@ import styled from "styled-components";
 import StoreCellBody from './components/StoreCellBody';
 import CartProductCell from './components/CartProductCell'
 import AddressCell from './components/AddressCell';
+import RoundedButton from './components/RoundedButton';
 import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView, Row, Left, Right, TouchableCell } from './styled/index';
 import { screenNames } from '../navigation/Routers';
 import { getCartTotal } from '../constants/functions';
@@ -28,6 +29,10 @@ const Header = styled.View`
 
 const View = styled.View`
 
+`
+
+const CartList = styled(FlatList) `
+    margin-bottom: 80;
 `
 
 const TextView = styled(PaddedView) `
@@ -56,7 +61,7 @@ class Cart extends Component<Props, State> {
         console.log(cart, store, cart_products)
         return (
             <Container>
-                <FlatList
+                <CartList
                     data={cart_products}
                     ListHeaderComponent={() => (
                         <Header>
@@ -79,43 +84,47 @@ class Cart extends Component<Props, State> {
 
                         </Header>
                     )}
-                    ListFooterComponent={() =>
+                    ListFooterComponent={() => (
                         <View>
-                            <AddMoreBtn
-                                onPress={() => navigation.navigate({ key: screenNames.Store, routeName: screenNames.Store, params: { title: store.name } })}
-                            >
-                                <Caption>Adicionar mais itens</Caption>
-                            </AddMoreBtn>
-                            <Cell>
-                                <Row>
-                                    <Left>
-                                        <Caption>Subtotal</Caption>
-                                    </Left>
-                                    <Right>
-                                        <Caption>{MapPrice(cart_total)}</Caption>
-                                    </Right>
-                                </Row>
-                                {store &&
-                                    <Row>
-                                        <Left>
-                                            <Caption>Taxa de entrega</Caption>
-                                        </Left>
-                                        <Right>
-                                            <Caption>{MapPrice(store.delivery_price)}</Caption>
-                                        </Right>
-                                    </Row>
-                                }
-                                <Row>
-                                    <Left>
-                                        <Title>Total</Title>
-                                    </Left>
-                                    <Right>
-                                        <Title>{MapPrice(cart_total)}</Title>
-                                    </Right>
-                                </Row>
-                            </Cell>
+                            {store &&
+                                <View>
+                                    <AddMoreBtn
+                                        onPress={() => navigation.navigate({ key: screenNames.Store, routeName: screenNames.Store, params: { title: store.name } })}
+                                    >
+                                        <Caption>Adicionar mais itens</Caption>
+                                    </AddMoreBtn>
+                                    <Cell>
+                                        <Row>
+                                            <Left>
+                                                <Caption>Subtotal</Caption>
+                                            </Left>
+                                            <Right>
+                                                <Caption>{MapPrice(cart_total)}</Caption>
+                                            </Right>
+                                        </Row>
+                                        {store &&
+                                            <Row>
+                                                <Left>
+                                                    <Caption>Taxa de entrega</Caption>
+                                                </Left>
+                                                <Right>
+                                                    <Caption>{MapPrice(store.delivery_price)}</Caption>
+                                                </Right>
+                                            </Row>
+                                        }
+                                        <Row>
+                                            <Left>
+                                                <Title>Total</Title>
+                                            </Left>
+                                            <Right>
+                                                <Title>{MapPrice(cart_total)}</Title>
+                                            </Right>
+                                        </Row>
+                                    </Cell>
+                                </View>
+                            }
                         </View>
-                    }
+                    )}
                     renderItem={({ item: cart_product, index }) => (
                         <CartProductCell
                             cart_product={cart_product}
@@ -130,6 +139,12 @@ class Cart extends Component<Props, State> {
                             })}
                         />
                     )}
+                />
+                <RoundedButton
+                    leftText={'Finalizar pedido'}
+                    rightText={MapPrice(cart_total)}
+                    disabled={cart_products.length == 0}
+                    onPress={() => console.log('finalizar')}
                 />
             </Container>
         );

@@ -37,7 +37,7 @@ export const MapCategory = (raw) => {
     }
 }
 
-export const MapStore = (raw) => {
+export const MapStore = (raw, full) => {
     return {
         id: raw && raw.id ? raw.id : '',
         name: raw && raw.name ? raw.name : '',
@@ -49,7 +49,8 @@ export const MapStore = (raw) => {
         delivery_price: raw && raw.delivery_price ? raw.delivery_price : '',
         delivery_min_price: raw && raw.delivery_min_price ? raw.delivery_min_price : '',
         delivery_zero_price: raw && raw.delivery_zero_price ? raw.delivery_zero_price : '',
-        menus: raw && raw.menus ? raw.menus.map(menu => MapMenu(menu)) : []
+        menus: raw && raw.menus ? raw.menus.map(menu => MapMenu(menu)) : [],
+        full: full
     }
 }
 

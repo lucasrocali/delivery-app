@@ -17,6 +17,8 @@ import * as cartActions from "../store/cart/action";
 import * as appSelectors from '../store/app/selector'
 import * as userSelectors from '../store/user/selector'
 import * as cartSelectors from '../store/cart/selector'
+import * as storeSelectors from '../store/stores/selector'
+
 import * as realApi from "../api/"
 import * as mockApi from "../api/mock.js"
 
@@ -26,6 +28,7 @@ import { mainStack } from '../navigation/Routers';
 const getToken = state => userSelectors.getAuthToken(state);
 const getCredentials = state => appSelectors.getCredentials(state);
 const getUser = state => userSelectors.getUser(state);
+const getCurrentStore = state => storeSelectors.getStore(state)
 const getCartStore = state => cartSelectors.getCartStore(state)
 
 //{message: "Missing token"}
@@ -133,18 +136,26 @@ const loadStores = function* (action) {
 
 const loadStore = function* (action) {
     try {
-        yield put(storeActions.setLoading())
 
         const { store } = action
 
-        const response = yield call(api.getStoreRequest, store.id)
+        const currentStore = yield select(getCurrentStore)
 
-        console.log(response)
+        if (!currentStore.full) {
 
-        const store_response = response
+            yield put(storeActions.setLoading())
 
-        yield put(storeActions.loadStoreSuccess(store_response))
-        yield put(cartActions.selectStore(store_response))
+            const response = yield call(api.getStoreRequest, store.id)
+
+            console.log(response)
+
+            const store_response = response
+
+            yield put(storeActions.loadStoreSuccess(store_response))
+            yield put(cartActions.selectStore(store_response))
+
+        }
+
     } catch (error) {
         console.log(error);
         yield put(storeActions.setError(error))
@@ -221,13 +232,18 @@ const navigate = function* (action) {
 
 const handleNewProduct = function* (action) {
     try {
-        const { store_id, cart_product } = action
+        const { store_id, cart_product, remove } = action
 
         const cartStore = yield select(getCartStore)
 
         if (cartStore.id == store_id) {
-            yield put(cartActions.addToCart(cart_product))
-            yield put(appActions.displayToastMsg('Item adicionado ao carrinho'))
+            yield put(cartActions.addToCart(cart_product, remove))
+            if (remove) {
+                yield put(appActions.displayToastMsg('Item removido do carrinho'))
+            } else {
+                yield put(appActions.displayToastMsg('Item adicionado ao carrinho'))
+            }
+
             yield put(NavigationActions.back())
         } else {
             yield put(appActions.displayToastMsg('Carrinho aberto em outra loja'))

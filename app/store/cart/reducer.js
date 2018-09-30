@@ -91,13 +91,18 @@ export default function cartReducer(state = initialState, action) {
             return state
         case actionTypes.ADD_TO_CART:
 
-            const { cart_product } = action
+            const { cart_product, remove } = action
             let { cart_products } = state
 
             if (cart_product.id > 0) {
 
-                var index = cart_products.map(cp => cp.id).indexOf(cart_product.id);
-                cart_products[index] = cart_product
+                if (remove) {
+                    cart_products = cart_products.filter(cp => cp.id !== cart_product.id);
+                } else {
+
+                    var index = cart_products.map(cp => cp.id).indexOf(cart_product.id);
+                    cart_products[index] = cart_product
+                }
 
             } else {
 
@@ -109,9 +114,6 @@ export default function cartReducer(state = initialState, action) {
                 ...state,
                 cart_products
             }
-        case actionTypes.REMOVE_PRODUCT:
-            const { cart_product_id } = action
-            return state
         default:
             return state
     }

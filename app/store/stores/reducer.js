@@ -32,10 +32,13 @@ export default function storesReducer(state = initialState, action) {
                 stores
             }
         case actionTypes.LOAD_STORE:
-            return {
-                ...state,
-                current_store: MapStore(action.store)
+            if (!state.current_store || (state.current_store.id != action.store.id)) {
+                return {
+                    ...state,
+                    current_store: MapStore(action.store, false)
+                }
             }
+            return state
         case actionTypes.LOAD_STORE_SUCCESS:
             const store = action.store
             return {
@@ -43,7 +46,7 @@ export default function storesReducer(state = initialState, action) {
                 loading: false,
                 current_store: {
                     ...state.current_store,
-                    ...MapStore(store)
+                    ...MapStore(store, true)
                 }
             }
         default:

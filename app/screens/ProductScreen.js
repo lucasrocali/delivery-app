@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import OptionCell from './components/OptionCell';
 import SubOptionCell from './components/SubOptionCell';
 import ProductCell from './components/ProductCell';
+import RoundedButton from './components/RoundedButton'
 import colors from '../constants/colors';
 import { connect } from 'react-redux';
 import { handleNewProduct } from '../store/cart/action'
@@ -173,30 +174,24 @@ class Product extends Component<Props, State> {
                     ListFooterComponent={(
                         <View>
                             {cart_product_id >= 0 &&
-                                <RemoveBtn>
+                                <RemoveBtn
+                                    onPress={() => handleNewProduct(store_id, { id: cart_product_id, product: product, quantity: quantity, selected_options: selected_options }, true)}
+                                >
                                     <Caption>Remover item</Caption>
                                 </RemoveBtn>
                             }
                         </View>
                     )}
                 />
-                <AddButton
-                    style={{ opacity: canAddProduct ? 1.0 : 0.4 }}
-                    activeOpacity={0.8}
+                <RoundedButton
+                    leftText={'Adicionar ' + quantity}
+                    rightText={MapPrice(cart_product_total)}
                     disabled={!canAddProduct}
                     onPress={() => {
-                        console.log(' handleNewProduct => ', cart_product_id)
                         handleNewProduct(store_id, { id: cart_product_id, product: product, quantity: quantity, selected_options: selected_options })
-                    }} >
-                    <Left>
-                        <LightTitle>{'Adicionar ' + quantity}</LightTitle>
-                    </Left>
-
-                    <Right>
-                        <LightTitle>{MapPrice(cart_product_total)}</LightTitle>
-                    </Right>
-                </AddButton>
-            </Container>
+                    }}
+                />
+            </Container >
         );
     }
 }
