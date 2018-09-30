@@ -44,7 +44,11 @@ export const MapStore = (raw) => {
         foo: 'store',
         img_url: raw && raw.img_url ? raw.img_url : '',
         price_type: raw && raw.price_type ? raw.price_type : '',
+        phone_number: raw && raw.phone_number ? raw.phone_number : '',
         delivery_estimation: raw && raw.delivery_estimation ? raw.delivery_estimation : '',
+        delivery_price: raw && raw.delivery_price ? raw.delivery_price : '',
+        delivery_min_price: raw && raw.delivery_min_price ? raw.delivery_min_price : '',
+        delivery_zero_price: raw && raw.delivery_zero_price ? raw.delivery_zero_price : '',
         menus: raw && raw.menus ? raw.menus.map(menu => MapMenu(menu)) : []
     }
 }

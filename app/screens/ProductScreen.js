@@ -174,7 +174,7 @@ class Product extends Component<Props, State> {
                     </Left>
 
                     <Right>
-                        <LightTitle>{'R$ ' + getCartProductTotal(product, quantity, selected_options)}</LightTitle>
+                        <LightTitle>{'R$ ' + getCartProductTotal({ product: product, quantity: quantity, selected_options: selected_options })}</LightTitle>
                     </Right>
                 </AddButton>
             </Container>

@@ -25,7 +25,7 @@ type Props = {
 export default CartProductCell = (props: Props) => {
     const { cart_product, onPress } = props
     const { product, quantity, selected_options } = cart_product
-    const cart_product_total = getCartProductTotal(product, quantity, selected_options)
+    const cart_product_total = getCartProductTotal(cart_product)
     const cart_product_sub_options = getCartProductSubOptions(product, quantity, selected_options)
     console.log(cart_product, cart_product_sub_options)
     return (

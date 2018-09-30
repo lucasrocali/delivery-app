@@ -12,8 +12,9 @@ import styled from "styled-components";
 import StoreCellBody from './components/StoreCellBody';
 import CartProductCell from './components/CartProductCell'
 import AddressCell from './components/AddressCell';
-import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView } from './styled/index';
+import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView, Row, Left, Right, TouchableCell } from './styled/index';
 import { stacks } from '../navigation/Routers';
+import { getCartTotal } from '../constants/functions';
 
 const Container = styled.View`
     flex: 1;
@@ -32,6 +33,11 @@ const TextView = styled(PaddedView) `
     padding-bottom: 0;
 `
 
+const AddMoreBtn = styled(TouchableCell) `
+    align-items: center;
+    justify-content: center;
+`
+
 type State = {
 
 }
@@ -45,6 +51,7 @@ class Cart extends Component<Props, State> {
         const { cart, selected_address, navigation } = this.props
         // console.log(JSON.stringify(cart))
         const { store, cart_products } = cart
+        const cart_total = getCartTotal(cart_products)
         console.log(cart, store, cart_products)
         return (
             <Container>
@@ -52,12 +59,7 @@ class Cart extends Component<Props, State> {
                     data={cart_products}
                     ListHeaderComponent={() => (
                         <Header>
-                            {store &&
-                                <Cell>
-                                    <TitleH2>{store.name}</TitleH2>
-                                    <Caption>{store.delivery_estimation}</Caption>
-                                </Cell>
-                            }
+
                             {selected_address &&
                                 <View>
                                     <TextView>
@@ -67,10 +69,48 @@ class Cart extends Component<Props, State> {
                                 </View>
 
                             }
+                            {store &&
+                                <Cell>
+                                    <TitleH2>{store.name}</TitleH2>
+                                    <Caption>{store.delivery_estimation}</Caption>
+                                </Cell>
+                            }
 
                         </Header>
                     )}
-                    ListFooterComponent={() => <Title>Footer</Title>}
+                    ListFooterComponent={() =>
+                        <View>
+                            <AddMoreBtn>
+                                <Caption>Adicionar mais items</Caption>
+                            </AddMoreBtn>
+                            <Cell>
+                                <Row>
+                                    <Left>
+                                        <Caption>Subtotal</Caption>
+                                    </Left>
+                                    <Right>
+                                        <Caption>{cart_total}</Caption>
+                                    </Right>
+                                </Row>
+                                <Row>
+                                    <Left>
+                                        <Caption>Taxa de entrega</Caption>
+                                    </Left>
+                                    <Right>
+                                        <Caption>10</Caption>
+                                    </Right>
+                                </Row>
+                                <Row>
+                                    <Left>
+                                        <Title>Total</Title>
+                                    </Left>
+                                    <Right>
+                                        <Title>{cart_total}</Title>
+                                    </Right>
+                                </Row>
+                            </Cell>
+                        </View>
+                    }
                     renderItem={({ item: cart_product, index }) => (
                         <CartProductCell
                             cart_product={cart_product}

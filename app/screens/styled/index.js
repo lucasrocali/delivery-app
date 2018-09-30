@@ -6,7 +6,7 @@ export const Title = styled.Text`
     margin-vertical: ${spacing.tiny2};
     font-size: 16;
     color: ${colors.gray70}
-    font-weight: bold;
+    font-weight: 600;
 `
 export const TitleH1 = styled(Title) `
     font-size: 28;
@@ -81,6 +81,9 @@ export const SectionHeader = styled(Cell) `
     flex-direction: row;
 `
 
+export const Row = styled.View`
+    flex-direction: row;
+`
 export const Left = styled.View`
     flex:1;
     justify-content: flex-start;

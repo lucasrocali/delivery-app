@@ -17,7 +17,7 @@ import * as userSelectors from '../store/user/selector'
 import * as realApi from "../api/"
 import * as mockApi from "../api/mock.js"
 
-const api = mockApi
+const api = realApi
 import { mainStack } from '../navigation/Routers';
 
 const getToken = state => userSelectors.getAuthToken(state);
