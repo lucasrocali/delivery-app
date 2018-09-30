@@ -16,6 +16,7 @@ import Ionicon from "react-native-vector-icons/Ionicons";
 import spacing from '../constants/spacing';
 import { MapOptionsSection } from '../constants/objects'
 import { getCartProductTotal } from '../constants/functions';
+import { MapPrice } from '../constants/objects';
 
 const Container = styled.View`
     flex: 1;
@@ -93,6 +94,7 @@ class Product extends Component<Props, State> {
         const { selected_options, quantity, cart_product_index } = this.state
         const { addToCart, navigation } = this.props
         const canAddProduct = canAdd(product, quantity, selected_options)
+        const cart_product_total = getCartProductTotal({ product: product, quantity: quantity, selected_options: selected_options })
         console.log(this.state)
         return (
             <Container>
@@ -174,7 +176,7 @@ class Product extends Component<Props, State> {
                     </Left>
 
                     <Right>
-                        <LightTitle>{'R$ ' + getCartProductTotal({ product: product, quantity: quantity, selected_options: selected_options })}</LightTitle>
+                        <LightTitle>{MapPrice(cart_product_total)}</LightTitle>
                     </Right>
                 </AddButton>
             </Container>

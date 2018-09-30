@@ -1,5 +1,5 @@
 import * as actionTypes from './actionType'
-
+import { MapStore } from '../../constants/objects';
 const initialState = {
     store: null,
     cart_products: []
@@ -85,7 +85,7 @@ export default function cartReducer(state = initialState, action) {
                 const { store } = action
                 return {
                     ...state,
-                    store
+                    store: MapStore(store)
                 }
             }
             return state

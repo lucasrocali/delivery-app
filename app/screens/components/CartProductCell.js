@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Text, Number, Caption, Cell, Left, Right } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
+import { MapPrice } from '../../constants/objects';
 import { getCartProductTotal, getCartProductSubOptions } from '../../constants/functions';
 
 const Touchable = styled.TouchableOpacity`
@@ -39,7 +40,7 @@ export default CartProductCell = (props: Props) => {
                     ))}
                 </InfoView>
                 <Right>
-                    <Number>{'R$ ' + cart_product_total}</Number>
+                    <Number>{MapPrice(cart_product_total)}</Number>
                 </Right>
             </Container>
         </Touchable>

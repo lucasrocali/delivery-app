@@ -1,6 +1,6 @@
 export const getCartProductTotal = (cart_product) => {
     const options_total = cart_product.selected_options && Object.keys(cart_product.selected_options).reduce((total, key) => total + cart_product.selected_options[key].reduce((total, so) => total + so.price, 0), 0)
-    return cart_product.quantity * (cart_product.product.price + options_total)
+    return cart_product.quantity * (cart_product.product.current_price + options_total)
 }
 
 export const getCartTotal = (cart_products) => {

@@ -43,9 +43,9 @@ export const MapStore = (raw) => {
         name: raw && raw.name ? raw.name : '',
         foo: 'store',
         img_url: raw && raw.img_url ? raw.img_url : '',
-        price_type: raw && raw.price_type ? raw.price_type : '',
+        price_type: raw && raw.price_type ? raw.price_type : '$',
         phone_number: raw && raw.phone_number ? raw.phone_number : '',
-        delivery_estimation: raw && raw.delivery_estimation ? raw.delivery_estimation : '',
+        delivery_estimation: raw && raw.delivery_estimation ? `${raw.delivery_estimation} mins` : '',
         delivery_price: raw && raw.delivery_price ? raw.delivery_price : '',
         delivery_min_price: raw && raw.delivery_min_price ? raw.delivery_min_price : '',
         delivery_zero_price: raw && raw.delivery_zero_price ? raw.delivery_zero_price : '',
@@ -68,9 +68,11 @@ export const MapProduct = (raw) => {
         name: raw && raw.name ? raw.name : '',
         descp: raw && raw.descp ? raw.descp : '',
         foo: 'product',
+        current_price: raw ? raw.promo_price < raw.price ? raw.promo_price : raw.price : 0,
         price: raw && raw.price ? raw.price : '',
+        price_text: raw && raw.price ? MapPrice(raw.price) : '',
         promo_price: raw && raw.promo_price ? raw.promo_price : '',
-        price_text: raw && raw.price ? `R$ ${raw.price}` : '',
+        promo_price_text: raw && raw.promo_price ? MapPrice(raw.promo_price) : '',
         img_url: raw && raw.img_url ? raw.img_url : '',
         options: raw && raw.options ? raw.options.map(option => MapOption(option)) : []
     }
@@ -100,7 +102,7 @@ export const MapSubOption = (raw) => {
         name: raw && raw.name ? raw.name : '',
         foo: 'sub_option',
         price: raw && raw.price ? raw.price : 0,
-        price_text: raw && raw.price ? `R$ ${raw.price}` : '',
+        price_text: raw && raw.price ? MapPrice(raw.price) : '',
     }
 }
 
@@ -122,4 +124,9 @@ export const MapOptionsSection = (product) => {
         }
     })
         : []
+}
+
+
+export const MapPrice = (price) => {
+    return `R$ ${price}`
 }

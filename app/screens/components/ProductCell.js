@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { Text, Number, Caption, Cell } from '../styled/index'
+import { Text, Number, RiskNumber, Caption, Cell } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
 
@@ -11,6 +11,10 @@ const Touchable = styled.TouchableOpacity`
 `
 
 const Container = styled(Cell) `
+    flex-direction: row;
+`
+
+const Row = styled.View`
     flex-direction: row;
 `
 
@@ -40,7 +44,14 @@ export default Base = (props: Props) => {
                 <InfoView>
                     <Text>{product.name}</Text>
                     {product.descp != '' && <Caption>{product.descp}</Caption>}
-                    <Number>{product.price_text}</Number>
+                    {product.promo_price < product.price ?
+                        <Row>
+                            <RiskNumber>{product.price_text}</RiskNumber>
+                            <Number>{product.promo_price_text}</Number>
+                        </Row>
+                        :
+                        <Number>{product.promo_price_text}</Number>
+                    }
                 </InfoView>
                 <ImageView>
                     {product.img_url != '' && <Image source={{ uri: product.img_url }} />}

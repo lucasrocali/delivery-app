@@ -50,6 +50,12 @@ export const Number = styled.Text`
     font-size: 13;
     color: ${colors.gray50}
     font-weight: 200;
+    margin-right: 3;
+    
+`
+
+export const RiskNumber = styled(Number) `
+    text-decoration-line:line-through;
 `
 
 export const ButtonText = styled.Text` 

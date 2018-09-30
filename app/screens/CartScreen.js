@@ -15,6 +15,7 @@ import AddressCell from './components/AddressCell';
 import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView, Row, Left, Right, TouchableCell } from './styled/index';
 import { stacks } from '../navigation/Routers';
 import { getCartTotal } from '../constants/functions';
+import { MapPrice } from '../constants/objects';
 
 const Container = styled.View`
     flex: 1;
@@ -89,23 +90,25 @@ class Cart extends Component<Props, State> {
                                         <Caption>Subtotal</Caption>
                                     </Left>
                                     <Right>
-                                        <Caption>{cart_total}</Caption>
+                                        <Caption>{MapPrice(cart_total)}</Caption>
                                     </Right>
                                 </Row>
-                                <Row>
-                                    <Left>
-                                        <Caption>Taxa de entrega</Caption>
-                                    </Left>
-                                    <Right>
-                                        <Caption>10</Caption>
-                                    </Right>
-                                </Row>
+                                {store &&
+                                    <Row>
+                                        <Left>
+                                            <Caption>Taxa de entrega</Caption>
+                                        </Left>
+                                        <Right>
+                                            <Caption>{MapPrice(store.delivery_price)}</Caption>
+                                        </Right>
+                                    </Row>
+                                }
                                 <Row>
                                     <Left>
                                         <Title>Total</Title>
                                     </Left>
                                     <Right>
-                                        <Title>{cart_total}</Title>
+                                        <Title>{MapPrice(cart_total)}</Title>
                                     </Right>
                                 </Row>
                             </Cell>
