@@ -50,6 +50,8 @@ const displayToastMsg = function* (action) {
 
 const autoLogin = function* (action) {
     try {
+        yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
+
         const user_credentials = yield select(getCredentials)
 
         if (user_credentials && user_credentials.email) {
@@ -63,8 +65,6 @@ const autoLogin = function* (action) {
             }
 
         }
-
-        yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
 
     } catch (error) {
         console.log(error);

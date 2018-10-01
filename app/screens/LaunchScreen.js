@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import { autoLogin } from '../store/user/action'
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
-import { Title } from './styled/index'
+import { Title } from './styled/index';
+import colors from '../constants/colors';
 
 const Container = styled.View`
     flex: 1;
-    align-items: center;
-    justify-content: center;
+    background-color: ${colors.white};
 `;
 
 type State = {
@@ -31,7 +31,7 @@ class Launch extends Component<Props, State> {
     render() {
         return (
             <Container>
-                <Title>Launch</Title>
+
             </Container>
         );
     }

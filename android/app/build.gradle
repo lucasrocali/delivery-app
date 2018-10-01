@@ -98,7 +98,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.deliveryapp"
+        applicationId "br.com.rocali.delivery"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -137,13 +137,16 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-google-sign-in')
+    implementation project(':react-native-google-sign-in') { // ADD this
+        exclude group: "com.google.android.gms"
+    }
     implementation project(':react-native-fbsdk')
     implementation project(':react-native-fast-image')
     implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.google.android.gms:play-services-base:11.4.2'
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.google.android.gms:play-services-auth:10.0.1"
     implementation "com.facebook.react:react-native:+"  // From node_modules
 }
 
