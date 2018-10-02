@@ -55,10 +55,10 @@ class Perfil extends Component<Props, State> {
         const { user, navigateTo } = this.props
         return (
             <Container>
-                {user && user.name && user.email ?
+                {user && user.email ?
                     <Content>
                         <PerfilView>
-                            <Title>{user.name}</Title>
+                            <Title>{user.name && user.name}</Title>
                             <Caption>{user.email}</Caption>
                         </PerfilView>
                         <Cell>

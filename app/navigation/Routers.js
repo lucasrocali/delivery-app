@@ -148,6 +148,7 @@ export const screens = {
             screen: ProductScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: "Produto",
+                leftIcon: icon_names.close
             }),
         }
     },
@@ -197,6 +198,7 @@ export const screens = {
             screen: AddressesScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: "Endereços",
+                leftIcon: icon_names.close
             }),
         }
     },
@@ -206,6 +208,7 @@ export const screens = {
             screen: PickerScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: 'Picker',
+                leftIcon: icon_names.close
             }),
         }
     },
@@ -215,6 +218,7 @@ export const screens = {
             screen: OrdersScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: 'Orders',
+                leftIcon: icon_names.close
             }),
         }
     },

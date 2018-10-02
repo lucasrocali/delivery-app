@@ -45,12 +45,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.deliveryapp",
+    package = "br.com.rocali.delivery",
 )
 
 android_resource(
     name = "res",
-    package = "com.deliveryapp",
+    package = "br.com.rocali.delivery",
     res = "src/main/res",
 )
 
