@@ -43,9 +43,7 @@
 		471068FD512447E88C37405D /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14BDE0DFEEED42A2B2614954 /* libFastImage.a */; };
 		54499D4A6671474592FED3F6 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 985FD58B5FE746D5B5442FC4 /* SimpleLineIcons.ttf */; };
 		70762FC215D34F2581716FE1 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 263E3616D6024AA999221A7E /* FontAwesome5_Solid.ttf */; };
-		78EAD488215CA3E100426DEB /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EAD485215CA3DE00426DEB /* FBSDKCoreKit.framework */; };
 		78EAD489215CA3E100426DEB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EAD486215CA3DF00426DEB /* Bolts.framework */; };
-		78EAD48A215CA3E100426DEB /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EAD487215CA3E100426DEB /* FBSDKLoginKit.framework */; };
 		78EAD48E215CA53C00426DEB /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EAD48B215CA53B00426DEB /* GoogleSignInDependencies.framework */; };
 		78EAD48F215CA53C00426DEB /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EAD48C215CA53B00426DEB /* GoogleSignIn.framework */; };
 		78EAD490215CA53C00426DEB /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 78EAD48D215CA53C00426DEB /* GoogleSignIn.bundle */; };
@@ -55,8 +53,10 @@
 		78EAD4B0215CA6E200426DEB /* RNGoogleSignInBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EAD4AC215CA6E100426DEB /* RNGoogleSignInBridge.m */; };
 		78EAD4B1215CA6E200426DEB /* RNGoogleSignInEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EAD4AD215CA6E100426DEB /* RNGoogleSignInEvents.swift */; };
 		78EAD4B2215CA6E200426DEB /* RNGoogleSignInEventsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EAD4AE215CA6E100426DEB /* RNGoogleSignInEventsBridge.m */; };
-		78EAD4D8215CB00800426DEB /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78EAD4D7215CB00700426DEB /* FBSDKShareKit.framework */; };
 		78EAD4DA215CB32F00426DEB /* GoogleService-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78EAD4D9215CB32F00426DEB /* GoogleService-info.plist */; };
+		78ECEE0521647BF400898ECD /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78ECEE0221647BF200898ECD /* FBSDKLoginKit.framework */; };
+		78ECEE0621647BF400898ECD /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78ECEE0321647BF300898ECD /* FBSDKShareKit.framework */; };
+		78ECEE0721647BF400898ECD /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78ECEE0421647BF300898ECD /* FBSDKCoreKit.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8BFC723B04BC40EABA1D4336 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B284713662EB40F2B00A2DC3 /* Ionicons.ttf */; };
 		8EFB527771064586A3F2F9DF /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 707266FD83CF45DCACDB38DE /* Foundation.ttf */; };
@@ -403,9 +403,7 @@
 		707266FD83CF45DCACDB38DE /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		71AA8E97AAE04DAB81E226F0 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		78EAD485215CA3DE00426DEB /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		78EAD486215CA3DF00426DEB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		78EAD487215CA3E100426DEB /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		78EAD48B215CA53B00426DEB /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
 		78EAD48C215CA53B00426DEB /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		78EAD48D215CA53C00426DEB /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
@@ -417,8 +415,10 @@
 		78EAD4AD215CA6E100426DEB /* RNGoogleSignInEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNGoogleSignInEvents.swift; sourceTree = "<group>"; };
 		78EAD4AE215CA6E100426DEB /* RNGoogleSignInEventsBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGoogleSignInEventsBridge.m; sourceTree = "<group>"; };
 		78EAD4D6215CAD8800426DEB /* Delivery-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Delivery-Bridging-Header.h"; sourceTree = "<group>"; };
-		78EAD4D7215CB00700426DEB /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		78EAD4D9215CB32F00426DEB /* GoogleService-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-info.plist"; sourceTree = "<group>"; };
+		78ECEE0221647BF200898ECD /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Pods/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		78ECEE0321647BF300898ECD /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Pods/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		78ECEE0421647BF300898ECD /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Pods/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		8090AADD70DF4B1E9164179F /* FastImage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		854EA3AC7E3F42D59627955E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
@@ -450,23 +450,23 @@
 				78EAD492215CA56B00426DEB /* SystemConfiguration.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
-				78EAD48A215CA3E100426DEB /* FBSDKLoginKit.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
-				78EAD4D8215CB00800426DEB /* FBSDKShareKit.framework in Frameworks */,
+				78ECEE0621647BF400898ECD /* FBSDKShareKit.framework in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				78EAD48E215CA53C00426DEB /* GoogleSignInDependencies.framework in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
+				78ECEE0521647BF400898ECD /* FBSDKLoginKit.framework in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				78EAD489215CA3E100426DEB /* Bolts.framework in Frameworks */,
 				2E4BA83277FB4BE9AD24F23C /* libRNVectorIcons.a in Frameworks */,
-				78EAD488215CA3E100426DEB /* FBSDKCoreKit.framework in Frameworks */,
 				471068FD512447E88C37405D /* libFastImage.a in Frameworks */,
+				78ECEE0721647BF400898ECD /* FBSDKCoreKit.framework in Frameworks */,
 				B20691950AD94ED8A5380F92 /* libRCTFBSDK.a in Frameworks */,
 				78EAD48F215CA53C00426DEB /* GoogleSignIn.framework in Frameworks */,
 			);
@@ -753,13 +753,13 @@
 		84F1F099A8C845DAA3EC185A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				78EAD4D7215CB00700426DEB /* FBSDKShareKit.framework */,
+				78ECEE0421647BF300898ECD /* FBSDKCoreKit.framework */,
+				78ECEE0221647BF200898ECD /* FBSDKLoginKit.framework */,
+				78ECEE0321647BF300898ECD /* FBSDKShareKit.framework */,
 				78EAD48D215CA53C00426DEB /* GoogleSignIn.bundle */,
 				78EAD48C215CA53B00426DEB /* GoogleSignIn.framework */,
 				78EAD48B215CA53B00426DEB /* GoogleSignInDependencies.framework */,
 				78EAD486215CA3DF00426DEB /* Bolts.framework */,
-				78EAD485215CA3DE00426DEB /* FBSDKCoreKit.framework */,
-				78EAD487215CA3E100426DEB /* FBSDKLoginKit.framework */,
 				BFFE775840AE467BB096AA23 /* Entypo.ttf */,
 				D6E339665B504496A482D11D /* EvilIcons.ttf */,
 				03C8FF2FD7EB4FC39334C644 /* Feather.ttf */,
@@ -1481,6 +1481,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1513,6 +1514,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
