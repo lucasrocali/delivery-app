@@ -92,7 +92,7 @@ class Product extends Component<Props, State> {
         this.state = {
             selected_options: order_product && order_product.selected_options ? order_product.selected_options : {},
             quantity: order_product && order_product.quantity ? order_product.quantity : 1,
-            order_product_id: order_product && typeof order_product.id == 'number' ? order_product.id : -1
+            order_product_id: order_product && typeof order_product.id == 'number' ? order_product.id : null
         };
     }
 

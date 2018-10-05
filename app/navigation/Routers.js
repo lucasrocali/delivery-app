@@ -12,6 +12,7 @@ import SocialLoginScreen from '../screens/SocialLoginScreen';
 import LoginScreen from '../screens/LoginScreen';
 import PerfilScreen from '../screens/PerfilScreen';
 import OrdersScreen from '../screens/OrdersScreen';
+import OrderScreen from '../screens/OrderScreen';
 import AddressesScreen from '../screens/AddressesScreen';
 import AddressScreen from '../screens/AddressScreen';
 import StoresScreen from '../screens/StoresScreen';
@@ -74,6 +75,7 @@ export const screenNames = {
     Address: 'Address',
     Addresses: 'Addresses',
     Orders: 'Orders',
+    Order: 'Order',
     Picker: 'Picker',
     Base: 'Base',
     CategoriesStack: 'CategoriesStack',
@@ -222,6 +224,16 @@ export const screens = {
             }),
         }
     },
+    [screenNames.Order]: {
+        name: screenNames.Order,
+        component: {
+            screen: OrderScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: 'Order',
+                leftIcon: icon_names.back
+            }),
+        }
+    },
     [screenNames.Base]: {
         name: screenNames.Base,
         component: {
@@ -297,7 +309,8 @@ export const stacks = {
         name: screenNames.OrdersStack,
         component: StackNavigator(
             {
-                [screens.Orders.name]: screens.Orders.component
+                [screens.Orders.name]: screens.Orders.component,
+                [screens.Order.name]: screens.Order.component
             }
         )
     },

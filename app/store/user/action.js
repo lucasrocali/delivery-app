@@ -104,3 +104,30 @@ export function selectedAddress(address_id) {
         address_id
     }
 }
+
+export function loadOrder(id) {
+    return {
+        type: actionTypes.LOAD_ORDERS,
+        id
+    }
+}
+
+export function loadOrderSuccess(response) {
+    return {
+        type: actionTypes.LOAD_ORDER_SUCCESS,
+        response
+    }
+}
+
+export function syncOpenedOrder() {
+    return {
+        type: actionTypes.SYNC_ORDER
+    }
+}
+
+export function selectedOrder(selected_order_id) {
+    return {
+        type: actionTypes.SELECTED_ORDER,
+        selected_order_id
+    }
+}

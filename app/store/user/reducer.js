@@ -5,7 +5,8 @@ const initialState = {
     loading: false,
     user: {},
     search_address: {},
-    selected_address_id: 0
+    selected_address_id: '',
+    selected_order_id: ''
 }
 
 const getLastAddressId = (addresses) => {
@@ -42,6 +43,21 @@ export default function userReducer(state = initialState, action) {
                     orders: orders.map(order => MapOrder(order))
                 },
             }
+        case actionTypes.LOAD_ORDER_SUCCESS:
+            const updated_order = action.response
+            const updated_orders = state.user.orders.map(order => {
+                if (order.id == updated_order.id) {
+                    return MapOrder(updated_order)
+                }
+                return order
+            })
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    orders: updated_orders
+                }
+            }
         case actionTypes.LOAD_ADDRESSES_SUCCESS:
             const addresses = action.response
             const sel_address_id = getLastAddressId(addresses)
@@ -64,6 +80,12 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 selected_address_id: address_id
+            }
+        case actionTypes.SELECTED_ORDER:
+            const { selected_order_id } = action
+            return {
+                ...state,
+                selected_order_id
             }
         default:
             return state

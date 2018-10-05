@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 
-const production = true;
+const production = false;
 
 var API = 'https://young-shelf-65999.herokuapp.com';
 
@@ -22,7 +22,7 @@ const authHeader = (token) => {
 }
 
 if (!production) {
-    API = 'http://192.168.1.102:3000';
+    API = 'http://192.168.1.101:3000';
 }
 
 function post(path, header, data) {
@@ -107,7 +107,7 @@ export function getStoreRequest(store_id) {
 }
 
 export function postAddressRequest(auth_token, address) {
-    if (address.id && address.id > 0) {
+    if (address.id) {
         return put(`addresses/${address.id}`, authHeader(auth_token), address)
     }
     return post('addresses', authHeader(auth_token), address)
@@ -127,4 +127,8 @@ export function postOrderRequest(auth_token, cart) {
 
 export function getOrdersRequest(auth_token) {
     return get('orders', authHeader(auth_token))
+}
+
+export function getOrderRequest(auth_token, order_id) {
+    return get(`orders/${order_id}`, authHeader(auth_token))
 }

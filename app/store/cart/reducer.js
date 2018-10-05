@@ -100,7 +100,7 @@ export default function cartReducer(state = initialState, action) {
             const { order_product, remove } = action
             let { order_products } = state
 
-            if (order_product.id > 0) {
+            if (order_product.id) {
 
                 if (remove) {
                     order_products = order_products.filter(cp => cp.id !== order_product.id);
@@ -112,7 +112,7 @@ export default function cartReducer(state = initialState, action) {
 
             } else {
 
-                order_product.id = order_products.length + 1
+                order_product.id = order_products.length + 2
                 order_products.push(order_product)
 
             }

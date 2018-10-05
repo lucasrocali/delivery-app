@@ -20,3 +20,17 @@ export function getSelectedAddress(state) {
     const match_addresses = addresses && addresses.length > 0 ? addresses.filter(address => address.id == selected_address_id) : null
     return match_addresses && match_addresses.length > 0 ? match_addresses[0] : null
 }
+
+export function getOpenedOrder(state) {
+    const { user } = state.user_reducer
+    const { orders } = user
+    const openedOrders = orders.filter(order => order.status != 'Entregue')
+    return openedOrders.length > 0 ? openedOrders[0] : null
+}
+
+export function getSelectedOrder(state) {
+    const { selected_order_id, user } = state.user_reducer
+    const { orders } = user
+    const match_orders = orders && orders.length > 0 ? orders.filter(order => order.id == selected_order_id) : null
+    return match_orders && match_orders.length > 0 ? match_orders[0] : null
+} 

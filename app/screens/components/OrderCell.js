@@ -11,15 +11,19 @@ const Container = styled(TouchableCell) `
 
 
 type Props = {
-    order: object
+    order: object,
+    onPress: Function
 }
 export default OrderCell = (props: Props) => {
-    const { order } = props
+    const { order, onPress } = props
     return (
-        <Container>
-            <Text>{order.store.name}</Text>
+        <Container
+            onPress={onPress}
+        >
+            <Text>{'#' + order.token + ' ' + order.store.name}</Text>
             <Caption>{order.address.street + ', ' + order.address.number}</Caption>
             <Caption>{order.total_text}</Caption>
+            <Caption>{order.status}</Caption>
         </Container>
     );
 }

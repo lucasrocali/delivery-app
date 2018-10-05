@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadOrders } from '../store/user/action'
+import { loadOrders, selectedOrder } from '../store/user/action'
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title, Text, TouchableCell } from './styled/index';
@@ -33,14 +33,20 @@ class Orders extends Component<Props, State> {
     }
 
     render() {
-        const { user, navigation } = this.props
+        const { user, selectedOrder, navigation } = this.props
         const { orders } = user
         return (
             <Container>
                 <FlatList
                     data={orders}
                     renderItem={({ item: order, index }) => (
-                        <OrderCell order={order} />
+                        <OrderCell
+                            order={order}
+                            onPress={() => {
+                                selectedOrder(order.id)
+                                navigation.navigate(screenNames.Order, { order_id: order.id })
+                            }}
+                        />
                     )}
                 />
             </Container>
@@ -52,5 +58,5 @@ export default connect(
     state => ({
         user: selectors.getUser(state),
     }),
-    { loadOrders }
+    { loadOrders, selectedOrder }
 )(Orders)

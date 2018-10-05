@@ -3,7 +3,7 @@ import { getCartProductOptionTotal, getCartProductSubOptionsText, getCartProduct
 
 export const MapAddress = (raw) => {
     return {
-        id: raw.id ? raw.id : 0,
+        id: raw.id ? raw.id : null,
         name: raw.name ? raw.name : '',
         state: raw.state ? raw.state : '',
         city: raw.city ? raw.city : '',
@@ -20,12 +20,22 @@ export const MapAddress = (raw) => {
 
 export const MapOrder = (raw) => {
     return {
-        id: raw.id ? raw.id : 0,
+        id: raw.id ? raw.id : null,
+        token: raw.token ? raw.token : '',
         store: raw.store ? MapStore(raw.store) : {},
         address: raw.address ? MapAddress(raw.address) : {},
+        status: raw.status ? raw.status : 0,
         total: raw.total ? raw.total : 0,
         total_text: MapPrice(raw.total ? raw.total : 0),
         order_products: raw.order_products ? raw.order_products.map(order_product => MapOrderProduct(order_product)) : [],
+        order_statuses: raw.order_statuses ? raw.order_statuses.map(order_status => MapOrderStatus(order_status)) : [],
+    }
+}
+
+export const MapOrderStatus = (raw) => {
+    return {
+        status: raw.status ? raw.status : '',
+        updated_at: raw.updated_at ? raw.updated_at : '',
     }
 }
 
@@ -109,7 +119,7 @@ export const MapOrder = (raw) => {
 
 export const MapUser = (raw) => {
     return {
-        id: raw.id ? raw.id : 0,
+        id: raw.id ? raw.id : null,
         email: raw.email ? raw.email : '',
         auth_token: raw.auth_token ? raw.auth_token : '',
         name: raw.name ? raw.name : '',
@@ -121,7 +131,7 @@ export const MapUser = (raw) => {
 
 export const MapCategory = (raw) => {
     return {
-        id: raw && raw.id ? raw.id : '',
+        id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
         foo: 'category',
         stores: raw && raw.stores ? raw.stores.map(store => MapStore(store)) : []
@@ -130,7 +140,7 @@ export const MapCategory = (raw) => {
 
 export const MapStore = (raw, full) => {
     return {
-        id: raw && raw.id ? raw.id : '',
+        id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
         foo: 'store',
         img_url: raw && raw.img_url ? raw.img_url : '',
@@ -147,7 +157,7 @@ export const MapStore = (raw, full) => {
 
 export const MapMenu = (raw) => {
     return {
-        id: raw && raw.id ? raw.id : '',
+        id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
         foo: 'menu',
         products: raw && raw.products ? raw.products.map(product => MapProduct(product)) : []
@@ -156,7 +166,7 @@ export const MapMenu = (raw) => {
 
 export const MapProduct = (raw) => {
     return {
-        id: raw && raw.id ? raw.id : '',
+        id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
         descp: raw && raw.descp ? raw.descp : '',
         foo: 'product',
@@ -179,7 +189,7 @@ export type Option = {
 
 export const MapOption = (raw) => {
     return {
-        id: raw && raw.id ? raw.id : '',
+        id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
         foo: 'option',
         min: raw && raw.min ? raw.min : 0,
@@ -190,7 +200,7 @@ export const MapOption = (raw) => {
 
 export const MapSubOption = (raw) => {
     return {
-        id: raw && raw.id ? raw.id : '',
+        id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
         foo: 'sub_option',
         price: raw && raw.price ? raw.price : 0,

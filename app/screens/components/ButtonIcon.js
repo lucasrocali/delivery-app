@@ -6,7 +6,8 @@ import colors from '../../constants/colors';
 import Ionicon from "react-native-vector-icons/Ionicons";
 
 const Container = styled.TouchableOpacity`
-    flex: ;
+    width: 30;
+    height: 30;
     margin-horizontal: 10;
     flex-direction: row;
     align-items: center;

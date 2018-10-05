@@ -1,6 +1,6 @@
 // @flow
 import type { Saga } from 'redux-saga';
-import { call, takeEvery, takeLatest, put, select } from 'redux-saga/effects';
+import { call, takeEvery, takeLatest, put, select, fork, cancel } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { NavigationActions } from "react-navigation";
 
@@ -22,6 +22,9 @@ import * as storeSelectors from '../store/stores/selector'
 import * as realApi from "../api/"
 import * as mockApi from "../api/mock.js"
 
+import firebase from 'firebase';
+import ReduxSagaFirebase from 'redux-saga-firebase';
+
 import { MapCart } from '../constants/objects';
 
 const api = realApi
@@ -34,6 +37,15 @@ const getCurrentStore = state => storeSelectors.getStore(state)
 const getCartStore = state => cartSelectors.getCartStore(state)
 const getCart = state => cartSelectors.getCart(state)
 const getCurrentAddress = state => userSelectors.getSelectedAddress(state)
+const getOpenedOrder = state => userSelectors.getOpenedOrder(state)
+
+const myFirebaseApp = firebase.initializeApp({
+    apiKey: "rzn1ccZZOWRGMngPP5pnTRBMN10cDgjw2a0s2ep5",
+    authDomain: "delivery-1538030350234.firebaseapp.com",
+    databaseURL: "https://delivery-1538030350234.firebaseio.com",
+});
+
+const reduxSagaFirebase = new ReduxSagaFirebase(myFirebaseApp)
 
 //{message: "Missing token"}
 const getToastMsg = (response) => {
@@ -58,7 +70,7 @@ const autoLogin = function* (action) {
 
             const response = yield call(api.loginRequest, user_credentials)
 
-            if (response && response.id && response.id > 0) {
+            if (response && response.id) {
                 yield put(userActions.setSuccess(response))
             } else {
                 yield put(appActions.clearCredentials())
@@ -83,7 +95,7 @@ const authenticate = function* (action) {
 
         const toast_msg = getToastMsg(response)
 
-        if (!toast_msg && response && response.id && response.id > 0) {
+        if (!toast_msg && response && response.id) {
 
             yield put(appActions.setCredentials(user_credentials))
 
@@ -98,7 +110,7 @@ const authenticate = function* (action) {
 
         // handleError(response)
     } catch (error) {
-        console.log(error);
+        console.log('auth error', error);
         //TODO: Handle Error
         yield put(userActions.setLoading(false))
     }
@@ -242,7 +254,7 @@ const handleNewProduct = function* (action) {
 
         const address = yield select(getCurrentAddress)
 
-        if (address && address.id > 0) {
+        if (address) {
 
             if (cartStore.id == store_id) {
                 yield put(cartActions.addToCart(order_product, remove))
@@ -274,9 +286,65 @@ const loadOrders = function* (action) {
         const response = yield call(api.getOrdersRequest, token)
 
         yield put(userActions.loaOrdersSuccess(response))
+
+        //TEMP
+        yield put(userActions.syncOpenedOrder())
     } catch (error) {
         console.log(error);
         yield put(userActions.setLoading(false))
+    }
+};
+
+const loadOrder = function* (action) {
+    try {
+        yield put(userActions.setLoading(true))
+
+        const token = yield select(getToken)
+
+        const { id } = action
+
+        const response = yield call(api.getOrderRequest, token, id)
+
+        yield put(userActions.loadOrderSuccess(response))
+
+    } catch (error) {
+        console.log(error);
+        yield put(userActions.setLoading(false))
+    }
+};
+
+var ordersTask
+
+export const syncOrder = response => ({
+    type: userActionTypes.LOAD_ORDER,
+    id: response.id
+})
+
+const handleSyncOrder = function* (action) {
+    console.log('syncOrders')
+    try {
+
+        if (ordersTask) {
+            yield cancel(ordersTask)
+        }
+
+        const token = yield select(getToken)
+        const order = yield select(getOpenedOrder)
+
+        console.log(order)
+        if (order) {
+
+            console.log(`orders/${order.store.id}/${order.token}`)
+            ordersTask = yield fork(
+                reduxSagaFirebase.database.sync,
+                `orders/${order.store.id}/${order.token}`,
+                { successActionCreator: syncOrder }
+            );
+        }
+
+    } catch (error) {
+        console.log(error);
+        // yield put({ type: LOAD_MENU.ERROR, error })
     }
 };
 
@@ -302,7 +370,9 @@ const placeOrder = function* (action) {
             yield put(appActions.displayToastMsg(toast_msg))
         } else {
             yield put(cartActions.clearCart())
-            // yield put(userActions.loadOrders())
+
+            yield put(userActions.syncOpenedOrder())
+
             yield put(NavigationActions.navigate({ routeName: screenNames.OrdersStack, key: screenNames.OrdersStack }))
         }
 
@@ -325,7 +395,9 @@ export function* root(): Saga<void> {
     yield takeLatest(userActionTypes.CREATE_ADDRESS, createAddress)
     yield takeLatest(userActionTypes.LOAD_ADDRESSES, loadAddresses)
     yield takeLatest(userActionTypes.LOAD_ORDERS, loadOrders)
+    yield takeLatest(userActionTypes.LOAD_ORDER, loadOrder)
     yield takeLatest(userActionTypes.LOAD_ADDRESS_INFO, loadAddressByZipCode)
     yield takeLatest(cartActionTypes.HANDLE_NEW_PRODUCT, handleNewProduct)
     yield takeLatest(cartActionTypes.PLACE_ORDER, placeOrder)
+    yield takeLatest(userActionTypes.SYNC_ORDER, handleSyncOrder)
 };

@@ -44,10 +44,11 @@ class Categories extends Component<Props, State> {
                             category={category}
                             onStorePress={(store) => {
                                 loadStore(store)
-                                navigateTo(screenNames.Store, { title: store.name })
+                                navigation.navigate(screenNames.Store)
+                                // navigateTo(screenNames.Store, { title: store.name })
                             }}
                             onMorePress={() => {
-                                navigation.navigate({ routeName: screenNames.Stores, key: screenNames.Stores })
+                                navigation.navigate(screenNames.Stores)
                                 // navigateTo(screenNames.Stores)
                             }}
                         />
