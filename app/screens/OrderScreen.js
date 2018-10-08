@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { } from '../store/user/action'
@@ -10,6 +10,7 @@ import styled from "styled-components";
 import colors from '../constants/colors';
 import { Text, Caption, Cell } from './styled/index';
 import OrderStatusCell from './components/OrderStatusCell';
+import MapView from 'react-native-maps';
 
 const Container = styled.View`
     flex: 1;
@@ -40,11 +41,22 @@ class Base extends Component<Props, State> {
                         />
                     )}
                     ListHeaderComponent={() => (
-                        <Header>
-                            <Text>{'#' + order.token + ' ' + order.store.name}</Text>
-                            <Caption>{order.address.street + ', ' + order.address.number}</Caption>
-                            <Caption>{order.total_text}</Caption>
-                        </Header>
+                        <View>
+                            <MapView
+                                style={{ flex: 1, height: 300 }}
+                                initialRegion={{
+                                    latitude: 37.78825,
+                                    longitude: -122.4324,
+                                    latitudeDelta: 0.0922,
+                                    longitudeDelta: 0.0421,
+                                }}
+                            />
+                            <Header>
+                                <Text>{'#' + order.token + ' ' + order.store.name}</Text>
+                                <Caption>{order.address.street + ', ' + order.address.number}</Caption>
+                                <Caption>{order.total_text}</Caption>
+                            </Header>
+                        </View>
                     )}
                 />
             </Container>
