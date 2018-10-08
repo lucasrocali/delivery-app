@@ -316,8 +316,8 @@ const loadOrder = function* (action) {
 var ordersTask
 
 export const syncOrder = response => ({
-    type: userActionTypes.LOAD_ORDER,
-    id: response.id
+    type: userActionTypes.SYNC_ORDER_SUCCESS,
+    response
 })
 
 const handleSyncOrder = function* (action) {

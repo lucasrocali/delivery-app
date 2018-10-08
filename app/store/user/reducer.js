@@ -81,6 +81,24 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 selected_address_id: address_id
             }
+        case actionTypes.SYNC_ORDER_SUCCESS:
+            const f_updated_order = action.response
+            const updated_orderss = state.user.orders.map(order => {
+                if (order.id == f_updated_order.id) {
+                    return MapOrder({
+                        ...order,
+                        ...f_updated_order
+                    })
+                }
+                return order
+            })
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    orders: updated_orderss
+                }
+            }
         case actionTypes.SELECTED_ORDER:
             const { selected_order_id } = action
             return {
