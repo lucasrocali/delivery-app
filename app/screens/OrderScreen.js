@@ -9,9 +9,12 @@ import * as cartSelectors from '../store/cart/selector';
 import styled from "styled-components";
 import colors from '../constants/colors';
 import spacing from '../constants/spacing';
+import dimensions from '../constants/dimensions';
 import { Text, Caption, Cell, TouchableCell } from './styled/index';
 import OrderStatusCell from './components/OrderStatusCell';
 import MapView, { Marker } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
+
 
 const Container = styled.View`
     flex: 1;
@@ -32,6 +35,9 @@ type State = {
 type Props = {
 
 }
+const origin = { latitude: 37.3318456, longitude: -122.0296002 };
+const destination = { latitude: 37.771707, longitude: -122.4053769 };
+const GOOGLE_MAPS_APIKEY = 'AIzaSyCZHg31NJuz_Jmlr86g_b_afagq8TdwOYY';
 class Base extends Component<Props, State> {
 
     constructor(props, context) {
@@ -44,9 +50,11 @@ class Base extends Component<Props, State> {
             },
             updated: false
         };
+        this.mapView = null;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldComponentUpdate', nextProps, nextState)
         if (nextProps.order == null) {
             const { navigation } = this.props
             navigation.goBack(null)
@@ -73,14 +81,50 @@ class Base extends Component<Props, State> {
                         <View>
                             {order && order.address && order.address.lat && order.address.lng &&
                                 <MapView
+                                    ref={c => this.mapView = c}
                                     style={{ flex: 1, height: 300 }}
-                                // re={{
-                                //     ...address_location,
-                                //     latitudeDelta: 0.01,
-                                //     longitudeDelta: 0.01,
-                                // }}
+                                    region={{
+                                        ...address_location,
+                                        latitudeDelta: 0.01,
+                                        longitudeDelta: 0.01,
+                                    }}
                                 >
-                                    <Marker
+                                    {driver_location ?
+                                        <MapViewDirections
+                                            origin={{
+                                                latitude: driver_location.lat,
+                                                longitude: driver_location.lng
+                                            }}
+                                            destination={address_location}
+                                            apikey={GOOGLE_MAPS_APIKEY}
+                                            onReady={(result) => {
+                                                this.mapView.fitToCoordinates([
+                                                    {
+                                                        latitude: driver_location.lat,
+                                                        longitude: driver_location.lng
+                                                    },
+                                                    address_location
+                                                ], {
+                                                        edgePadding: {
+                                                            right: (dimensions.width / 20),
+                                                            bottom: (dimensions.height / 20),
+                                                            left: (dimensions.width / 20),
+                                                            top: (dimensions.height / 20),
+                                                        }
+                                                    });
+                                            }}
+                                        />
+                                        :
+                                        <Marker
+                                            key={order.token}
+                                            draggable
+                                            coordinate={address_location}
+                                            title={order.token}
+                                            description={' '}
+                                            onDragEnd={(e) => this.setState({ address_location: e.nativeEvent.coordinate, updated: true })}
+                                        />
+                                    }
+                                    {/* <Marker
                                         draggable
                                         coordinate={address_location}
                                         title={order.token}
@@ -97,7 +141,7 @@ class Base extends Component<Props, State> {
                                             title={'Driver'}
                                             description={' '}
                                         />
-                                    }
+                                    } */}
 
                                 </MapView>
                             }
