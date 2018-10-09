@@ -58,6 +58,16 @@ const getBottomInfo = (user, selected_address, cart, navigateTo) => {
             evil_icon: 'user',
             onPress: () => navigateTo(screenNames.LoginStack)
         }
+    } else if (cart && cart.opened_order && cart.opened_order.id) {
+        const opened_order = cart.opened_order
+
+        return {
+            title: `Acompanhe seu pedido`,
+            number: '',
+            evil_icon: 'cart',
+            onPress: () => navigateTo(screenNames.OrderStack)
+        }
+
     } else if (cart && cart.order_products && cart.order_products.length > 0) {
 
         const order_products_count = cart.order_products.length

@@ -42,3 +42,24 @@ export function clearCart() {
         type: actionTypes.CLEAR_CART
     }
 }
+
+export function setOpenedOrder(order) {
+    return {
+        type: actionTypes.SET_OPENED_ORDER,
+        order
+    }
+}
+
+
+export function syncOpenedOrder() {
+    return {
+        type: actionTypes.SYNC_ORDER
+    }
+}
+
+export function syncOrderSuccess(response) {
+    return {
+        type: actionTypes.SYNC_ORDER_SUCCESS,
+        response
+    }
+}

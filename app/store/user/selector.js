@@ -21,12 +21,15 @@ export function getSelectedAddress(state) {
     return match_addresses && match_addresses.length > 0 ? match_addresses[0] : null
 }
 
-export function getOpenedOrder(state) {
-    const { user } = state.user_reducer
-    const { orders } = user
-    const openedOrders = orders.filter(order => order.status != 'Entregue')
-    return openedOrders.length > 0 ? openedOrders[0] : null
+export function getOrders(state) {
+    return state.user_reducer && state.user_reducer.user && state.user_reducer.user.orders ? state.user_reducer.user.orders : []
 }
+// export function getOpenedOrder(state) {
+//     const { user } = state.user_reducer
+//     const { orders } = user
+//     const openedOrders = orders.filter(order => order.status != 'Entregue')
+//     return openedOrders.length > 0 ? openedOrders[0] : null
+// }
 
 export function getSelectedOrder(state) {
     const { selected_order_id, user } = state.user_reducer

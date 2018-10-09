@@ -13,8 +13,8 @@ export const MapAddress = (raw) => {
         number: raw.number ? raw.number.toString() : '',
         complement: raw.complement ? raw.complement : '',
         reference: raw.reference ? raw.reference : '',
-        lat: raw.lat ? raw.lat : '',
-        lng: raw.lng ? raw.lng : '',
+        lat: raw.lat ? parseFloat(raw.lat) : '',
+        lng: raw.lng ? parseFloat(raw.lng) : '',
     }
 }
 
@@ -27,6 +27,7 @@ export const MapOrder = (raw) => {
         status: raw.status ? raw.status : 0,
         total: raw.total ? raw.total : 0,
         total_text: MapPrice(raw.total ? raw.total : 0),
+        driver_id: raw.driver_id ? raw.driver_id : '',
         order_products: raw.order_products ? raw.order_products.map(order_product => MapOrderProduct(order_product)) : [],
         order_statuses: raw.order_statuses ? raw.order_statuses.map(order_status => MapOrderStatus(order_status)) : [],
     }
@@ -262,5 +263,13 @@ export const MapCartOrderProduct = (raw) => {
         sub_options_txt: raw ? getCartProductSubOptionsText(raw) : '',
         sub_options_total: raw ? getCartProductOptionTotal(raw) : 0,
         product_total: raw ? getCartProductTotal(raw) : 0
+    }
+}
+
+export const MapLocation = (raw) => {
+    return {
+        lat: raw && raw.lat ? parseFloat(raw.lat) : '',
+        lng: raw && raw.lng ? parseFloat(raw.lng) : '',
+        created_at: raw && raw.created_at ? raw.created_at : '',
     }
 }

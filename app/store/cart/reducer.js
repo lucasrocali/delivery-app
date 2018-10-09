@@ -1,8 +1,10 @@
 import * as actionTypes from './actionType'
-import { MapStore } from '../../constants/objects';
+import { MapStore, MapOrder, MapLocation } from '../../constants/objects';
 const initialState = {
     store: null,
-    order_products: []
+    order_products: [],
+    opened_order: null,
+    driver_location: null
 }
 
 // const initialState = {
@@ -119,6 +121,28 @@ export default function cartReducer(state = initialState, action) {
             return {
                 ...state,
                 order_products
+            }
+        case actionTypes.SET_OPENED_ORDER:
+            const { order } = action
+            return {
+                ...state,
+                opened_order: order
+            }
+        case actionTypes.SYNC_ORDER_SUCCESS:
+            const opened_order = state.opened_order
+            const f_updated_order = action.response
+            return {
+                ...state,
+                opened_order: MapOrder({
+                    ...opened_order,
+                    ...f_updated_order
+                })
+            }
+        case actionTypes.SYNC_DRIVER_SUCCESS:
+            const driver_location = action.response
+            return {
+                ...state,
+                driver_location: MapLocation(driver_location)
             }
         default:
             return state

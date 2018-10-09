@@ -36,8 +36,9 @@ const getUser = state => userSelectors.getUser(state);
 const getCurrentStore = state => storeSelectors.getStore(state)
 const getCartStore = state => cartSelectors.getCartStore(state)
 const getCart = state => cartSelectors.getCart(state)
+const getOrders = state => userSelectors.getOrders(state)
 const getCurrentAddress = state => userSelectors.getSelectedAddress(state)
-const getOpenedOrder = state => userSelectors.getOpenedOrder(state)
+const getOpenedOrder = state => cartSelectors.getOpenedOrder(state)
 
 const myFirebaseApp = firebase.initializeApp({
     apiKey: "rzn1ccZZOWRGMngPP5pnTRBMN10cDgjw2a0s2ep5",
@@ -60,6 +61,22 @@ const displayToastMsg = function* (action) {
     yield put(appActions.clearToastMsg())
 }
 
+const handleOpenedOrder = function* () {
+
+    const orders = yield select(getOrders)
+
+    console.log('handleOpenedOrder')
+    const opened_orders = orders.filter(order => order.status != 'Entregue')
+    const opened_order = opened_orders.length > 0 ? opened_orders[0] : null
+
+    if (opened_order) {
+        yield put(cartActions.setOpenedOrder(opened_order))
+
+        yield put(cartActions.syncOpenedOrder())
+    }
+}
+
+
 const autoLogin = function* (action) {
     try {
         yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
@@ -72,6 +89,8 @@ const autoLogin = function* (action) {
 
             if (response && response.id) {
                 yield put(userActions.setSuccess(response))
+
+                yield call(handleOpenedOrder)
             } else {
                 yield put(appActions.clearCredentials())
             }
@@ -100,6 +119,8 @@ const authenticate = function* (action) {
             yield put(appActions.setCredentials(user_credentials))
 
             yield put(userActions.setSuccess(response))
+
+            yield call(handleOpenedOrder)
 
             yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
         } else if (toast_msg) {
@@ -182,7 +203,7 @@ const createAddress = function* (action) {
     try {
         yield put(userActions.setLoading(true))
 
-        const { address } = action
+        const { address, updateOrders } = action
 
         const token = yield select(getToken)
 
@@ -194,8 +215,16 @@ const createAddress = function* (action) {
             yield put(appActions.displayToastMsg(toast_msg))
         } else {
             yield put(userActions.setCreateAddressSuccess(response))
-            yield put(userActions.loadAddress())
-            yield put(NavigationActions.back())
+
+            if (updateOrders) {
+                yield put(userActions.loadOrders())
+                // yield put(NavigationActions.back())
+            } else {
+                yield put(userActions.loadAddress())
+                yield put(NavigationActions.back())
+            }
+
+
         }
 
 
@@ -287,8 +316,8 @@ const loadOrders = function* (action) {
 
         yield put(userActions.loaOrdersSuccess(response))
 
-        //TEMP
-        yield put(userActions.syncOpenedOrder())
+        yield call(handleOpenedOrder)
+
     } catch (error) {
         console.log(error);
         yield put(userActions.setLoading(false))
@@ -314,11 +343,50 @@ const loadOrder = function* (action) {
 };
 
 var ordersTask
+var driverTask
 
-export const syncOrder = response => ({
-    type: userActionTypes.SYNC_ORDER_SUCCESS,
+export const syncOrderLocation = response => ({
+    type: cartActionTypes.SYNC_DRIVER_SUCCESS,
     response
 })
+
+export const syncOrderStatus = response => ({
+    type: cartActionTypes.HANDLE_SYNC_ORDER_SUCCESS,
+    response
+})
+
+const handleSyncOrderSuccess = function* (action) {
+    try {
+        const updated_order = action.response
+        yield put(cartActions.syncOrderSuccess(updated_order))
+
+        console.log('a', updated_order.order_statuses, updated_order.order_statuses.length, updated_order.order_statuses.length > 0 && updated_order.order_statuses[0].status == 'Entregue', updated_order.order_statuses.length > 0 && updated_order.order_statuses[updated_order.order_statuses.length - 1].status)
+        if (updated_order.order_statuses && updated_order.order_statuses.length > 0 && updated_order.order_statuses[0].status == 'Entregue') {
+            yield put(cartActions.setOpenedOrder(null))
+        }
+
+        if (updated_order.driver_id) {
+            if (driverTask) {
+                yield cancel(driverTask)
+            }
+
+            const order = yield select(getOpenedOrder)
+
+            if (order) {
+
+                console.log(`drivers/${order.driver_id}`)
+                ordersTask = yield fork(
+                    reduxSagaFirebase.database.sync,
+                    `drivers/${order.driver_id}`,
+                    { successActionCreator: syncOrderLocation }
+                );
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        // yield put({ type: LOAD_MENU.ERROR, error })
+    }
+}
 
 const handleSyncOrder = function* (action) {
     console.log('syncOrders')
@@ -328,7 +396,6 @@ const handleSyncOrder = function* (action) {
             yield cancel(ordersTask)
         }
 
-        const token = yield select(getToken)
         const order = yield select(getOpenedOrder)
 
         console.log(order)
@@ -338,7 +405,7 @@ const handleSyncOrder = function* (action) {
             ordersTask = yield fork(
                 reduxSagaFirebase.database.sync,
                 `orders/${order.store.id}/${order.token}`,
-                { successActionCreator: syncOrder }
+                { successActionCreator: syncOrderStatus }
             );
         }
 
@@ -371,14 +438,18 @@ const placeOrder = function* (action) {
         } else {
             yield put(cartActions.clearCart())
 
-            yield put(userActions.syncOpenedOrder())
+            const opened_order = response
 
-            yield put(NavigationActions.navigate({ routeName: screenNames.OrdersStack, key: screenNames.OrdersStack }))
+            yield put(cartActions.setOpenedOrder(opened_order))
+
+            yield put(cartActions.syncOpenedOrder())
+
+            yield put(NavigationActions.navigate({ routeName: screenNames.OrderStack, key: screenNames.OrderStack }))
         }
 
 
     } catch (error) {
-        yield put(userActions.setLoading(false))
+
         console.log(error);
     }
 };
@@ -399,5 +470,6 @@ export function* root(): Saga<void> {
     yield takeLatest(userActionTypes.LOAD_ADDRESS_INFO, loadAddressByZipCode)
     yield takeLatest(cartActionTypes.HANDLE_NEW_PRODUCT, handleNewProduct)
     yield takeLatest(cartActionTypes.PLACE_ORDER, placeOrder)
-    yield takeLatest(userActionTypes.SYNC_ORDER, handleSyncOrder)
+    yield takeLatest(cartActionTypes.SYNC_ORDER, handleSyncOrder)
+    yield takeLatest(cartActionTypes.HANDLE_SYNC_ORDER_SUCCESS, handleSyncOrderSuccess)
 };

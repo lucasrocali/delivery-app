@@ -42,10 +42,10 @@ class Orders extends Component<Props, State> {
                     renderItem={({ item: order, index }) => (
                         <OrderCell
                             order={order}
-                            onPress={() => {
-                                selectedOrder(order.id)
-                                navigation.navigate(screenNames.Order, { order_id: order.id })
-                            }}
+                        // onPress={() => {
+                        //     selectedOrder(order.id)
+                        //     navigation.navigate(screenNames.Order, { order_id: order.id })
+                        // }}
                         />
                     )}
                 />

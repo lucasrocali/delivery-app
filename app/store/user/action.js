@@ -70,10 +70,11 @@ export function loaOrdersSuccess(response) {
     }
 }
 
-export function createAddress(address) {
+export function createAddress(address, updateOrders = false) {
     return {
         type: actionTypes.CREATE_ADDRESS,
-        address
+        address,
+        updateOrders
     }
 }
 
@@ -116,12 +117,6 @@ export function loadOrderSuccess(response) {
     return {
         type: actionTypes.LOAD_ORDER_SUCCESS,
         response
-    }
-}
-
-export function syncOpenedOrder() {
-    return {
-        type: actionTypes.SYNC_ORDER
     }
 }
 

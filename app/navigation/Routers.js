@@ -86,6 +86,7 @@ export const screenNames = {
     PerfilStack: 'PerfilStack',
     AddressesStack: 'AddressesStack',
     OrdersStack: 'OrdersStack',
+    OrderStack: 'OrderStack',
     PickerStack: 'PickerStack',
     BaseStack: 'BaseStack',
 
@@ -230,7 +231,7 @@ export const screens = {
             screen: OrderScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: 'Order',
-                leftIcon: icon_names.back
+                leftIcon: icon_names.close
             }),
         }
     },
@@ -309,7 +310,14 @@ export const stacks = {
         name: screenNames.OrdersStack,
         component: StackNavigator(
             {
-                [screens.Orders.name]: screens.Orders.component,
+                [screens.Orders.name]: screens.Orders.component
+            }
+        )
+    },
+    [screenNames.OrderStack]: {
+        name: screenNames.OrderStack,
+        component: StackNavigator(
+            {
                 [screens.Order.name]: screens.Order.component
             }
         )
@@ -368,7 +376,8 @@ export const AppNavigator = StackNavigator(
         [stacks.LoginStack.name]: stacks.LoginStack.component,
         [stacks.AddressesStack.name]: stacks.AddressesStack.component,
         [stacks.OrdersStack.name]: stacks.OrdersStack.component,
-        [stacks.PickerStack.name]: stacks.PickerStack.component
+        [stacks.OrderStack.name]: stacks.OrderStack.component,
+        [stacks.PickerStack.name]: stacks.PickerStack.component,
     }, {
         initialRouteName: screens.Launch.name,
         // initialRouteName: stacks.AddressesStack.name,
