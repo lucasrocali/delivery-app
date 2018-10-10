@@ -84,7 +84,11 @@ class Base extends Component<Props, State> {
                         zoomControlEnabled={true}
                     >
                         {address_location && address_location.latitude && address_location.longitude &&
-                            <Marker coordinate={address_location}>
+                            <Marker
+                                draggable
+                                coordinate={address_location}
+                                onDragEnd={(e) => this.setState({ address_location: e.nativeEvent.coordinate, updated: true })}
+                            >
                                 <Callout>
                                     <Text>You are here</Text>
                                 </Callout>

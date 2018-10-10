@@ -140,10 +140,13 @@ export default function cartReducer(state = initialState, action) {
             }
         case actionTypes.SYNC_DRIVER_SUCCESS:
             const driver_location = action.response
-            return {
-                ...state,
-                driver_location: MapLocation(driver_location)
+            if (driver_location) {
+                return {
+                    ...state,
+                    driver_location: MapLocation(driver_location)
+                }
             }
+            return state
         default:
             return state
     }
