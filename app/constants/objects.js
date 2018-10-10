@@ -13,8 +13,8 @@ export const MapAddress = (raw) => {
         number: raw.number ? raw.number.toString() : '',
         complement: raw.complement ? raw.complement : '',
         reference: raw.reference ? raw.reference : '',
-        lat: raw.lat ? parseFloat(raw.lat) : '',
-        lng: raw.lng ? parseFloat(raw.lng) : '',
+        latitude: raw.lat ? parseFloat(raw.lat) : raw.latitude ? parseFloat(raw.latitude) : '',
+        longitude: raw.lng ? parseFloat(raw.lng) : raw.longitude ? parseFloat(raw.longitude) : '',
     }
 }
 
@@ -268,8 +268,8 @@ export const MapCartOrderProduct = (raw) => {
 
 export const MapLocation = (raw) => {
     return {
-        lat: raw && raw.lat ? parseFloat(raw.lat) : '',
-        lng: raw && raw.lng ? parseFloat(raw.lng) : '',
+        latitude: raw.lat ? parseFloat(raw.lat) : raw.latitude ? parseFloat(raw.latitude) : '',
+        longitude: raw.lng ? parseFloat(raw.lng) : raw.longitude ? parseFloat(raw.longitude) : '',
         created_at: raw && raw.created_at ? raw.created_at : '',
     }
 }

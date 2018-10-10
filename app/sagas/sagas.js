@@ -189,9 +189,10 @@ const loadStore = function* (action) {
             const store_response = response
 
             yield put(storeActions.loadStoreSuccess(store_response))
-            yield put(cartActions.selectStore(store_response))
+
 
         }
+        yield put(cartActions.selectStore(store))
 
     } catch (error) {
         console.log(error);
@@ -285,7 +286,7 @@ const handleNewProduct = function* (action) {
 
         if (address) {
 
-            if (cartStore.id == store_id) {
+            if (cartStore && cartStore.id == store_id) {
                 yield put(cartActions.addToCart(order_product, remove))
                 if (remove) {
                     yield put(appActions.displayToastMsg('Item removido do carrinho'))

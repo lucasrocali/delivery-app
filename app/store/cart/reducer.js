@@ -126,7 +126,7 @@ export default function cartReducer(state = initialState, action) {
             const { order } = action
             return {
                 ...state,
-                opened_order: order
+                opened_order: order ? MapOrder(order) : order
             }
         case actionTypes.SYNC_ORDER_SUCCESS:
             const opened_order = state.opened_order
