@@ -154,6 +154,7 @@ dependencies {
     implementation project(':react-native-fbsdk')
     implementation project(':react-native-fast-image')
     implementation project(':react-native-vector-icons')
+    implementation project(':react-native-maps')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.google.android.gms:play-services-base:11.4.2'
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
