@@ -1,15 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-    <plist version="1.0">
-    <dict>
-      <key>CLIENT_ID</key>
-      <string>123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g.apps.googleusercontent.com</string>
-      <key>REVERSED_CLIENT_ID</key>
-      <string>com.googleusercontent.apps.123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g</string>
-      <key>PLIST_VERSION</key>
-      <string>1</string>
-      <key>BUNDLE_ID</key>
-      <string>br.com.rocali.delivery</string>
-    </dict>
-    </plist>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDKpnJo4QI4YIndPTKHDDintp2IK8iDl4Y</string>
+	<key>GCM_SENDER_ID</key>
+	<string>123512393747</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>br.com.rocali.delivery</string>
+	<key>PROJECT_ID</key>
+	<string>delivery-1538030350234</string>
+	<key>STORAGE_BUCKET</key>
+	<string>delivery-1538030350234.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:123512393747:ios:4919428daa7e96bf</string>
+	<key>DATABASE_URL</key>
+	<string>https://delivery-1538030350234.firebaseio.com</string>
+</dict>
+</plist>

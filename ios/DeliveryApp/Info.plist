@@ -12,6 +12,31 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb295589654504537</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>br.com.rocali.delivery</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
@@ -21,7 +46,13 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
+	<key>CodePushDeploymentKey</key>
+	<string>Qi5jqqiFi4HWUgUcKMFBiB2pWbTYS1PS-RCim</string>
+	<key>FacebookAppID</key>
+	<string>295589654504537</string>
+	<key>FacebookDisplayName</key>
+	<string>Delivery</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -30,6 +61,11 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>codepush.azurewebsites.net</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -70,35 +106,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb295589654504537</string>
-      </array>
-    </dict>
-    <dict>
-      <key>CFBundleTypeRole</key>
-      <string>Editor</string>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>com.googleusercontent.apps.123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g</string>
-      </array>
-    </dict>
-    <dict>
-      <key>CFBundleTypeRole</key>
-      <string>Editor</string>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>br.com.rocali.delivery</string>
-      </array>
-    </dict>
-  </array>
-  <key>FacebookAppID</key>
-  <string>295589654504537</string>
-  <key>FacebookDisplayName</key>
-  <string>Delivery</string>
 </dict>
 </plist>

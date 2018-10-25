@@ -12,7 +12,8 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <GoogleMaps/GoogleMaps.h>
-
+#import <Firebase/Firebase.h>
+#import <CodePush/CodePush.h>
 
 @implementation AppDelegate
 
@@ -21,7 +22,11 @@
   [GMSServices provideAPIKey:@"AIzaSyCZHg31NJuz_Jmlr86g_b_afagq8TdwOYY"];
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  #ifdef DEBUG
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+  #else
+    jsCodeLocation = [CodePush bundleURL];
+  #endif
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"DeliveryApp"
@@ -40,7 +45,7 @@
   NSString *filePath = [[NSBundle mainBundle] pathForResource:@"GoogleService-Info" ofType:@"plist"];
   NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:filePath];
   [GIDSignIn sharedInstance].clientID = [plistDict objectForKey:@"123512393747-m7uvtcunobtj2vk6mo52vf3u98ueki3g.apps.googleusercontent.com"];
-
+[FIRApp configure];
   return YES;
 }
 

@@ -56,7 +56,7 @@
 		78EAD4B0215CA6E200426DEB /* RNGoogleSignInBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EAD4AC215CA6E100426DEB /* RNGoogleSignInBridge.m */; };
 		78EAD4B1215CA6E200426DEB /* RNGoogleSignInEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EAD4AD215CA6E100426DEB /* RNGoogleSignInEvents.swift */; };
 		78EAD4B2215CA6E200426DEB /* RNGoogleSignInEventsBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EAD4AE215CA6E100426DEB /* RNGoogleSignInEventsBridge.m */; };
-		78EAD4DA215CB32F00426DEB /* GoogleService-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78EAD4D9215CB32F00426DEB /* GoogleService-info.plist */; };
+		78F452A121818A4F00200B71 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78F452A021818A4F00200B71 /* GoogleService-Info.plist */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8BFC723B04BC40EABA1D4336 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B284713662EB40F2B00A2DC3 /* Ionicons.ttf */; };
 		8EFB527771064586A3F2F9DF /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 707266FD83CF45DCACDB38DE /* Foundation.ttf */; };
@@ -421,7 +421,7 @@
 		78EAD4AD215CA6E100426DEB /* RNGoogleSignInEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RNGoogleSignInEvents.swift; sourceTree = "<group>"; };
 		78EAD4AE215CA6E100426DEB /* RNGoogleSignInEventsBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNGoogleSignInEventsBridge.m; sourceTree = "<group>"; };
 		78EAD4D6215CAD8800426DEB /* Delivery-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Delivery-Bridging-Header.h"; sourceTree = "<group>"; };
-		78EAD4D9215CB32F00426DEB /* GoogleService-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-info.plist"; sourceTree = "<group>"; };
+		78F452A021818A4F00200B71 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8090AADD70DF4B1E9164179F /* FastImage.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		82A72D69DF7CE4418E48F48C /* Pods-DeliveryApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DeliveryApp/Pods-DeliveryApp.debug.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -585,7 +585,7 @@
 		13B07FAE1A68108700A75B9A /* DeliveryApp */ = {
 			isa = PBXGroup;
 			children = (
-				78EAD4D9215CB32F00426DEB /* GoogleService-info.plist */,
+				78F452A021818A4F00200B71 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1296,8 +1296,8 @@
 				B97D08AB50B148A4A6DCAFEA /* FontAwesome5_Brands.ttf in Resources */,
 				2B17FB5F527A476CA8711AAF /* FontAwesome5_Regular.ttf in Resources */,
 				70762FC215D34F2581716FE1 /* FontAwesome5_Solid.ttf in Resources */,
-				78EAD4DA215CB32F00426DEB /* GoogleService-info.plist in Resources */,
 				8EFB527771064586A3F2F9DF /* Foundation.ttf in Resources */,
+				78F452A121818A4F00200B71 /* GoogleService-Info.plist in Resources */,
 				8BFC723B04BC40EABA1D4336 /* Ionicons.ttf in Resources */,
 				EDB97123CFBB4390A7B7B508 /* MaterialCommunityIcons.ttf in Resources */,
 				C18BE773148640E6AC76F01C /* MaterialIcons.ttf in Resources */,
