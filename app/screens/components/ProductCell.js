@@ -47,9 +47,7 @@ export default Base = (props: Props) => {
                     <Placeholder width={110} height={10} />
                     <Placeholder width={30} height={15} />
                 </InfoView>
-                <ImageView>
-                    {product.img_url != '' && <Image source={{ uri: product.img_url }} />}
-                </ImageView>
+                <Placeholder width={50} height={50} />
             </Container>
         );
     }

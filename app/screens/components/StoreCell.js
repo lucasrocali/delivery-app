@@ -39,7 +39,11 @@ export default StoreCell = (props: Props) => {
     return (
         <Container full={full} activeOpacity={0.9} onPress={onPress}>
             <Body>
-                <Image full={full} source={{ uri: store.img_url }} />
+                {store.img_url ?
+                    <Image full={full} source={{ uri: store.img_url }} />
+                    :
+                    <Placeholder width={full ? dimensions.estabCellFullWidth : dimensions.estabCellWidth} height={full ? dimensions.estabCellFullHeigth : dimensions.estabCellHeigth} />
+                }
                 <StoreCellBody store={store} />
             </Body>
         </ Container>

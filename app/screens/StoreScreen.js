@@ -11,7 +11,7 @@ import colors from '../constants/colors';
 import dimensions from '../constants/dimensions';
 import spacing from '../constants/spacing';
 import StoreCellBody from './components/StoreCellBody'
-import { Title, Text, Cell, CloseView } from './styled/index'
+import { Title, Text, Cell, CloseView, Placeholder } from './styled/index'
 import { MapMenuSection } from '../constants/objects';
 import ProductCell from './components/ProductCell';
 import MenuCell from './components/MenuCell';
@@ -92,7 +92,11 @@ class Store extends Component<Props, State> {
                     ListHeaderComponent={() => (
                         <SectionHeader>
                             {/* <Transition appear={'top'}> */}
-                            <Image source={{ uri: store.img_url }} />
+                            {store.img_url ?
+                                <Image source={{ uri: store.img_url }} />
+                                :
+                                <Placeholder width={dimensions.width} height={dimensions.storeImgHeight} />
+                            }
                             {/* </Transition> */}
 
                             <HeaderBody>

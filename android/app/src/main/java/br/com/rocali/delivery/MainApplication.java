@@ -14,6 +14,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.reactlibrary.googlesignin.RNGoogleSignInPackage;
 import com.airbnb.android.react.maps.MapsPackage;
+import com.microsoft.codepush.react.CodePush;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +34,11 @@ public class MainApplication extends Application implements ReactApplication {
     }
 
     @Override
+    protected String getJSBundleFile() {
+      return CodePush.getJSBundleFile();
+    }
+
+    @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
@@ -40,7 +46,8 @@ public class MainApplication extends Application implements ReactApplication {
             new FBSDKPackage(mCallbackManager),
             new FastImageViewPackage(),
             new VectorIconsPackage(),
-              new MapsPackage()
+              new MapsPackage(),
+              new CodePush("C1GOhSfAk-xBDU8bmaW-x2wQVHeMByroF1u3X", MainApplication.this, BuildConfig.DEBUG)
       );
     }
 

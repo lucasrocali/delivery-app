@@ -21,7 +21,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 export const store = createStore(
     persistedReducer,
-    applyMiddleware(sagaMiddleware, logger, navMiddleware),
+    __DEV__ ? applyMiddleware(sagaMiddleware, logger, navMiddleware) : applyMiddleware(sagaMiddleware, navMiddleware),
     // other store enhancers if any
 );
 
