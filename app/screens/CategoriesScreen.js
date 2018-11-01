@@ -37,7 +37,7 @@ class Categories extends Component<Props, State> {
         return (
             <Container>
                 <FlatList
-                    data={categories}
+                    data={categories.length > 0 ? categories : ['ph1', 'ph2']}
                     renderItem={({ item: category }, i) => (
                         <CategoryCell
                             key={i}

@@ -72,10 +72,12 @@ class Store extends Component<Props, State> {
     render() {
         const { store, navigation } = this.props
         const { onScroll = () => { } } = this.props;
+        const menu_sections = MapMenuSection(store)
+        const placeholder_sections = [{ name: '', data: ['ph', 'ph', 'ph', 'ph',] }, { name: '', data: ['ph', 'ph', 'ph', 'ph',] }]
         return (
             <Container>
                 <SectionList
-                    sections={MapMenuSection(store)}
+                    sections={menu_sections.length > 0 ? menu_sections : placeholder_sections}
                     renderSectionHeader={({ section: menu }) =>
                         (<MenuCell menu={menu} />)
                     }

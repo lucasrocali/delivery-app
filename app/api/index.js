@@ -22,7 +22,7 @@ const authHeader = (token) => {
 }
 
 if (!production) {
-    API = 'http://192.168.1.103:3000';
+    API = 'http://100.64.67.91:3000';
 }
 
 function post(path, header, data) {

@@ -125,6 +125,14 @@ export const Button = styled.TouchableOpacity`
     justify-content: center;
     border-radius: 6;
 `
+
+export const Placeholder = styled.View` 
+    width: ${props => props.width ? props.width : 50};
+    height: ${props => props.height ? props.height : 20};
+    background-color: ${colors.gray5};
+    margin-horizontal: ${spacing.tiny2};
+    margin-vertical: ${spacing.tiny2};
+`
 // TitleH4: {
 //     fontSize: 34,
 //     lineHeight: 41,

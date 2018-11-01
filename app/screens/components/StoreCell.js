@@ -2,7 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import colors from '../../constants/colors';
 import dimensions from '../../constants/dimensions';
-import StoreCellBody from './StoreCellBody'
+import StoreCellBody from './StoreCellBody';
+import { Placeholder } from '../../screens/styled';
 
 import FastImage from 'react-native-fast-image'
 
@@ -23,7 +24,7 @@ const Body = styled.View`
 `
 
 const Image = styled(FastImage) `
-    background-color: ${colors.gray10};
+    background-color: ${colors.gray5};
     width: ${props => props.full ? dimensions.estabCellFullWidth : dimensions.estabCellWidth}
     height: ${props => props.full ? dimensions.estabCellFullHeigth : dimensions.estabCellHeigth};
 `

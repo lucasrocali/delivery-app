@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { Text, Number, RiskNumber, Caption, Cell } from '../styled/index'
+import { Text, Number, RiskNumber, Caption, Cell, Placeholder } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
 
@@ -38,6 +38,21 @@ type Props = {
 }
 export default Base = (props: Props) => {
     const { product, onPress } = props
+    if (typeof product == 'string') {
+        return (
+            <Container>
+                <InfoView>
+                    <Placeholder width={70} height={20} />
+                    <Placeholder width={120} height={10} />
+                    <Placeholder width={110} height={10} />
+                    <Placeholder width={30} height={15} />
+                </InfoView>
+                <ImageView>
+                    {product.img_url != '' && <Image source={{ uri: product.img_url }} />}
+                </ImageView>
+            </Container>
+        );
+    }
     return (
         <Touchable activeOpacity={onPress ? 0.7 : 1.0} onPress={onPress}>
             <Container>

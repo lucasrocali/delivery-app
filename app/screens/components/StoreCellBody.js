@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import colors from '../../constants/colors';
 import dimensions from '../../constants/dimensions';
-import { Title, Caption, Cell, Left, Right } from '../styled/index'
+import { Title, Caption, Cell, Left, Right, Placeholder } from '../styled/index'
 
 
 
@@ -25,6 +25,21 @@ type Props = {
 }
 export default StoreCellBody = (props: Props) => {
     const { store } = props
+    if (typeof store == 'string') {
+        return (
+            <Body>
+                <Placeholder width={70} height={15} />
+                <Row>
+                    <Left>
+                        <Placeholder width={30} height={10} />
+                    </Left>
+                    <Right>
+                        <Placeholder width={30} height={10} />
+                    </Right>
+                </Row>
+            </Body>
+        );
+    }
     return (
         <Body>
             <Title>{store.name}</Title>

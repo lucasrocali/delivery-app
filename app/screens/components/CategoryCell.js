@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import styled from "styled-components";
 import StoreCell from './StoreCell';
 import colors from '../../constants/colors';
-import { Title, ButtonText, SectionHeader, Left, Right } from '../styled/index'
+import { Title, ButtonText, SectionHeader, Left, Right, Placeholder } from '../styled/index'
 
 const Container = styled.View`
     border-bottom-width: 1;
@@ -33,18 +33,26 @@ export default CategoryCell = (props: Props) => {
         <Container>
             <SectionHeader>
                 <Left>
-                    <Title>{category.name}</Title>
+                    {typeof category != 'string' ?
+                        <Title>{category.name}</Title>
+                        :
+                        <Placeholder width={100} height={20} />
+                    }
                 </Left>
                 <Right>
-                    <Button onPress={onMorePress}>
-                        <ButtonText>Mais</ButtonText>
-                    </Button>
+                    {typeof category != 'string' ?
+                        <Button onPress={onMorePress}>
+                            <ButtonText>Mais</ButtonText>
+                        </Button>
+                        :
+                        <Placeholder width={30} height={20} />
+                    }
                 </Right>
             </SectionHeader>
 
             <FlatList
                 horizontal
-                data={category.stores}
+                data={typeof category != 'string' ? category.stores : ['ph1', 'ph2']}
                 renderItem={({ item: store }, i) => (
                     <StoreCell
                         key={i}

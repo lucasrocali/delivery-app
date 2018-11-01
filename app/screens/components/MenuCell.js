@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { TitleH4, Cell } from '../styled/index'
+import { TitleH4, Cell, Placeholder } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
 
@@ -13,6 +13,13 @@ type Props = {
 }
 export default MenuCell = (props: Props) => {
     const { menu } = props
+    if (menu == '') {
+        return (
+            <Container>
+                <Placeholder width={70} height={15} />
+            </Container>
+        )
+    }
     return (
         <Container>
             <TitleH4>{menu.name}</TitleH4>
