@@ -72,6 +72,11 @@ class Perfil extends Component<Props, State> {
                             </Touchable>
                         </Cell>
                         <Cell>
+                            <Touchable onPress={() => navigateTo(screenNames.CardsStack)} >
+                                <Text>Cartões</Text>
+                            </Touchable>
+                        </Cell>
+                        <Cell>
                             <Touchable onPress={this.handlePress}>
                                 <Text>Logout</Text>
                             </Touchable>

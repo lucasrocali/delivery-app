@@ -1,5 +1,5 @@
 import * as actionTypes from './actionType'
-import { MapUser, MapAddress, MapOrder } from '../../constants/objects'
+import { MapUser, MapAddress, MapOrder, MapCard } from '../../constants/objects'
 
 const initialState = {
     loading: false,
@@ -40,6 +40,7 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 user: {
                     ...state.user,
+                    loading: false,
                     orders: orders.map(order => MapOrder(order))
                 },
             }
@@ -65,6 +66,7 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 user: {
                     ...state.user,
+                    loading: false,
                     addresses: addresses.map(address => MapAddress(address))
                 },
                 selected_address_id: sel_address_id
@@ -86,6 +88,16 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 selected_order_id
+            }
+        case actionTypes.LOAD_CARDS_SUCCESS:
+            const cards = action.response
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    loading: false,
+                    cards: cards.map(card => MapCard(card))
+                },
             }
         default:
             return state

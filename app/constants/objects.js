@@ -273,3 +273,12 @@ export const MapLocation = (raw) => {
         created_at: raw && raw.created_at ? raw.created_at : '',
     }
 }
+
+export const MapCard = (raw) => {
+    return {
+        id: raw && raw.id ? raw.id : '',
+        brand: raw && raw.brand ? raw.brand : '',
+        description: raw && raw.description ? raw.description : '',
+        display_number: raw && raw.display_number ? raw.display_number : '',
+    }
+}

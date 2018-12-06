@@ -126,3 +126,30 @@ export function selectedOrder(selected_order_id) {
         selected_order_id
     }
 }
+
+export function loadCards() {
+    return {
+        type: actionTypes.LOAD_CARDS
+    }
+}
+
+export function loadCardsSuccess(response) {
+    return {
+        type: actionTypes.LOAD_CARDS_SUCCESS,
+        response
+    }
+}
+
+export function createCard(card) {
+    return {
+        type: actionTypes.CREATE_CARD,
+        card
+    }
+}
+
+export function setCreateCardSuccess(response) {
+    return {
+        type: actionTypes.CREATE_CARD_SUCCESS,
+        response
+    }
+}

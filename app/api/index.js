@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 
-const production = true;
+const production = false;
 
 var API = 'https://young-shelf-65999.herokuapp.com';
 
@@ -22,7 +22,7 @@ const authHeader = (token) => {
 }
 
 if (!production) {
-    API = 'http://100.64.67.91:3000';
+    API = 'http://192.168.0.13:3000';
 }
 
 function post(path, header, data) {
@@ -86,10 +86,11 @@ export function loginRequest(user_login) {
 
 export function signupRequest(user_signup) {
     const sign_data = {
-        email: user_signup.email,
+        name: user_signup.name,
+        email: user_signup.email.toLowerCase(),
         password: user_signup.password,
         password_confirmation: user_signup.password_confirmation,
-        name: user_signup.name,
+        login_type: "Manual"
     }
     return post('signup', header(), sign_data)
 }
@@ -131,4 +132,12 @@ export function getOrdersRequest(auth_token) {
 
 export function getOrderRequest(auth_token, order_id) {
     return get(`orders/${order_id}`, authHeader(auth_token))
+}
+
+export function getCardsRequest(auth_token) {
+    return get('cards', authHeader(auth_token))
+}
+
+export function postCardRequest(auth_token, card) {
+    return post('cards', authHeader(auth_token), card)
 }

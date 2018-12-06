@@ -21,6 +21,9 @@ import StoreScreen from '../screens/StoreScreen';
 import ProductScreen from '../screens/ProductScreen';
 import CartScreen from '../screens/CartScreen';
 import PickerScreen from '../screens/PickerScreen';
+import CardsScreen from '../screens/CardsScreen';
+import CardScreen from '../screens/CardScreen';
+import SignupScreen from '../screens/SignupScreen';
 
 import ButtonIcon from '../screens/components/ButtonIcon'
 // import { FluidNavigator } from 'react-navigation-fluid-transitions'
@@ -63,6 +66,7 @@ const baseNavigationOption = (navigation, options: { title: string, leftIcon: bo
 
 
 export const screenNames = {
+    //Screens
     Launch: 'Launch',
     Categories: 'Categories',
     Stores: 'Stores',
@@ -77,7 +81,12 @@ export const screenNames = {
     Orders: 'Orders',
     Order: 'Order',
     Picker: 'Picker',
+    Cards: 'Cards',
+    Card: 'Card',
+    Signup: 'Signup',
     Base: 'Base',
+
+    //Stack
     CategoriesStack: 'CategoriesStack',
     StoreStack: 'StoreStack',
     CartStack: 'CartStack',
@@ -88,6 +97,8 @@ export const screenNames = {
     OrdersStack: 'OrdersStack',
     OrderStack: 'OrderStack',
     PickerStack: 'PickerStack',
+    CardsStack: 'CardsStack',
+    SignupStack: 'SignupStack',
     BaseStack: 'BaseStack',
 
 
@@ -243,6 +254,35 @@ export const screens = {
                 title: 'Base',
             }),
         }
+    },
+    [screenNames.Cards]: {
+        name: screenNames.Cards,
+        component: {
+            screen: CardsScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: 'Cartões',
+                leftIcon: icon_names.close
+            }),
+        }
+    },
+    [screenNames.Card]: {
+        name: screenNames.Card,
+        component: {
+            screen: CardScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: 'Criar Cartão',
+                leftIcon: icon_names.back
+            }),
+        }
+    },
+    [screenNames.Signup]: {
+        name: screenNames.Signup,
+        component: {
+            screen: SignupScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: 'Cadastro',
+            }),
+        }
     }
 }
 
@@ -285,7 +325,8 @@ export const stacks = {
         component: StackNavigator(
             {
                 [screens.SocialLogin.name]: screens.SocialLogin.component,
-                [screens.Login.name]: screens.Login.component
+                [screens.Login.name]: screens.Login.component,
+                [screens.Signup.name]: screens.Signup.component
             }
         )
     },
@@ -337,7 +378,16 @@ export const stacks = {
                 [screens.Base.name]: screens.Base.component
             }
         )
-    }
+    },
+    [screenNames.CardsStack]: {
+        name: screenNames.CardsStack,
+        component: StackNavigator(
+            {
+                [screens.Cards.name]: screens.Cards.component,
+                [screens.Card.name]: screens.Card.component
+            }
+        )
+    },
 }
 
 export const TabNavigator = createMaterialTopTabNavigator(
@@ -377,6 +427,7 @@ export const AppNavigator = StackNavigator(
         [stacks.AddressesStack.name]: stacks.AddressesStack.component,
         [stacks.OrdersStack.name]: stacks.OrdersStack.component,
         [stacks.OrderStack.name]: stacks.OrderStack.component,
+        [stacks.CardsStack.name]: stacks.CardsStack.component,
         [stacks.PickerStack.name]: stacks.PickerStack.component,
     }, {
         initialRouteName: screens.Launch.name,

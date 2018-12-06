@@ -225,9 +225,7 @@ const createAddress = function* (action) {
                 yield put(NavigationActions.back())
             }
 
-
         }
-
 
     } catch (error) {
         yield put(userActions.setLoading(false))
@@ -340,6 +338,51 @@ const loadOrder = function* (action) {
     } catch (error) {
         console.log(error);
         yield put(userActions.setLoading(false))
+    }
+};
+
+const loadCards = function* (action) {
+    try {
+        yield put(userActions.setLoading(true))
+
+        const token = yield select(getToken)
+
+        const response = yield call(api.getCardsRequest, token)
+
+        yield put(userActions.loadCardsSuccess(response))
+
+    } catch (error) {
+        console.log(error);
+        yield put(userActions.setLoading(false))
+    }
+};
+
+const createCard = function* (action) {
+    try {
+        yield put(userActions.setLoading(true))
+
+        const { card } = action
+
+        const token = yield select(getToken)
+
+        const response = yield call(api.postCardRequest, token, card)
+
+        const toast_msg = getToastMsg(response)
+
+        yield put(userActions.setLoading(false))
+
+        if (toast_msg) {
+            yield put(appActions.displayToastMsg(toast_msg))
+        } else {
+            yield put(userActions.setCreateCardSuccess(response))
+
+            yield put(userActions.loadCards())
+            yield put(NavigationActions.back())
+        }
+
+    } catch (error) {
+        yield put(userActions.setLoading(false))
+        console.log(error);
     }
 };
 
@@ -473,4 +516,6 @@ export function* root(): Saga<void> {
     yield takeLatest(cartActionTypes.PLACE_ORDER, placeOrder)
     yield takeLatest(cartActionTypes.SYNC_ORDER, handleSyncOrder)
     yield takeLatest(cartActionTypes.HANDLE_SYNC_ORDER_SUCCESS, handleSyncOrderSuccess)
+    yield takeLatest(userActionTypes.LOAD_CARDS, loadCards)
+    yield takeLatest(userActionTypes.CREATE_CARD, createCard)
 };

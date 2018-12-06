@@ -174,7 +174,7 @@ class SocialLogin extends Component<Props, State> {
                     <ManualBtn onPress={() => navigation.navigate({ routeName: screenNames.Login, key: screenNames.Login })}>
                         <ButtonText>Login com email e senha</ButtonText>
                     </ManualBtn>
-                    <RegisterBtn>
+                    <RegisterBtn onPress={() => navigation.navigate({ routeName: screenNames.Signup, key: screenNames.Signup })}>
                         <ButtonText>Registrar</ButtonText>
                     </RegisterBtn>
                 </BottomView>
