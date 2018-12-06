@@ -1,10 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loadCards } from '../store/user/action'
+import { loadCards, selectedCard } from '../store/user/action'
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title, Text, TouchableCell } from './styled/index';
@@ -27,16 +27,30 @@ type Props = {
 class Base extends Component<Props, State> {
 
     componentDidMount() {
+        const { user, loadCards } = this.props
+        const { cards } = user
+        if (!cards || cards && cards.length == 0) {
+            loadCards()
+        }
+    }
+
+    onRefresh = () => {
         const { loadCards } = this.props
         loadCards()
     }
 
     render() {
-        const { user, navigation } = this.props
+        const { user, selected_card_id, selectedCard, navigation } = this.props
         const { cards } = user
         return (
             <Container>
                 <FlatList
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={false}
+                            onRefresh={this.onRefresh}
+                        />
+                    }
                     ListHeaderComponent={() => (
                         <TouchableCell
                             onPress={() => navigation.navigate({
@@ -48,7 +62,11 @@ class Base extends Component<Props, State> {
                     )}
                     data={cards}
                     renderItem={({ item: card, index }) => (
-                        <CardCell card={card} />
+                        <CardCell
+                            card={card}
+                            checked={card.id == selected_card_id}
+                            onPress={() => selectedCard(card.id)}
+                        />
                     )}
                 />
             </Container>
@@ -59,6 +77,7 @@ class Base extends Component<Props, State> {
 export default connect(
     state => ({
         user: selectors.getUser(state),
+        selected_card_id: selectors.getSelectedCardId(state)
     }),
-    { loadCards }
+    { loadCards, selectedCard }
 )(Base)

@@ -6,11 +6,16 @@ const initialState = {
     user: {},
     search_address: {},
     selected_address_id: '',
-    selected_order_id: ''
+    selected_order_id: '',
+    selected_card_id: ''
 }
 
 const getLastAddressId = (addresses) => {
     return addresses && addresses.length > 0 ? addresses[addresses.length - 1].id : 0
+}
+
+const getLastCardId = (cards) => {
+    return cards && cards.length > 0 ? cards[cards.length - 1].id : 0
 }
 
 export default function userReducer(state = initialState, action) {
@@ -26,6 +31,7 @@ export default function userReducer(state = initialState, action) {
             const mapped_user = MapUser(user)
             const first_address_id = getLastAddressId(mapped_user.addresses)
             return {
+                ...state,
                 loading: false,
                 user: mapped_user,
                 selected_address_id: first_address_id
@@ -91,6 +97,7 @@ export default function userReducer(state = initialState, action) {
             }
         case actionTypes.LOAD_CARDS_SUCCESS:
             const cards = action.response
+            const sel_card_id = state.selected_card_id != '' ? state.selected_card_id : getLastCardId(cards)
             return {
                 ...state,
                 user: {
@@ -98,6 +105,13 @@ export default function userReducer(state = initialState, action) {
                     loading: false,
                     cards: cards.map(card => MapCard(card))
                 },
+                selected_card_id: sel_card_id
+            }
+        case actionTypes.SELECTED_CARD:
+            const { card_id } = action
+            return {
+                ...state,
+                selected_card_id: card_id
             }
         default:
             return state

@@ -14,11 +14,22 @@ export function getSelectedAddressId(state) {
     return state.user_reducer.selected_address_id;
 }
 
+export function getSelectedCardId(state) {
+    return state.user_reducer.selected_card_id;
+}
+
 export function getSelectedAddress(state) {
     const { selected_address_id, user } = state.user_reducer
     const { addresses } = user
     const match_addresses = addresses && addresses.length > 0 ? addresses.filter(address => address.id == selected_address_id) : null
     return match_addresses && match_addresses.length > 0 ? match_addresses[0] : null
+}
+
+export function getSelectedCard(state) {
+    const { selected_card_id, user } = state.user_reducer
+    const { cards } = user
+    const match_cards = cards && cards.length > 0 ? cards.filter(card => card.id == selected_card_id) : null
+    return match_cards && match_cards.length > 0 ? match_cards[0] : null
 }
 
 export function getOrders(state) {

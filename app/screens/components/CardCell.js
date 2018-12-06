@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Cell, Text, Caption } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 const Container = styled(Cell) `
     align-items: center;
@@ -22,12 +23,24 @@ const IconView = styled.TouchableOpacity`
 
 type Props = {
     card: object,
+    checked: boolean,
     onPress: Function,
 }
 export default CardCell = (props: Props) => {
-    const { card, onPress } = props
+    const { card, checked, onPress } = props
     return (
         <Container>
+            {typeof checked == 'boolean' &&
+                <CheckView>
+                    {checked &&
+                        <Ionicon
+                            name={'ios-checkmark'}
+                            size={25}
+                            color={colors.link}
+                        />
+                    }
+                </CheckView>
+            }
             <Touchable onPress={onPress}>
                 <Text>{card.brand}</Text>
                 <Caption>{card.display_number}</Caption>

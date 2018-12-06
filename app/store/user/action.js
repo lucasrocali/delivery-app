@@ -153,3 +153,10 @@ export function setCreateCardSuccess(response) {
         response
     }
 }
+
+export function selectedCard(card_id) {
+    return {
+        type: actionTypes.SELECTED_CARD,
+        card_id
+    }
+}

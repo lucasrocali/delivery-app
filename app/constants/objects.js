@@ -234,12 +234,13 @@ export const MapPrice = (price) => {
     return `R$ ${price}`
 }
 
-export const MapCart = (cart, address) => {
+export const MapCart = (cart, address, card) => {
     console.log('MapCart', cart)
     return {
         store_id: cart.store.id,
         address_id: address.id,
         total: getCartTotal(cart.order_products),
+        payment_method_id: card.id,
         order_products_attributes: cart.order_products.map(order_product => MapCartOrderProduct(order_product))
     }
 }

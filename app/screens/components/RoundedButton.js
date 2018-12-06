@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { ActivityIndicator } from 'react-native';
 import { TitleH4, Left, Right } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
@@ -18,29 +19,37 @@ const AddButton = styled.TouchableOpacity`
     right: ${spacing.small};
     padding-horizontal: ${spacing.small};
     align-items: center;
+    justify-content: center;
     border-radius: 5;
 `
 type Props = {
     leftText: string,
     rightText: string,
+    loading: boolean,
     disabled: boolean,
     onPress: Function
 }
 export default Base = (props: Props) => {
-    const { leftText, rightText, disabled, onPress } = props
+    const { leftText, rightText, loading, disabled, onPress } = props
     return (
         <AddButton
             style={{ opacity: disabled ? 0.4 : 1.0 }}
             activeOpacity={0.8}
             disabled={disabled}
             onPress={onPress} >
-            <Left>
-                <LightTitle>{leftText}</LightTitle>
-            </Left>
-
-            <Right>
-                <LightTitle>{rightText}</LightTitle>
-            </Right>
+            {loading &&
+                <ActivityIndicator size="small" color="white" />
+            }
+            {!loading &&
+                <Left>
+                    <LightTitle>{leftText}</LightTitle>
+                </Left>
+            }
+            {!loading &&
+                <Right>
+                    <LightTitle>{rightText}</LightTitle>
+                </Right>
+            }
         </AddButton>
     );
 }

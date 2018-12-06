@@ -4,7 +4,8 @@ const initialState = {
     store: null,
     order_products: [],
     opened_order: null,
-    driver_location: null
+    driver_location: null,
+    loading: false
 }
 
 // const initialState = {
@@ -82,6 +83,12 @@ const initialState = {
 
 export default function cartReducer(state = initialState, action) {
     switch (action.type) {
+        case actionTypes.PLACE_ORDER_LOADING:
+            const { loading } = action
+            return {
+                ...state,
+                loading
+            }
         case actionTypes.CLEAR_CART:
             return {
                 ...state,

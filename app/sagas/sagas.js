@@ -38,6 +38,7 @@ const getCartStore = state => cartSelectors.getCartStore(state)
 const getCart = state => cartSelectors.getCart(state)
 const getOrders = state => userSelectors.getOrders(state)
 const getCurrentAddress = state => userSelectors.getSelectedAddress(state)
+const getCurrentCard = state => userSelectors.getSelectedCard(state)
 const getOpenedOrder = state => cartSelectors.getOpenedOrder(state)
 
 const myFirebaseApp = firebase.initializeApp({
@@ -59,6 +60,13 @@ const displayToastMsg = function* (action) {
     yield put(appActions.setToastMsg(toast_msg))
     yield delay(3000)
     yield put(appActions.clearToastMsg())
+}
+
+const initApp = function* () {
+
+    yield call(handleOpenedOrder)
+
+    yield put(userActions.loadCards())
 }
 
 const handleOpenedOrder = function* () {
@@ -90,7 +98,7 @@ const autoLogin = function* (action) {
             if (response && response.id) {
                 yield put(userActions.setSuccess(response))
 
-                yield call(handleOpenedOrder)
+                yield call(initApp)
             } else {
                 yield put(appActions.clearCredentials())
             }
@@ -120,7 +128,7 @@ const authenticate = function* (action) {
 
             yield put(userActions.setSuccess(response))
 
-            yield call(handleOpenedOrder)
+            yield call(initApp)
 
             yield put(NavigationActions.navigate({ routeName: mainStack.Main.name }))
         } else if (toast_msg) {
@@ -467,15 +475,20 @@ const placeOrder = function* (action) {
 
         const address = yield select(getCurrentAddress)
 
+        const card = yield select(getCurrentCard)
+
         const token = yield select(getToken)
 
-        const mapped_cart = MapCart(cart, address)
+        const mapped_cart = MapCart(cart, address, card)
 
         console.log('mapped_cart ==> ', mapped_cart)
 
         const response = yield call(api.postOrderRequest, token, mapped_cart)
 
+        yield put(cartActions.placeOrderLoading(false))
+
         const toast_msg = getToastMsg(response)
+
 
         if (toast_msg) {
             yield put(appActions.displayToastMsg(toast_msg))

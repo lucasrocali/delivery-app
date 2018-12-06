@@ -12,6 +12,7 @@ import styled from "styled-components";
 import StoreCellBody from './components/StoreCellBody';
 import CartProductCell from './components/CartProductCell'
 import AddressCell from './components/AddressCell';
+import CardCell from './components/CardCell';
 import RoundedButton from './components/RoundedButton';
 import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView, Row, Left, Right, TouchableCell } from './styled/index';
 import { screenNames } from '../navigation/Routers';
@@ -54,7 +55,7 @@ type Props = {
 class Cart extends Component<Props, State> {
 
     render() {
-        const { cart, selected_address, placeOrder, navigation } = this.props
+        const { cart, loading, selected_address, selected_card, placeOrder, navigation } = this.props
         // console.log(JSON.stringify(cart))
         const { store, order_products } = cart
         const cart_total = getCartTotal(order_products)
@@ -73,8 +74,8 @@ class Cart extends Component<Props, State> {
                                     </TextView>
                                     <AddressCell address={selected_address} />
                                 </View>
-
                             }
+
                             {store &&
                                 <Cell>
                                     <TitleH2>{store.name}</TitleH2>
@@ -123,6 +124,21 @@ class Cart extends Component<Props, State> {
                                     </Cell>
                                 </View>
                             }
+
+                            {selected_card &&
+                                <View>
+                                    <TextView>
+                                        <Title>{'Pagamento:'}</Title>
+                                    </TextView>
+                                    <CardCell
+                                        card={selected_card}
+                                        onPress={() => navigation.navigate({
+                                            key: screenNames.CardsStack,
+                                            routeName: screenNames.CardsStack
+                                        })}
+                                    />
+                                </View>
+                            }
                         </View>
                     )}
                     renderItem={({ item: order_product, index }) => (
@@ -142,8 +158,9 @@ class Cart extends Component<Props, State> {
                 />
                 <RoundedButton
                     leftText={'Finalizar pedido'}
+                    loading={loading}
                     rightText={MapPrice(cart_total)}
-                    disabled={order_products.length == 0}
+                    disabled={order_products.length == 0 || loading}
                     onPress={() => placeOrder()}
                 />
             </Container>
@@ -154,7 +171,9 @@ class Cart extends Component<Props, State> {
 export default connect(
     state => ({
         cart: cartSelectors.getCart(state),
-        selected_address: userSelectors.getSelectedAddress(state)
+        selected_address: userSelectors.getSelectedAddress(state),
+        selected_card: userSelectors.getSelectedCard(state),
+        loading: cartSelectors.isCartLoaing(state)
     }),
     { placeOrder }
 )(Cart)

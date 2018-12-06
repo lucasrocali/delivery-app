@@ -13,3 +13,7 @@ export function getOpenedOrder(state) {
 export function getCartLocation(state) {
     return state.cart_reducer.driver_location
 }
+
+export function isCartLoaing(state) {
+    return state.cart_reducer.loading
+}
