@@ -2,9 +2,10 @@
 
 import * as actionTypes from './actionType'
 
-export function setLoading() {
+export function setLoading(loading) {
     return {
-        type: actionTypes.STORES_LOADING
+        type: actionTypes.STORES_LOADING,
+        loading
     }
 }
 
@@ -44,13 +45,14 @@ export function loadStoreSuccess(store: Object) {
 }
 
 
-export function loadStores() {
+export function loadStores(category_id: string = '') {
     return {
         type: actionTypes.LOAD_STORES,
+        category_id
     }
 }
 
-export function loadStoresSuccess(stores: Object) {
+export function loadStoresSuccess(stores: Array) {
     return {
         type: actionTypes.LOAD_STORES_SUCCESS,
         stores

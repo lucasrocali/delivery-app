@@ -1,67 +1,39 @@
 import React from 'react';
-import { FlatList } from 'react-native';
 import styled from "styled-components";
-import StoreCell from './StoreCell';
+import { Text } from '../styled/index'
+import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
-import { Title, ButtonText, SectionHeader, Left, Right, Placeholder } from '../styled/index'
 
-const Container = styled.View`
-    border-bottom-width: 1;
-    border-color: ${colors.gray5};
-    padding-vertical: 10;
+const Container = styled.TouchableOpacity`
+    margin-vertical: ${spacing.tiny};
+    margin-horizontal: ${spacing.tiny4};
+    align-items: center;
 `;
 
-const Button = styled.TouchableOpacity`
-
+const Title = styled(Text) `
+    text-align: center;
 `
 
-const Header = styled.View`
-    flex-direction: row;
-    padding-horizontal: 16;
-    padding-vertical: 8;
+const Image = styled.Image`
+    background-color: ${colors.gray10}; 
+    width: 100;
+    height: 60;
+    border-radius: 12;
 `
 
 type Props = {
-    category: object,
-    onStorePress: Function,
-    onMorePress: Function
+    category: {
+        name: string,
+        img_url: string
+    },
+    onPress: Function
 }
-export default CategoryCell = (props: Props) => {
-    const { category, onStorePress, onMorePress } = props
-    console.log('CategoryCell', category)
+export default Base = (props: Props) => {
+    const { category, onPress } = props
     return (
-        <Container>
-            <SectionHeader>
-                <Left>
-                    {typeof category != 'string' ?
-                        <Title>{category.name}</Title>
-                        :
-                        <Placeholder width={100} height={20} />
-                    }
-                </Left>
-                <Right>
-                    {typeof category != 'string' ?
-                        <Button onPress={onMorePress}>
-                            <ButtonText>Mais</ButtonText>
-                        </Button>
-                        :
-                        <Placeholder width={30} height={20} />
-                    }
-                </Right>
-            </SectionHeader>
-
-            <FlatList
-                horizontal
-                data={typeof category != 'string' ? category.stores : ['ph1', 'ph2']}
-                renderItem={({ item: store }, i) => (
-                    <StoreCell
-                        key={i}
-                        store={store}
-                        onPress={() => onStorePress(store)}
-                    />
-                )}
-            />
-
+        <Container activeOpacity={0.9} onPress={onPress}>
+            <Image source={{ uri: category.img_url }} />
+            <Title>{category.name}</Title>
         </Container>
     );
 }

@@ -1,11 +1,11 @@
 // @flow
 
 import React, { Component } from 'react';
-import { FlatList, LayoutAnimation } from 'react-native';
+import { FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { navigateTo } from '../store/app/action'
-import { loadCategories, loadStore } from '../store/stores/action'
+import { loadCategories, loadStore, loadStores } from '../store/stores/action'
 import * as storeSelectors from '../store/stores/selector';
 import CategoryCell from './components/CategoryCell';
 import styled from "styled-components";
@@ -14,6 +14,11 @@ import { screenNames } from '../navigation/Routers'
 
 const Container = styled.View`
     flex: 1;
+    background-color: ${colors.white};
+`;
+
+const Header = styled.View`
+    height: 100;
     background-color: ${colors.white};
 `;
 
@@ -32,24 +37,44 @@ class Categories extends Component<Props, State> {
         loadCategories()
     }
 
-    render() {
-        const { categories, loadStore, navigateTo, navigation } = this.props
+    renderHeader() {
+        const { categories, loadStore, loadStores, navigateTo, navigation } = this.props
         return (
-            <Container>
+            <Header>
                 <FlatList
-                    data={categories.length > 0 ? categories : ['ph1', 'ph2']}
+                    data={categories.length > 0 ? categories : ['ph1', 'ph2', 'ph1', 'ph2']}
+                    horizontal
+                    ListHeaderComponent={(<View width={10} />)}
                     renderItem={({ item: category }, i) => (
                         <CategoryCell
                             key={i}
                             category={category}
-                            onStorePress={(store) => {
-                                loadStore(store)
-                                navigation.navigate(screenNames.Store)
-                                // navigateTo(screenNames.Store, { title: store.name })
+                            onPress={(store) => {
+                                loadStores(category.id)
                             }}
-                            onMorePress={() => {
-                                navigation.navigate(screenNames.Stores)
-                                // navigateTo(screenNames.Stores)
+                        />
+                    )}
+                />
+            </Header>
+        );
+    }
+
+    render() {
+        const { stores, loadStore, loading, navigation } = this.props
+        console.log('render categories', stores)
+        return (
+            <Container>
+                <FlatList
+                    data={loading ? ['ph', 'ph', 'ph'] : stores}
+                    ListHeaderComponent={this.renderHeader()}
+                    renderItem={({ item }, i) => (
+                        <StoreCell
+                            key={i}
+                            full
+                            store={item}
+                            onPress={() => {
+                                loadStore(item)
+                                navigation.navigate(screenNames.Store)
                             }}
                         />
                     )}
@@ -63,6 +88,8 @@ class Categories extends Component<Props, State> {
 export default connect(
     state => ({
         categories: storeSelectors.getCategories(state),
+        stores: storeSelectors.getStores(state),
+        loading: storeSelectors.isLoading(state)
     }),
-    { loadCategories, loadStore, navigateTo }
+    { loadCategories, loadStore, loadStores, navigateTo }
 )(Categories)

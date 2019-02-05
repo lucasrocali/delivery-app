@@ -5,12 +5,22 @@ import { MapCategory, MapStore } from '../../constants/objects';
 const initialState = {
     loading: false,
     categories: [],
+    selected_category_id: null,
     stores: [],
     current_store: null,
 }
 
 export default function storesReducer(state = initialState, action) {
     switch (action.type) {
+        case actionTypes.LOAD_STORES:
+            const { category_id } = action
+            if (category_id) {
+                return {
+                    ...state,
+                    selected_category_id: category_id
+                }
+            }
+            return state
         case actionTypes.STORES_LOADING:
             const { loading } = action
             return {

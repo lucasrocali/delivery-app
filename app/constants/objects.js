@@ -134,8 +134,7 @@ export const MapCategory = (raw) => {
     return {
         id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
-        foo: 'category',
-        stores: raw && raw.stores ? raw.stores.map(store => MapStore(store)) : []
+        img_url: raw && raw.img_url || ''
     }
 }
 

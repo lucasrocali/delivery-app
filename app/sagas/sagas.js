@@ -40,6 +40,7 @@ const getOrders = state => userSelectors.getOrders(state)
 const getCurrentAddress = state => userSelectors.getSelectedAddress(state)
 const getCurrentCard = state => userSelectors.getSelectedCard(state)
 const getOpenedOrder = state => cartSelectors.getOpenedOrder(state)
+const getSelectedCategoryId = state => storeSelectors.getSelectedCategoryId(state)
 
 const myFirebaseApp = firebase.initializeApp({
     apiKey: "rzn1ccZZOWRGMngPP5pnTRBMN10cDgjw2a0s2ep5",
@@ -147,7 +148,7 @@ const authenticate = function* (action) {
 
 const loadCategories = function* (action) {
     try {
-        yield put(storeActions.setLoading())
+        yield put(storeActions.setLoading(true))
 
         const response = yield call(api.getCategoriesRequest)
 
@@ -155,7 +156,17 @@ const loadCategories = function* (action) {
 
         const categories = response
 
+        yield put(storeActions.setLoading(false))
+
         yield put(storeActions.loadCategoriesSuccess(categories))
+
+        let first_category_id = null
+
+        if (categories && categories.length > 0) {
+            first_category_id = categories[0].id
+        }
+
+        yield put(storeActions.loadStores(first_category_id))
     } catch (error) {
         console.log(error);
         yield put(storeActions.setError(error))
@@ -164,15 +175,28 @@ const loadCategories = function* (action) {
 
 const loadStores = function* (action) {
     try {
-        yield put(storeActions.setLoading())
+        yield put(storeActions.setLoading(true))
 
-        const response = yield call(api.getStoresRequest)
+        const category_id = yield select(getSelectedCategoryId)
+
+        console.log('category_id', category_id)
+
+        const data = {
+            category_id
+        }
+
+        const response = yield call(api.getStoresRequest, data)
 
         console.log(response)
 
         const stores = response
 
-        yield put(storeActions.loadStoresSuccess(stores))
+        yield put(storeActions.setLoading(false))
+
+        if (stores && typeof stores == 'object' && stores.length >= 0) {
+            yield put(storeActions.loadStoresSuccess(stores))
+        }
+
     } catch (error) {
         console.log(error);
         yield put(storeActions.setError(error))
@@ -182,6 +206,7 @@ const loadStores = function* (action) {
 const loadStore = function* (action) {
     try {
 
+        console.log('SELECT_STORE', action)
         const { store } = action
 
         const currentStore = yield select(getCurrentStore)
@@ -517,7 +542,6 @@ export function* root(): Saga<void> {
     yield takeLatest(appActionTypes.NAVIGATE, navigate)
     yield takeLatest(userActionTypes.AUTO_LOGIN, autoLogin)
     yield takeLatest(userActionTypes.AUTHENTICATE, authenticate)
-    yield takeLatest(storesActionTypes.LOAD_STORES, loadCategories)
     yield takeLatest(storesActionTypes.LOAD_CATEGORIES, loadCategories)
     yield takeLatest(storesActionTypes.LOAD_STORE, loadStore)
     yield takeLatest(userActionTypes.CREATE_ADDRESS, createAddress)
@@ -531,4 +555,5 @@ export function* root(): Saga<void> {
     yield takeLatest(cartActionTypes.HANDLE_SYNC_ORDER_SUCCESS, handleSyncOrderSuccess)
     yield takeLatest(userActionTypes.LOAD_CARDS, loadCards)
     yield takeLatest(userActionTypes.CREATE_CARD, createCard)
+    yield takeLatest(storesActionTypes.LOAD_STORES, loadStores)
 };

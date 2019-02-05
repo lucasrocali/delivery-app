@@ -435,6 +435,7 @@ export const AppNavigator = StackNavigator(
         // initialRouteName: stacks.AddressesStack.name,
         mode: 'modal',
         navigationOptions: {
+            gesturesEnabled: false,
             header: null,
         },
     }

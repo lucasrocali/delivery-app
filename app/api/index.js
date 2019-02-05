@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 
-const production = false;
+const production = true;
 
 var API = 'https://young-shelf-65999.herokuapp.com';
 
@@ -99,8 +99,8 @@ export function getCategoriesRequest() {
     return get('categories', header())
 }
 
-export function getStoresRequest() {
-    return get('stores', header())
+export function getStoresRequest(data) {
+    return get('stores', header(), data)
 }
 
 export function getStoreRequest(store_id) {
