@@ -29,7 +29,7 @@ const Header = styled.View`
 `
 
 const OptionsList = styled(SectionList) `
-    margin-bottom: 80;
+
 `
 
 const InfoView = styled(Cell) `
@@ -98,7 +98,7 @@ class Product extends Component<Props, State> {
 
     render() {
 
-        const { store_id, order_product } = this.props.navigation.state.params
+        const { store, order_product } = this.props.navigation.state.params
         const { product } = order_product
         const { selected_options, quantity, order_product_id } = this.state
         const { handleNewProduct, navigation } = this.props
@@ -145,6 +145,7 @@ class Product extends Component<Props, State> {
                         (<Header>
                             <ProductCell
                                 product={product}
+                                store={store}
                             />
                             <InfoView>
                                 <Touchable disabled={quantity == 1} onPress={() => this.setState({ quantity: quantity - 1 })}>
@@ -175,7 +176,7 @@ class Product extends Component<Props, State> {
                         <View>
                             {order_product_id >= 0 &&
                                 <RemoveBtn
-                                    onPress={() => handleNewProduct(store_id, { id: order_product_id, product: product, quantity: quantity, selected_options: selected_options }, true)}
+                                    onPress={() => handleNewProduct(store.id, { id: order_product_id, product: product, quantity: quantity, selected_options: selected_options }, true)}
                                 >
                                     <Caption>Remover item</Caption>
                                 </RemoveBtn>
@@ -188,7 +189,7 @@ class Product extends Component<Props, State> {
                     rightText={MapPrice(order_product_total)}
                     disabled={!canAddProduct}
                     onPress={() => {
-                        handleNewProduct(store_id, { id: order_product_id, product: product, quantity: quantity, selected_options: selected_options })
+                        handleNewProduct(store.id, { id: order_product_id, product: product, quantity: quantity, selected_options: selected_options })
                     }}
                 />
             </Container >

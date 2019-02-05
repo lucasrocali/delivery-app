@@ -5,6 +5,7 @@ import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
 import { MapPrice } from '../../constants/objects';
 import { getCartProductTotal, getCartProductSubOptions } from '../../constants/functions';
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 const Touchable = styled.TouchableOpacity`
 
@@ -17,7 +18,9 @@ const Container = styled(Cell) `
 const InfoView = styled(Left) ` 
     flex: 5;
 `
-
+const Icon = styled(Ionicon) `
+    margin-left: ${spacing.tiny}
+`
 
 type Props = {
     order_product: Object,
@@ -40,8 +43,14 @@ export default CartProductCell = (props: Props) => {
                     ))}
                 </InfoView>
                 <Right>
-                    <Number>{MapPrice(order_product_total)}</Number>
+                    <Text>{MapPrice(order_product_total)}</Text>
                 </Right>
+                <Icon
+                    name={'ios-menu'}
+                    size={25}
+                    color={colors.link}
+                    backgroundColor={"transparent"}
+                />
             </Container>
         </Touchable>
     );

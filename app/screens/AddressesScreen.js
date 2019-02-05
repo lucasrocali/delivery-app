@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { selectedAddress } from '../store/user/action'
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
-import { Title, Text, TouchableCell } from './styled/index';
+import { Title, Text, TouchableCell, LinkText } from './styled/index';
 import colors from '../constants/colors';
 import AddressCell from './components/AddressCell';
 import { screenNames } from '../navigation/Routers';
@@ -17,6 +17,9 @@ const Container = styled.View`
     background-color: ${colors.white};
 `;
 
+const FooterView = styled(TouchableCell) `
+    align-items: center;
+`
 
 type State = {
 
@@ -33,14 +36,14 @@ class Addresses extends Component<Props, State> {
         return (
             <Container>
                 <FlatList
-                    ListHeaderComponent={() => (
-                        <TouchableCell
+                    ListFooterComponent={() => (
+                        <FooterView
                             onPress={() => navigation.navigate({
                                 key: screenNames.Address,
                                 routeName: screenNames.Address
                             })}>
-                            <Text>Novo endereço</Text>
-                        </TouchableCell>
+                            <LinkText>Adicionar endereço</LinkText>
+                        </FooterView>
                     )}
                     data={addresses}
                     renderItem={({ item: address, index }) => (

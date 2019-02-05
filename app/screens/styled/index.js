@@ -6,7 +6,7 @@ export const Title = styled.Text`
     margin-vertical: ${spacing.tiny2};
     font-size: 16;
     color: ${colors.gray70}
-    font-weight: 600;
+    font-weight: 400;
 `
 export const TitleH1 = styled(Title) `
     font-size: 28;
@@ -24,35 +24,49 @@ export const TitleH4 = styled(Title) `
     font-size: 18;
 `
 
+export const TextLight = styled.Text`
+    margin-vertical: ${spacing.tiny2};
+    font-size: 16;
+    color: ${props => props.light ? colors.white : colors.gray70}
+    font-weight: 200;
+`
+
 export const Text = styled.Text`
     margin-vertical: ${spacing.tiny2};
     font-size: 16;
-    color: ${colors.gray70}
-    font-weight: 400;
+    color: ${props => props.light ? colors.white : colors.gray70}
 `
 
 export const Text1 = styled.Text`
     margin-vertical: ${spacing.tiny2};
     font-size: 14;
-    color: ${colors.gray70}
+    color: ${props => props.light ? colors.white : colors.gray70}
     font-weight: 400;
 `
 
 export const Caption = styled.Text`
     margin-vertical: ${spacing.tiny2};
-    font-size: 13;
-    color: ${colors.gray40};
-    font-weight: 200;
+    font-size: 14;
+    color: ${props => props.light ? colors.white : colors.gray40}
+    font-weight: 100;
 `
 
 export const Number = styled.Text`
     margin-vertical: ${spacing.tiny2};
     font-size: 13;
-    color: ${colors.gray50}
+    color: ${colors.link}
     font-weight: 200;
     margin-right: 3;
     
 `
+
+export const LinkText = styled.Text`
+    margin-vertical: ${spacing.tiny2};
+    font-size: 14;
+    color: ${colors.link}
+    font-weight: 400;
+`
+
 
 export const RiskNumber = styled(Number) `
     text-decoration-line:line-through;
@@ -65,9 +79,8 @@ export const ButtonText = styled.Text`
 `
 
 export const PaddedView = styled.View`
-    padding-horizontal: ${spacing.small};
+    padding-horizontal: ${spacing.large};
     padding-vertical: ${spacing.medium};
-    margin-horizontal: ${spacing.small};
 `
 
 export const Cell = styled(PaddedView) ` 
@@ -97,6 +110,11 @@ export const Left = styled.View`
 export const Right = styled.View`
     flex:1;
     align-items: flex-end;
+`
+
+export const Horizontal = styled.View`
+    flex-direction: row;
+    align-items: center;
 `
 
 export const CloseView = styled.TouchableOpacity`

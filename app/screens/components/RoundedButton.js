@@ -11,13 +11,11 @@ const LightTitle = styled(TitleH4) `
 
 const AddButton = styled.TouchableOpacity`
     flex-direction: row;
-    height: 60;
     background-color: ${colors.link};
-    position: absolute;
-    bottom: ${spacing.small};
-    left: ${spacing.small};
-    right: ${spacing.small};
+    padding-vertical: ${spacing.small};
     padding-horizontal: ${spacing.small};
+    margin-vertical: ${spacing.small};
+    margin-horizontal: ${spacing.small};
     align-items: center;
     justify-content: center;
     border-radius: 5;

@@ -12,11 +12,10 @@ const Container = styled.TouchableOpacity`
     background-color: ${colors.white};
     margin-vertical: 10;
     margin-horizontal: 10; 
-    border-radius: 5;
+    border-radius: 15;
     border-width: 1;
     border-color: ${colors.gray5};
-    box-shadow: 10px 5px 5px ${colors.gray10};
-    elevation: 1;
+    overflow: hidden;
 `
 
 const Body = styled.View`

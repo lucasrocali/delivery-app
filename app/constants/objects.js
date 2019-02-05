@@ -147,7 +147,7 @@ export const MapStore = (raw, full) => {
         img_url: raw && raw.img_url ? raw.img_url : '',
         price_type: raw && raw.price_type ? raw.price_type : '$',
         phone_number: raw && raw.phone_number ? raw.phone_number : '',
-        delivery_estimation: raw && raw.delivery_estimation ? `${raw.delivery_estimation} mins` : '',
+        delivery_estimation: raw && raw.delivery_estimation ? `${raw.delivery_estimation}` : '',
         delivery_price: raw && raw.delivery_price ? raw.delivery_price : '',
         delivery_min_price: raw && raw.delivery_min_price ? raw.delivery_min_price : '',
         delivery_zero_price: raw && raw.delivery_zero_price ? raw.delivery_zero_price : '',
@@ -231,7 +231,7 @@ export const MapOptionsSection = (product) => {
 
 
 export const MapPrice = (price) => {
-    return `R$ ${price}`
+    return `$ ${price}`
 }
 
 export const MapCart = (cart, address, card) => {
@@ -240,7 +240,8 @@ export const MapCart = (cart, address, card) => {
         store_id: cart.store.id,
         address_id: address.id,
         total: getCartTotal(cart.order_products),
-        payment_method_id: card.id,
+        payment_method_id: card && card.id || '',
+        payment_method: 'Money',
         order_products_attributes: cart.order_products.map(order_product => MapCartOrderProduct(order_product))
     }
 }

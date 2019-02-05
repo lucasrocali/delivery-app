@@ -14,9 +14,10 @@ type Props = {
     value: string,
     label: string,
     editable: boolean,
+    secureTextEntry: boolean,
 }
 export default Base = (props: Props) => {
-    const { onChangeText, value, label, editable, onTouchStart } = props
+    const { onChangeText, value, label, editable, secureTextEntry, onTouchStart } = props
     return (
         <InputCell pointerEvents={typeof editable == 'boolean' && !editable ? 'none' : 'auto'}>
             <FloatingLabel
@@ -25,6 +26,7 @@ export default Base = (props: Props) => {
                 value={value}
                 editable={typeof editable == 'boolean' ? editable : true}
                 selectTextOnFocus={typeof editable == 'boolean' ? editable : true}
+                secureTextEntry={secureTextEntry}
             >{label}</FloatingLabel>
         </InputCell>
     );

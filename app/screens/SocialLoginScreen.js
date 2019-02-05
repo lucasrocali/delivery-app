@@ -9,14 +9,15 @@ import * as selectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title, Text, Cell, ButtonText } from './styled/index';
 import colors from '../constants/colors';
+import assets from '../constants/assets';
 import spacing from '../constants/spacing';
+import dimensions from '../constants/dimensions';
 import Ionicon from "react-native-vector-icons/Ionicons";
 import CloseBtn from './components/CloseBtn';
 import GoogleSignIn from 'react-native-google-sign-in';
 import { LoginButton, LoginManager, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
 import { facebookId, googleClientIdIOS, googleClientIdAndroid, googleClientIdAndroidProd } from '../constants/constants';
 import { screenNames } from '../navigation/Routers';
-import dimensions from '../constants/dimensions';
 
 const Container = styled.View`
     flex: 1;
@@ -24,14 +25,6 @@ const Container = styled.View`
     align-items: center;
     justify-content: center;
 `;
-
-const Image = styled.Image` 
-    width: ${dimensions.width * 0.7}
-`
-
-const SocialBtnText = styled(ButtonText) ` 
-    color: ${colors.link}
-`
 
 const Touchable = styled.TouchableOpacity`
 
@@ -73,6 +66,15 @@ const BottomView = styled.View`
     left: 0;
     right: 0;
     align-items: center;
+`
+
+const WhiteText = styled(ButtonText) `
+    color: ${colors.link}
+`
+
+const LogoImage = styled.Image`
+    width: ${dimensions.width * 0.7};
+    margin-bottom: ${spacing.large42}
 `
 
 type State = {
@@ -160,8 +162,8 @@ class SocialLogin extends Component<Props, State> {
         const { navigation } = this.props
         return (
             <Container>
+                <LogoImage source={assets.logo_full} resizeMode={'contain'} />
                 <CloseBtn onPress={() => navigation.goBack(null)} />
-                <Image source={require('./assets/logo_name_vertical.png')} resizeMode={'contain'} />
                 <FacebookBtn onPress={this.handleFacebookLogin.bind(this)}>
                     <Ionicon
                         name={'logo-facebook'}
@@ -182,13 +184,13 @@ class SocialLogin extends Component<Props, State> {
                 </GoogleBtn>
                 <BottomView>
                     <ManualBtn onPress={() => navigation.navigate({ routeName: screenNames.Login, key: screenNames.Login })}>
-                        <SocialBtnText>Login com email e senha</SocialBtnText>
+                        <WhiteText>Login com email e senha</WhiteText>
                     </ManualBtn>
                     <RegisterBtn onPress={() => navigation.navigate({ routeName: screenNames.Signup, key: screenNames.Signup })}>
-                        <SocialBtnText>Registrar</SocialBtnText>
+                        <WhiteText>Registrar</WhiteText>
                     </RegisterBtn>
                 </BottomView>
-            </Container >
+            </Container>
         );
     }
 }

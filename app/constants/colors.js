@@ -15,7 +15,7 @@ export default {
     warningText: '#666804',
     noticeBackground: tintColor,
     noticeText: '#fff',
-    baseColorOrange: '#ff9933',
+    baseColorOrange: '#FFA800',
     baseColorViolet: '#5f5f99',
     baseColorDark: '#333',
     black: '#000',

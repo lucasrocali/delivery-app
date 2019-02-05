@@ -58,6 +58,7 @@ class Login extends Component<Props, State> {
                                 value={values.password}
                                 label="Senha"
                                 placeholder="Senha"
+                                secureTextEntry
                             />
                             <Button onPress={handleSubmit} >
                                 <LoginText>Login</LoginText>

@@ -41,9 +41,9 @@ const icon_names = {
 const baseNavigationOption = (navigation, options: { title: string, leftIcon: boolean, leftRouteName: string, rightIcon: boolean, rightRouteName: string }, navigateTo) => {
     console.log('baseNavigationOption', navigation, options, navigateTo)
     return ({
-        title: navigation.state.params && navigation.state.params.title ? navigation.state.params.title : options.title,
+        title: navigation.state.params && navigation.state.params.title ? navigation.state.params.title.toUpperCase() : options.title.toUpperCase(),
         gesturesEnabled: false,
-        headerTintColor: colors.link,
+        headerTintColor: colors.black,
         tintColor: colors.link,
         headerStyle: {
             backgroundColor: colors.white,
@@ -221,7 +221,7 @@ export const screens = {
         component: {
             screen: PickerScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-                title: 'Picker',
+                title: 'Selecione',
                 leftIcon: icon_names.close
             }),
         }
@@ -231,7 +231,7 @@ export const screens = {
         component: {
             screen: OrdersScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-                title: 'Orders',
+                title: 'Pedidos',
                 leftIcon: icon_names.close
             }),
         }
@@ -241,7 +241,7 @@ export const screens = {
         component: {
             screen: OrderScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
-                title: 'Order',
+                title: 'Pedido',
                 leftIcon: icon_names.close
             }),
         }
@@ -281,6 +281,7 @@ export const screens = {
             screen: SignupScreen,
             navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
                 title: 'Cadastro',
+                leftIcon: icon_names.back,
             }),
         }
     }

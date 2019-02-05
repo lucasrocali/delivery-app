@@ -9,8 +9,10 @@ import colors from '../constants/colors';
 import { logout } from '../store/user/action';
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
-import { Title, Caption, Text, Cell } from './styled/index';
+import { Title, Caption, Text, TextLight, Cell } from './styled/index';
 import { screenNames } from '../navigation/Routers';
+import spacing from '../constants/spacing';
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 const Container = styled.View`
     flex: 1;
@@ -21,12 +23,32 @@ const Content = styled.View`
 `
 
 const PerfilView = styled(Cell) `
-    align-items: center;
+    flex-direction: row;
+`
+
+const Image = styled.Image` 
+    width: 50;
+    height: 50;
+    border-radius: 25;
+    background-color: ${colors.gray10};
+    margin-right: ${spacing.small};
+    margin-vertical: ${spacing.small};
+`
+
+const Vertical = styled.View`
     justify-content: center;
 `
 
 const Touchable = styled.TouchableOpacity`
+    flex-direction: row;    
+`
 
+const IconView = styled.View`
+    width: 30;
+    height: 30;
+    margin-right: ${spacing.small};
+    align-items: center;
+    justify-content: center;
 `
 
 type State = {
@@ -58,27 +80,62 @@ class Perfil extends Component<Props, State> {
                 {user && user.email ?
                     <Content>
                         <PerfilView>
-                            <Title>{user.name && user.name}</Title>
-                            <Caption>{user.email}</Caption>
+                            <Image />
+                            <Vertical>
+                                <Title>{user.name && user.name}</Title>
+                                <Caption>{user.email}</Caption>
+                            </Vertical>
                         </PerfilView>
                         <Cell>
                             <Touchable onPress={() => navigateTo(screenNames.AddressesStack)} >
-                                <Text>Endereços</Text>
+                                <IconView>
+                                    <Ionicon
+                                        name={'ios-pin'}
+                                        size={25}
+                                        color={colors.black}
+                                        backgroundColor={"transparent"}
+                                    />
+                                </IconView>
+                                <TextLight>Endereços</TextLight>
                             </Touchable>
                         </Cell>
                         <Cell>
                             <Touchable onPress={() => navigateTo(screenNames.OrdersStack)} >
-                                <Text>Pedidos</Text>
+                                <IconView>
+                                    <Ionicon
+                                        name={'ios-clipboard'}
+                                        size={25}
+                                        color={colors.black}
+                                        backgroundColor={"transparent"}
+                                    />
+                                </IconView>
+                                <TextLight>Pedidos</TextLight>
                             </Touchable>
                         </Cell>
                         <Cell>
                             <Touchable onPress={() => navigateTo(screenNames.CardsStack)} >
-                                <Text>Cartões</Text>
+                                <IconView>
+                                    <Ionicon
+                                        name={'ios-card'}
+                                        size={25}
+                                        color={colors.black}
+                                        backgroundColor={"transparent"}
+                                    />
+                                </IconView>
+                                <TextLight>Cartões</TextLight>
                             </Touchable>
                         </Cell>
                         <Cell>
                             <Touchable onPress={this.handlePress}>
-                                <Text>Logout</Text>
+                                <IconView>
+                                    <Ionicon
+                                        name={'ios-log-out'}
+                                        size={25}
+                                        color={colors.black}
+                                        backgroundColor={"transparent"}
+                                    />
+                                </IconView>
+                                <TextLight>Logout</TextLight>
                             </Touchable>
                         </Cell>
                     </Content>
@@ -86,7 +143,15 @@ class Perfil extends Component<Props, State> {
                     <Content>
                         <Cell>
                             <Touchable onPress={() => navigateTo(screenNames.LoginStack)}>
-                                <Text>Login</Text>
+                                <IconView>
+                                    <Ionicon
+                                        name={'ios-log-in'}
+                                        size={25}
+                                        color={colors.black}
+                                        backgroundColor={"transparent"}
+                                    />
+                                </IconView>
+                                <TextLight>Login</TextLight>
                             </Touchable>
                         </Cell>
                     </Content>

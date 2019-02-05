@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import { Text, Number, RiskNumber, Caption, Cell, Placeholder } from '../styled/index'
+import { TitleH3, Text, Number, RiskNumber, Caption, Cell, Placeholder, Left, Right, Horizontal } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
+import { MapPrice } from '../../constants/objects';
+import Ionicon from "react-native-vector-icons/Ionicons";
 
 import FastImage from 'react-native-fast-image'
 
@@ -19,25 +21,44 @@ const Row = styled.View`
 `
 
 const InfoView = styled.View`
-    flex: 4;
+    flex: 1;
+    padding-horizontal: ${spacing.small};
 `
 
 const ImageView = styled.View`
-    flex:1
+
 `
 
 const Image = styled(FastImage) `
     background-color: ${colors.gray5};
-    width: 50;
-    height: 50;
+    width: 90;
+    height: 120;
+    border-radius: 10;
+`
+
+const LargeNumber = styled(Number) `
+    font-size: 20;
+    font-weight: 500;
+`
+
+const OpenFlag = styled.View`
+    padding-horizontal: ${spacing.small};
+    border-radius: 10;
+    border-width: 1;
+    border-color: ${colors.gray40};
+`
+
+const OpenText = styled(Caption) `
+    color: ${props => props.open ? colors.link : colors.gray40};
 `
 
 type Props = {
     product: Object,
+    store: Object,
     onPress: Function
 }
-export default Base = (props: Props) => {
-    const { product, onPress } = props
+export default ProductCell = (props: Props) => {
+    const { product, store, onPress } = props
     if (typeof product == 'string') {
         return (
             <Container>
@@ -54,21 +75,43 @@ export default Base = (props: Props) => {
     return (
         <Touchable activeOpacity={onPress ? 0.7 : 1.0} onPress={onPress}>
             <Container>
-                <InfoView>
-                    <Text>{product.name}</Text>
-                    {product.descp != '' && <Caption>{product.descp}</Caption>}
-                    {product.promo_price < product.price ?
-                        <Row>
-                            <RiskNumber>{product.price_text}</RiskNumber>
-                            <Number>{product.promo_price_text}</Number>
-                        </Row>
-                        :
-                        <Number>{product.promo_price_text}</Number>
-                    }
-                </InfoView>
                 <ImageView>
-                    {product.img_url != '' && <Image source={{ uri: product.img_url }} />}
+                    <Image source={{ uri: product.img_url }} />
                 </ImageView>
+                <InfoView>
+                    <TitleH3>{product.name}</TitleH3>
+                    {store && store.name != '' && (
+                        <Horizontal>
+                            <Ionicon
+                                name={'ios-home'}
+                                size={15}
+                                color={colors.gray40}
+                            />
+                            <Caption> {store.name}</Caption>
+                        </Horizontal>)}
+                    {store && store.delivery_estimation != '' && (
+                        <Horizontal>
+                            <Ionicon
+                                name={'ios-timer'}
+                                size={15}
+                                color={colors.gray40}
+                            />
+                            <Caption> {store.delivery_estimation}</Caption>
+                        </Horizontal>
+                    )}
+                    {product.descp != '' && <Caption>{product.descp}</Caption>}
+                    <Horizontal>
+                        <Left>
+                            <LargeNumber>{product.promo_price_text}</LargeNumber>
+                        </Left>
+                        <Right>
+                            <OpenFlag>
+                                <OpenText open>Aberto</OpenText>
+                            </OpenFlag>
+                        </Right>
+                    </Horizontal>
+                    {store && store.delivery_price != '' && <Caption>{'Entrega ' + MapPrice(store.delivery_price)}</Caption>}
+                </InfoView>
             </Container>
         </Touchable>
     );

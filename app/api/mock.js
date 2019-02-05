@@ -72,6 +72,7 @@ export function getStoreRequest() {
         "name": "S1",
         "img_url": "https://gds.portal5g-media.com/contentFiles/image/2016/12/VEN/principal/97273_w840h0_1482403716jamp-burger-mushroom-burger.jpg",
         "price_type": "$$",
+        "delivery_price": "8",
         "delivery_estimation": "30 min",
         "menus": [
             {
@@ -82,7 +83,7 @@ export function getStoreRequest() {
                         "id": 1,
                         "name": "P1",
                         "price": 10,
-                        "promo_price": 10,
+                        "promo_price": 8,
                         "img_url": null,
                         "options": [
                             {
@@ -426,5 +427,17 @@ export function postOrderRequest(auth_token, cart) {
 }
 
 export function getOrdersRequest() {
+    return []
+}
+
+export function getOrderRequest() {
+    return {}
+}
+
+export function getCardsRequest() {
+    return []
+}
+
+export function postCardRequest() {
     return {}
 }

@@ -64,12 +64,14 @@ class Login extends Component<Props, State> {
                                 value={values.password}
                                 label="Senha"
                                 placeholder="Senha"
+                                secureTextEntry
                             />
                             <InputText
                                 onChangeText={handleChange('password_confirmation')}
                                 value={values.password_confirmation}
                                 label="Confirme a senha"
                                 placeholder="Confirme a senha"
+                                secureTextEntry
                             />
                             <Button onPress={handleSubmit} >
                                 <LoginText>Cadastrar</LoginText>

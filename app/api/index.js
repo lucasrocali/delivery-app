@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 
-const production = true;
+const production = false;
 
 var API = 'https://young-shelf-65999.herokuapp.com';
 

@@ -14,10 +14,11 @@ import CartProductCell from './components/CartProductCell'
 import AddressCell from './components/AddressCell';
 import CardCell from './components/CardCell';
 import RoundedButton from './components/RoundedButton';
-import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView, Row, Left, Right, TouchableCell } from './styled/index';
+import { Text, Title, Cell, TitleH3, TitleH2, Caption, TitleH4, PaddedView, Row, Left, Right, TouchableCell, LinkText } from './styled/index';
 import { screenNames } from '../navigation/Routers';
 import { getCartTotal } from '../constants/functions';
 import { MapPrice } from '../constants/objects';
+import spacing from '../constants/spacing';
 
 const Container = styled.View`
     flex: 1;
@@ -27,13 +28,18 @@ const Container = styled.View`
 const Header = styled.View`
 
 `
-
 const View = styled.View`
+    background-color: ${colors.white}
+`
 
+const AddressView = styled.View`
+    background-color: ${colors.link};
+    border-bottom-left-radius: 20;
+    border-bottom-right-radius: 20;
 `
 
 const CartList = styled(FlatList) `
-    margin-bottom: 80;
+
 `
 
 const TextView = styled(PaddedView) `
@@ -43,6 +49,15 @@ const TextView = styled(PaddedView) `
 const AddMoreBtn = styled(TouchableCell) `
     align-items: center;
     justify-content: center;
+`
+
+const TotalRow = styled(Row) `
+    margin-top: ${spacing.tiny4};
+`
+
+const DarkView = styled.View`
+    padding-top: 10;
+    background-color: ${colors.gray5}
 `
 
 type State = {
@@ -68,17 +83,17 @@ class Cart extends Component<Props, State> {
                         <Header>
 
                             {selected_address &&
-                                <View>
+                                <AddressView>
                                     <TextView>
-                                        <Title>{'Entregar em:'}</Title>
+                                        <Title>{'Entregar em'.toUpperCase()}</Title>
                                     </TextView>
-                                    <AddressCell address={selected_address} />
-                                </View>
+                                    <AddressCell address={selected_address} light />
+                                </AddressView>
                             }
 
                             {store &&
                                 <Cell>
-                                    <TitleH2>{store.name}</TitleH2>
+                                    <TitleH3>{store.name}</TitleH3>
                                     <Caption>{store.delivery_estimation}</Caption>
                                 </Cell>
                             }
@@ -92,52 +107,54 @@ class Cart extends Component<Props, State> {
                                     <AddMoreBtn
                                         onPress={() => navigation.navigate({ key: screenNames.Store, routeName: screenNames.Store, params: { title: store.name } })}
                                     >
-                                        <Caption>Adicionar mais itens</Caption>
+                                        <LinkText>Adicionar mais itens</LinkText>
                                     </AddMoreBtn>
                                     <Cell>
-                                        <Row>
+                                        <TotalRow>
                                             <Left>
                                                 <Caption>Subtotal</Caption>
                                             </Left>
                                             <Right>
                                                 <Caption>{MapPrice(cart_total)}</Caption>
                                             </Right>
-                                        </Row>
-                                        {store &&
-                                            <Row>
+                                        </TotalRow>
+                                        {store && store.delivery_price &&
+                                            <TotalRow>
                                                 <Left>
                                                     <Caption>Taxa de entrega</Caption>
                                                 </Left>
                                                 <Right>
                                                     <Caption>{MapPrice(store.delivery_price)}</Caption>
                                                 </Right>
-                                            </Row>
+                                            </TotalRow>
                                         }
-                                        <Row>
+                                        <TotalRow>
                                             <Left>
-                                                <Title>Total</Title>
+                                                <Caption>Total</Caption>
                                             </Left>
                                             <Right>
-                                                <Title>{MapPrice(cart_total)}</Title>
+                                                <Caption>{MapPrice(cart_total)}</Caption>
                                             </Right>
-                                        </Row>
+                                        </TotalRow>
                                     </Cell>
                                 </View>
                             }
 
                             {selected_card &&
-                                <View>
-                                    <TextView>
-                                        <Title>{'Pagamento:'}</Title>
-                                    </TextView>
-                                    <CardCell
-                                        card={selected_card}
-                                        onPress={() => navigation.navigate({
-                                            key: screenNames.CardsStack,
-                                            routeName: screenNames.CardsStack
-                                        })}
-                                    />
-                                </View>
+                                <DarkView>
+                                    <View>
+                                        <Cell>
+                                            <Title>{'Pagamento'}</Title>
+                                        </Cell>
+                                        <CardCell
+                                            card={selected_card}
+                                            onPress={() => navigation.navigate({
+                                                key: screenNames.CardsStack,
+                                                routeName: screenNames.CardsStack
+                                            })}
+                                        />
+                                    </View>
+                                </DarkView>
                             }
                         </View>
                     )}
@@ -148,7 +165,7 @@ class Cart extends Component<Props, State> {
                                 key: screenNames.ProductStack,
                                 routeName: screenNames.ProductStack,
                                 params: {
-                                    store_id: store.id,
+                                    store: store,
                                     order_product: order_product,
                                     title: store.name
                                 }

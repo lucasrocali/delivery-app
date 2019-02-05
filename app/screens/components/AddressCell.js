@@ -24,11 +24,12 @@ const IconView = styled.TouchableOpacity`
 type Props = {
     address: object,
     checked: boolean,
+    light: boolean,
     onPress: Function,
     onOptionsPress: Function,
 }
 export default AddressCell = (props: Props) => {
-    const { address, checked, onPress, onOptionsPress } = props
+    const { address, checked, light, onPress, onOptionsPress } = props
     return (
         <Container>
             {typeof checked == 'boolean' &&
@@ -44,8 +45,8 @@ export default AddressCell = (props: Props) => {
             }
             {address &&
                 <Touchable onPress={onPress}>
-                    <Text>{address.street + ', ' + address.number}</Text>
-                    <Caption>{address.neighborhood + ' - ' + address.city + ' - ' + address.state}</Caption>
+                    <Text light={light}>{address.street + ', ' + address.number}</Text>
+                    <Caption light={light}>{address.neighborhood + ' - ' + address.city + ' - ' + address.state}</Caption>
                 </Touchable>
             }
             {onOptionsPress &&

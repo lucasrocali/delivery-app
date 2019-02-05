@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { loadCards, selectedCard } from '../store/user/action'
 import * as selectors from '../store/user/selector';
 import styled from "styled-components";
-import { Title, Text, TouchableCell } from './styled/index';
+import { Title, Text, TouchableCell, LinkText } from './styled/index';
 import colors from '../constants/colors';
 import { screenNames } from '../navigation/Routers';
 import CardCell from './components/CardCell';
@@ -16,6 +16,10 @@ const Container = styled.View`
     flex: 1;
     background-color: ${colors.white};
 `;
+
+const FooterView = styled(TouchableCell) `
+    align-items: center;
+`
 
 type State = {
 
@@ -51,14 +55,14 @@ class Base extends Component<Props, State> {
                             onRefresh={this.onRefresh}
                         />
                     }
-                    ListHeaderComponent={() => (
-                        <TouchableCell
+                    ListFooterComponent={() => (
+                        <FooterView
                             onPress={() => navigation.navigate({
                                 key: screenNames.Card,
                                 routeName: screenNames.Card
                             })}>
-                            <Text>Novo cartão</Text>
-                        </TouchableCell>
+                            <LinkText>Adicionar cartão</LinkText>
+                        </FooterView>
                     )}
                     data={cards}
                     renderItem={({ item: card, index }) => (
