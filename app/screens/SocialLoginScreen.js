@@ -16,6 +16,7 @@ import GoogleSignIn from 'react-native-google-sign-in';
 import { LoginButton, LoginManager, AccessToken, GraphRequestManager, GraphRequest } from 'react-native-fbsdk'
 import { facebookId, googleClientIdIOS, googleClientIdAndroid, googleClientIdAndroidProd } from '../constants/constants';
 import { screenNames } from '../navigation/Routers';
+import dimensions from '../constants/dimensions';
 
 const Container = styled.View`
     flex: 1;
@@ -23,6 +24,14 @@ const Container = styled.View`
     align-items: center;
     justify-content: center;
 `;
+
+const Image = styled.Image` 
+    width: ${dimensions.width * 0.7}
+`
+
+const SocialBtnText = styled(ButtonText) ` 
+    color: ${colors.link}
+`
 
 const Touchable = styled.TouchableOpacity`
 
@@ -152,6 +161,7 @@ class SocialLogin extends Component<Props, State> {
         return (
             <Container>
                 <CloseBtn onPress={() => navigation.goBack(null)} />
+                <Image source={require('./assets/logo_name_vertical.png')} resizeMode={'contain'} />
                 <FacebookBtn onPress={this.handleFacebookLogin.bind(this)}>
                     <Ionicon
                         name={'logo-facebook'}
@@ -172,13 +182,13 @@ class SocialLogin extends Component<Props, State> {
                 </GoogleBtn>
                 <BottomView>
                     <ManualBtn onPress={() => navigation.navigate({ routeName: screenNames.Login, key: screenNames.Login })}>
-                        <ButtonText>Login com email e senha</ButtonText>
+                        <SocialBtnText>Login com email e senha</SocialBtnText>
                     </ManualBtn>
                     <RegisterBtn onPress={() => navigation.navigate({ routeName: screenNames.Signup, key: screenNames.Signup })}>
-                        <ButtonText>Registrar</ButtonText>
+                        <SocialBtnText>Registrar</SocialBtnText>
                     </RegisterBtn>
                 </BottomView>
-            </Container>
+            </Container >
         );
     }
 }

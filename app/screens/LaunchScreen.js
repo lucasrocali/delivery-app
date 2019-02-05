@@ -8,11 +8,18 @@ import * as selectors from '../store/user/selector';
 import styled from "styled-components";
 import { Title } from './styled/index';
 import colors from '../constants/colors';
+import dimensions from '../constants/dimensions';
 
 const Container = styled.View`
     flex: 1;
-    background-color: ${colors.white};
+    background-color: ${colors.link};
+    align-items: center;
+    justify-content: center;
 `;
+
+const Image = styled.Image` 
+    width: ${dimensions.width * 0.7}
+`
 
 type State = {
 
@@ -31,7 +38,7 @@ class Launch extends Component<Props, State> {
     render() {
         return (
             <Container>
-
+                <Image source={require('./assets/logo_white.png')} resizeMode={'contain'} />
             </Container>
         );
     }
