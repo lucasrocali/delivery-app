@@ -47,14 +47,20 @@ export const Text1 = styled.Text`
 export const Caption = styled.Text`
     margin-vertical: ${spacing.tiny2};
     font-size: 14;
-    color: ${props => props.light ? colors.white : colors.gray40}
+    color: ${props => props.light ? colors.white : colors.gray40};
+    font-weight: 100;
+`
+
+export const Caption2 = styled.Text`
+    margin-vertical: ${spacing.tiny2};
+    font-size: 12;
     font-weight: 100;
 `
 
 export const Number = styled.Text`
     margin-vertical: ${spacing.tiny2};
     font-size: 13;
-    color: ${colors.link}
+    color: ${colors.link2}
     font-weight: 200;
     margin-right: 3;
     
@@ -69,6 +75,7 @@ export const LinkText = styled.Text`
 
 
 export const RiskNumber = styled(Number) `
+    color: ${colors.gray40};
     text-decoration-line:line-through;
 `
 

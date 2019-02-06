@@ -37,8 +37,8 @@ const Image = styled(FastImage) `
 `
 
 const LargeNumber = styled(Number) `
-    font-size: 20;
-    font-weight: 500;
+    font-size: 16;
+    font-weight: 100;
 `
 
 const OpenFlag = styled.View`
@@ -100,16 +100,14 @@ export default ProductCell = (props: Props) => {
                         </Horizontal>
                     )}
                     {product.descp != '' && <Caption>{product.descp}</Caption>}
-                    <Horizontal>
-                        <Left>
-                            <LargeNumber>{product.promo_price_text}</LargeNumber>
-                        </Left>
-                        <Right>
-                            <OpenFlag>
-                                <OpenText open>Aberto</OpenText>
-                            </OpenFlag>
-                        </Right>
-                    </Horizontal>
+                    {product.promo_price < product.price ?
+                        <Row>
+                            <RiskNumber>{product.price_text}</RiskNumber>
+                            <Number>{product.promo_price_text}</Number>
+                        </Row>
+                        :
+                        <Number>{product.promo_price_text}</Number>
+                    }
                     {store && store.delivery_price != '' && <Caption>{'Entrega ' + MapPrice(store.delivery_price)}</Caption>}
                 </InfoView>
             </Container>

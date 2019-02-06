@@ -41,6 +41,7 @@ const getCurrentAddress = state => userSelectors.getSelectedAddress(state)
 const getCurrentCard = state => userSelectors.getSelectedCard(state)
 const getOpenedOrder = state => cartSelectors.getOpenedOrder(state)
 const getSelectedCategoryId = state => storeSelectors.getSelectedCategoryId(state)
+const getSearchingText = state => storeSelectors.getSearchingText(state)
 
 const myFirebaseApp = firebase.initializeApp({
     apiKey: "rzn1ccZZOWRGMngPP5pnTRBMN10cDgjw2a0s2ep5",
@@ -160,13 +161,13 @@ const loadCategories = function* (action) {
 
         yield put(storeActions.loadCategoriesSuccess(categories))
 
-        let first_category_id = null
+        // let first_category_id = null
 
-        if (categories && categories.length > 0) {
-            first_category_id = categories[0].id
-        }
+        // if (categories && categories.length > 0) {
+        //     first_category_id = categories[0].id
+        // }
 
-        yield put(storeActions.loadStores(first_category_id))
+        yield put(storeActions.loadStores())
     } catch (error) {
         console.log(error);
         yield put(storeActions.setError(error))
@@ -178,11 +179,18 @@ const loadStores = function* (action) {
         yield put(storeActions.setLoading(true))
 
         const category_id = yield select(getSelectedCategoryId)
+        const searchingText = yield select(getSearchingText)
 
-        console.log('category_id', category_id)
+        console.log('category_id', category_id, searchingText)
 
-        const data = {
-            category_id
+        let data = {}
+
+        if (category_id) {
+            data.category_id = category_id
+        }
+
+        if (searchingText) {
+            data.query = searchingText
         }
 
         const response = yield call(api.getStoresRequest, data)

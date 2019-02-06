@@ -145,7 +145,7 @@ class Product extends Component<Props, State> {
                         (<Header>
                             <ProductCell
                                 product={product}
-                                store={store}
+                            // store={store}
                             />
                             <InfoView>
                                 <Touchable disabled={quantity == 1} onPress={() => this.setState({ quantity: quantity - 1 })}>

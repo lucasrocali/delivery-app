@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import { Text } from '../styled/index'
+import { Caption2 } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
+import FastImage from 'react-native-fast-image'
 
 const Container = styled.TouchableOpacity`
     margin-vertical: ${spacing.tiny};
@@ -10,12 +11,12 @@ const Container = styled.TouchableOpacity`
     align-items: center;
 `;
 
-const Title = styled(Text) `
+const Title = styled(Caption2) `
     text-align: center;
 `
 
-const Image = styled.Image`
-    background-color: ${colors.gray10}; 
+const Image = styled(FastImage) `
+    background-color: ${colors.gray5}; 
     width: 100;
     height: 60;
     border-radius: 12;

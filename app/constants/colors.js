@@ -28,5 +28,6 @@ export default {
     gray50: '#666',
     gray60: '#444',
     gray70: '#222',
-    link: '#FFA800'
+    link: '#FFA800',
+    link2: '#FB4000'
 };

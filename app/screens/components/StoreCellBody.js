@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import colors from '../../constants/colors';
 import dimensions from '../../constants/dimensions';
+import spacing from '../../constants/spacing';
 import { Title, Caption, Cell, Left, Right, Placeholder } from '../styled/index'
 
 
@@ -18,6 +19,17 @@ const Body = styled(Cell) `
 
 const Row = styled.View`
     flex-direction: row;
+`
+
+const OpenFlag = styled.View`
+    padding-horizontal: ${spacing.small};
+    border-radius: 10;
+    border-width: 1;
+    border-color: ${colors.gray40};
+`
+
+const OpenText = styled(Caption) `
+    color: ${props => props.open ? colors.link2 : colors.gray40};
 `
 
 type Props = {
@@ -48,7 +60,10 @@ export default StoreCellBody = (props: Props) => {
                     <Caption>{store.price_type}</Caption>
                 </Left>
                 <Right>
-                    <Caption>{store.delivery_estimation}</Caption>
+                    <OpenFlag>
+                        <OpenText open>Aberto</OpenText>
+                    </OpenFlag>
+                    {/* <Caption>{store.delivery_estimation}</Caption> */}
                 </Right>
             </Row>
         </Body>

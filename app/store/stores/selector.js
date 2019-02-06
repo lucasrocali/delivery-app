@@ -15,6 +15,10 @@ export function getSelectedCategoryId(state) {
     return state.stores_reducer.selected_category_id
 }
 
+export function getSearchingText(state) {
+    return state.stores_reducer.searchingText
+}
+
 export function isLoading(state) {
     return state.stores_reducer.loading
 }

@@ -45,10 +45,11 @@ export function loadStoreSuccess(store: Object) {
 }
 
 
-export function loadStores(category_id: string = '') {
+export function loadStores(category_id: string = '', searchingText: string = '') {
     return {
         type: actionTypes.LOAD_STORES,
-        category_id
+        category_id,
+        searchingText
     }
 }
 
