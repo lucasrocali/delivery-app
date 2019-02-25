@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
-import { Cell, Text, Caption } from '../styled/index';
+import { Cell, Text, Caption, TouchableCell } from '../styled/index';
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
 import { getCartTotal } from '../../constants/functions';
 
-const Container = styled(Cell) `
+const Container = styled(TouchableCell) `
   
 `;
 

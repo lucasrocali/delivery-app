@@ -1,4 +1,5 @@
 export const getCartProductTotal = (order_product) => {
+    console.log('product_total')
     const options_total = order_product.selected_options && Object.keys(order_product.selected_options).reduce((total, key) => total + order_product.selected_options[key].reduce((total, so) => total + so.price, 0), 0)
     return order_product.quantity * (order_product.product.current_price + options_total)
 }
@@ -8,6 +9,7 @@ export const getCartTotal = (order_products) => {
 }
 
 export const getCartProductSubOptions = (order_product) => {
+    console.log('getCartProductSubOptions')
     const { product, quantity, selected_options } = order_product
     const sub_options = []
     Object.keys(selected_options).map((key) => selected_options[key].map((so) => sub_options.push(so)))

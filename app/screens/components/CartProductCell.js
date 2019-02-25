@@ -16,7 +16,7 @@ const Container = styled(Cell) `
 `
 
 const InfoView = styled(Left) ` 
-    flex: 5;
+    flex: 4;
 `
 const Icon = styled(Ionicon) `
     margin-left: ${spacing.tiny}
@@ -24,13 +24,14 @@ const Icon = styled(Ionicon) `
 
 type Props = {
     order_product: Object,
+    hideMenu: boolean,
     onPress: Function
 }
 export default CartProductCell = (props: Props) => {
-    const { order_product, onPress } = props
-    const { product, quantity, selected_options } = order_product
-    const order_product_total = getCartProductTotal(order_product)
-    const order_product_sub_options = getCartProductSubOptions(order_product)
+    const { order_product, hideMenu, onPress } = props
+    const { product, quantity, selected_options, product_total, sub_options_total } = order_product
+    const order_product_total = typeof product_total == 'number' ? product_total : getCartProductTotal(order_product)
+    const order_product_sub_options = typeof sub_options_total == 'number' ? sub_options_total : getCartProductSubOptions(order_product)
     console.log(order_product, order_product_sub_options)
     return (
         <Touchable activeOpacity={onPress ? 0.7 : 1.0} onPress={onPress}>
@@ -45,12 +46,14 @@ export default CartProductCell = (props: Props) => {
                 <Right>
                     <Text>{MapPrice(order_product_total)}</Text>
                 </Right>
-                <Icon
-                    name={'ios-menu'}
-                    size={25}
-                    color={colors.link}
-                    backgroundColor={"transparent"}
-                />
+                {!hideMenu &&
+                    <Icon
+                        name={'ios-menu'}
+                        size={25}
+                        color={colors.link}
+                        backgroundColor={"transparent"}
+                    />
+                }
             </Container>
         </Touchable>
     );

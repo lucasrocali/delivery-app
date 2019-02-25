@@ -133,7 +133,7 @@ class Cart extends Component<Props, State> {
                                                 <Caption>Total</Caption>
                                             </Left>
                                             <Right>
-                                                <Caption>{MapPrice(cart_total)}</Caption>
+                                                <Caption>{MapPrice(cart_total + store.delivery_price)}</Caption>
                                             </Right>
                                         </TotalRow>
                                     </Cell>

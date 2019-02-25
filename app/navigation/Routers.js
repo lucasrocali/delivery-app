@@ -13,6 +13,7 @@ import LoginScreen from '../screens/LoginScreen';
 import PerfilScreen from '../screens/PerfilScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import OrderScreen from '../screens/OrderScreen';
+import OrderDetailScreen from '../screens/OrderDetailScreen';
 import AddressesScreen from '../screens/AddressesScreen';
 import AddressScreen from '../screens/AddressScreen';
 import StoresScreen from '../screens/StoresScreen';
@@ -80,6 +81,7 @@ export const screenNames = {
     Addresses: 'Addresses',
     Orders: 'Orders',
     Order: 'Order',
+    OrderDetail: 'OrderDetail',
     Picker: 'Picker',
     Cards: 'Cards',
     Card: 'Card',
@@ -246,6 +248,16 @@ export const screens = {
             }),
         }
     },
+    [screenNames.OrderDetail]: {
+        name: screenNames.OrderDetail,
+        component: {
+            screen: OrderDetailScreen,
+            navigationOptions: ({ navigation }) => baseNavigationOption(navigation, {
+                title: 'Pedido',
+                leftIcon: icon_names.close
+            }),
+        }
+    },
     [screenNames.Base]: {
         name: screenNames.Base,
         component: {
@@ -352,7 +364,8 @@ export const stacks = {
         name: screenNames.OrdersStack,
         component: StackNavigator(
             {
-                [screens.Orders.name]: screens.Orders.component
+                [screens.Orders.name]: screens.Orders.component,
+                [screens.OrderDetail.name]: screens.OrderDetail.component
             }
         )
     },
