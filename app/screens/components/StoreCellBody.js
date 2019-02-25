@@ -57,7 +57,9 @@ export default StoreCellBody = (props: Props) => {
             <Title>{store.name}</Title>
             <Row>
                 <Left>
-                    <Caption>{store.price_type}</Caption>
+                    {/* <Caption>{store.price_type}</Caption> */}
+                    <Caption>{store.delivery_estimation_text}</Caption>
+                    <Caption>{`Entrega: ${store.delivery_price_text}`}</Caption>
                 </Left>
                 <Right>
                     <OpenFlag>

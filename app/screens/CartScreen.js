@@ -94,7 +94,7 @@ class Cart extends Component<Props, State> {
                             {store &&
                                 <Cell>
                                     <TitleH3>{store.name}</TitleH3>
-                                    <Caption>{store.delivery_estimation}</Caption>
+                                    <Caption>{`Previsão de entrega: ${store.delivery_estimation_text}`}</Caption>
                                 </Cell>
                             }
 

@@ -147,7 +147,9 @@ export const MapStore = (raw, full) => {
         price_type: raw && raw.price_type ? raw.price_type : '$',
         phone_number: raw && raw.phone_number ? raw.phone_number : '',
         delivery_estimation: raw && raw.delivery_estimation ? `${raw.delivery_estimation}` : '',
+        delivery_estimation_text: raw && raw.delivery_estimation ? `${raw.delivery_estimation} min` : '',
         delivery_price: raw && raw.delivery_price ? raw.delivery_price : '',
+        delivery_price_text: raw && raw.delivery_price ? MapPrice(raw.delivery_price) : '',
         delivery_min_price: raw && raw.delivery_min_price ? raw.delivery_min_price : '',
         delivery_zero_price: raw && raw.delivery_zero_price ? raw.delivery_zero_price : '',
         menus: raw && raw.menus ? raw.menus.map(menu => MapMenu(menu)) : [],
@@ -230,7 +232,7 @@ export const MapOptionsSection = (product) => {
 
 
 export const MapPrice = (price) => {
-    return `$ ${price}`
+    return `R$ ${price}`
 }
 
 export const MapCart = (cart, address, card) => {

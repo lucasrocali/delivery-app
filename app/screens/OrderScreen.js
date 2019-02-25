@@ -70,7 +70,7 @@ class Base extends Component<Props, State> {
         console.log('order', this.props, this.state, order, driver_location)
         return (
             <Container>
-                {address_location && address_location.latitude && address_location.longitude &&
+                {address_location && address_location.latitude && address_location.longitude && false &&
                     <MapView
                         provider={'google'}
                         ref={c => this.mapView = c}
@@ -132,6 +132,8 @@ class Base extends Component<Props, State> {
                     data={order.order_statuses}
                     renderItem={({ item: order_status, index }) => (
                         <OrderStatusCell
+                            first={index == 0}
+                            last={index == order.order_statuses.length - 1}
                             order_status={order_status}
                         />
                     )}

@@ -96,7 +96,7 @@ export default ProductCell = (props: Props) => {
                                 size={15}
                                 color={colors.gray40}
                             />
-                            <Caption> {store.delivery_estimation}</Caption>
+                            <Caption> {store.delivery_estimation_text}</Caption>
                         </Horizontal>
                     )}
                     {product.descp != '' && <Caption>{product.descp}</Caption>}
