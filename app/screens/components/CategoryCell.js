@@ -33,7 +33,7 @@ export default Base = (props: Props) => {
     const { category, onPress } = props
     return (
         <Container activeOpacity={0.9} onPress={onPress}>
-            <Image source={{ uri: category.img_url }} />
+            {category.img_url && <Image source={{ uri: category.img_url }} />}
             <Title>{category.name}</Title>
         </Container>
     );

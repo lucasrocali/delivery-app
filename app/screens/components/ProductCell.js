@@ -76,7 +76,7 @@ export default ProductCell = (props: Props) => {
         <Touchable activeOpacity={onPress ? 0.7 : 1.0} onPress={onPress}>
             <Container>
                 <ImageView>
-                    <Image source={{ uri: product.img_url }} />
+                    {product.img_url && <Image source={{ uri: product.img_url }} />}
                 </ImageView>
                 <InfoView>
                     <TitleH3>{product.name}</TitleH3>
