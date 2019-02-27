@@ -44,7 +44,7 @@ const SearchContent = styled.View`
 
 const InputText = styled.TextInput`
     flex: 1;
-    height: 30;
+    height: 40;
     margin-right: ${spacing.small};
     margin-vertical: ${spacing.small};
     padding-left: ${spacing.small};
@@ -123,8 +123,14 @@ class Categories extends Component<Props, State> {
                                     key={i}
                                     category={category}
                                     onPress={(store) => {
-                                        this.setState({ currentCategory: category })
-                                        loadStores(category.id)
+                                        if (this.state.currentCategory != category) {
+                                            this.setState({ currentCategory: category })
+                                            loadStores(category.id)
+                                        } else {
+                                            this.setState({ currentCategory: null })
+                                            loadStores()
+                                        }
+
                                     }}
                                 />
                             )}

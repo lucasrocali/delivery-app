@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from "styled-components";
 import { ActivityIndicator } from 'react-native';
-import { TitleH4, Left, Right } from '../styled/index'
+import { TitleH4, Left, Right, TextLight } from '../styled/index'
 import spacing from '../../constants/spacing';
 import colors from '../../constants/colors';
 
-const LightTitle = styled(TitleH4) `
+const LightTitle = styled(TextLight) `
     color: ${colors.white};
 `
 

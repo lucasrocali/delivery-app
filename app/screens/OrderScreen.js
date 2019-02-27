@@ -29,6 +29,9 @@ const MapUpdateButton = styled(TouchableCell) `
 
 const Header = styled(Cell) ``
 
+const List = styled(FlatList) `
+    flex: 2;
+`
 
 type State = {
 
@@ -70,7 +73,7 @@ class Base extends Component<Props, State> {
         console.log('order', this.props, this.state, order, driver_location)
         return (
             <Container>
-                {address_location && address_location.latitude && address_location.longitude && false &&
+                {address_location && address_location.latitude && address_location.longitude &&
                     <MapView
                         provider={'google'}
                         ref={c => this.mapView = c}
@@ -128,7 +131,7 @@ class Base extends Component<Props, State> {
                             />}
                     </MapView>
                 }
-                <FlatList
+                <List
                     data={order.order_statuses}
                     renderItem={({ item: order_status, index }) => (
                         <OrderStatusCell

@@ -140,7 +140,7 @@ class Cart extends Component<Props, State> {
                                 </View>
                             }
 
-                            {selected_card &&
+                            {selected_card ?
                                 <DarkView>
                                     <View>
                                         <Cell>
@@ -154,6 +154,15 @@ class Cart extends Component<Props, State> {
                                             })}
                                         />
                                     </View>
+                                </DarkView>
+                                :
+                                <DarkView>
+                                    <TouchableCell onPress={() => navigation.navigate({
+                                        key: screenNames.CardsStack,
+                                        routeName: screenNames.CardsStack
+                                    })}>
+                                        <Title>{'Selecione pagamento'}</Title>
+                                    </TouchableCell>
                                 </DarkView>
                             }
                         </View>
@@ -177,7 +186,7 @@ class Cart extends Component<Props, State> {
                     leftText={'Finalizar pedido'}
                     loading={loading}
                     rightText={MapPrice(cart_total)}
-                    disabled={order_products.length == 0 || loading}
+                    disabled={order_products.length == 0 || loading || !selected_card}
                     onPress={() => placeOrder()}
                 />
             </Container>

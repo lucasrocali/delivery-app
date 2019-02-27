@@ -23,7 +23,7 @@ const Container = styled.View`
     flex: 1;
     background-color: ${colors.white};
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 `;
 
 const Touchable = styled.TouchableOpacity`
@@ -74,7 +74,7 @@ const WhiteText = styled(ButtonText) `
 
 const LogoImage = styled.Image`
     width: ${dimensions.width * 0.7};
-    margin-bottom: ${spacing.large42}
+    margin-vertical: ${spacing.large42}
 `
 
 type State = {
