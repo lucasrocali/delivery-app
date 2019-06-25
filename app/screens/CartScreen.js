@@ -186,7 +186,7 @@ class Cart extends Component<Props, State> {
                     leftText={'Finalizar pedido'}
                     loading={loading}
                     rightText={MapPrice(cart_total)}
-                    disabled={order_products.length == 0 || loading || !selected_card}
+                    disabled={order_products.length == 0 || loading}
                     onPress={() => placeOrder()}
                 />
             </Container>
