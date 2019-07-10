@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native'
 
 const { width, height } = Dimensions.get('window')
 const storeNormalPct = 0.85
-const storeFullPct = 0.95
+const storeFullPct = 1.0
 export default {
     width: width,
     height: height,

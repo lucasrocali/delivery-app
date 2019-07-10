@@ -58,7 +58,7 @@ class OrderDetail extends Component<Props, State> {
         // console.log(JSON.stringify(cart))
         const { store, address, total: cart_total, order_products } = order
         // const order_products = []
-        console.log(store, order_products)
+        console.log('product_total orderdetail', store, order_products)
         return (
             <Container>
                 <CartList
@@ -70,10 +70,10 @@ class OrderDetail extends Component<Props, State> {
                     )}
                     ListFooterComponent={() => (
                         <View>
-                            {store &&
+                            {store ?
                                 <View>
                                     <Cell>
-                                        {store && store.delivery_price &&
+                                        {store && store.delivery_price ?
                                             <TotalRow>
                                                 <Left>
                                                     <Caption>Taxa de entrega</Caption>
@@ -82,7 +82,7 @@ class OrderDetail extends Component<Props, State> {
                                                     <Caption>{MapPrice(store.delivery_price)}</Caption>
                                                 </Right>
                                             </TotalRow>
-                                        }
+                                            : <View />}
                                         <TotalRow>
                                             <Left>
                                                 <Caption>Total</Caption>
@@ -93,7 +93,7 @@ class OrderDetail extends Component<Props, State> {
                                         </TotalRow>
                                     </Cell>
                                 </View>
-                            }
+                                : <View />}
                         </View>
                     )}
                     renderItem={({ item: order_product, index }) => (

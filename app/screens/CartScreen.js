@@ -140,7 +140,7 @@ class Cart extends Component<Props, State> {
                                 </View>
                             }
 
-                            {selected_card ?
+                            {/* {selected_card ?
                                 <DarkView>
                                     <View>
                                         <Cell>
@@ -164,7 +164,7 @@ class Cart extends Component<Props, State> {
                                         <Title>{'Selecione pagamento'}</Title>
                                     </TouchableCell>
                                 </DarkView>
-                            }
+                            } */}
                         </View>
                     )}
                     renderItem={({ item: order_product, index }) => (

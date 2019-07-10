@@ -1,10 +1,11 @@
 export const getCartProductTotal = (order_product) => {
-    console.log('product_total')
+    console.log('product_total', order_product)
     const options_total = order_product.selected_options && Object.keys(order_product.selected_options).reduce((total, key) => total + order_product.selected_options[key].reduce((total, so) => total + so.price, 0), 0)
     return order_product.quantity * (order_product.product.current_price + options_total)
 }
 
 export const getCartTotal = (order_products) => {
+    console.log('product_total total', order_products)
     return order_products ? order_products.reduce((total, order_product) => total + getCartProductTotal(order_product), 0) : 0
 }
 

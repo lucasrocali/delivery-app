@@ -15,8 +15,8 @@ export default {
     warningText: '#666804',
     noticeBackground: tintColor,
     noticeText: '#fff',
-    baseColorOrange: '#FFA800',
-    baseColorViolet: '#5f5f99',
+    baseColorOrange: '#417285',
+    baseColorViolet: '#302727',
     baseColorDark: '#333',
     black: '#000',
     gray1: '#FEFEFE',
@@ -28,6 +28,6 @@ export default {
     gray50: '#666',
     gray60: '#444',
     gray70: '#222',
-    link: '#FFA800',
-    link2: '#FB4000'
+    link: '#417285',
+    link2: '#417285'
 };

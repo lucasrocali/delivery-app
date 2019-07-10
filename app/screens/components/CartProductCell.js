@@ -22,6 +22,8 @@ const Icon = styled(Ionicon) `
     margin-left: ${spacing.tiny}
 `
 
+const View = styled.View``
+
 type Props = {
     order_product: Object,
     hideMenu: boolean,
@@ -38,22 +40,22 @@ export default CartProductCell = (props: Props) => {
             <Container>
                 <InfoView>
                     <Text>{quantity + 'x ' + product.name}</Text>
-                    {product.descp != '' && <Caption>{product.descp}</Caption>}
-                    {order_product_sub_options && order_product_sub_options.map((so, i) => (
+                    {product.descp != '' ? <Caption>{product.descp}</Caption> : null}
+                    {order_product_sub_options && order_product_sub_options.length > 0 ? order_product_sub_options.map((so, i) => (
                         <Caption key={i}>{' - '.concat(so.name).concat(so.price == 0 ? '' : ' (' + so.price_text + ')')}</Caption>
-                    ))}
+                    )) : <View />}
                 </InfoView>
                 <Right>
                     <Text>{MapPrice(order_product_total)}</Text>
                 </Right>
-                {!hideMenu &&
+                {!hideMenu ?
                     <Icon
                         name={'ios-menu'}
                         size={25}
                         color={colors.link}
                         backgroundColor={"transparent"}
                     />
-                }
+                    : <View />}
             </Container>
         </Touchable>
     );

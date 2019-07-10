@@ -112,7 +112,7 @@ class Perfil extends Component<Props, State> {
                                 <TextLight>Pedidos</TextLight>
                             </Touchable>
                         </Cell>
-                        <Cell>
+                        {/* <Cell>
                             <Touchable onPress={() => navigateTo(screenNames.CardsStack)} >
                                 <IconView>
                                     <Ionicon
@@ -124,7 +124,7 @@ class Perfil extends Component<Props, State> {
                                 </IconView>
                                 <TextLight>Cartões</TextLight>
                             </Touchable>
-                        </Cell>
+                        </Cell> */}
                         <Cell>
                             <Touchable onPress={this.handlePress}>
                                 <IconView>

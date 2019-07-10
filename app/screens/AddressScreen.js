@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { createAddress, loadAddressInfo } from '../store/user/action'
 import * as userSelectors from '../store/user/selector';
 import styled from "styled-components";
-import { Title, Cell, Button, ButtonText, Caption } from './styled/index'
+import { Title, Cell, Button, ButtonText, Caption, LinkText } from './styled/index'
 import colors from '../constants/colors'
 import spacing from '../constants/spacing';
 import { Formik } from 'formik';
@@ -130,7 +130,7 @@ class Address extends Component<Props, State> {
                                         loadAddressInfo({ zip: values.zipcode })
                                     }}
                                 >
-                                    <Caption>Buscar Endereço</Caption>
+                                    <LinkText>Buscar Endereço</LinkText>
                                 </SearchButton>
                             </Row>
                             <AddressInput
@@ -211,7 +211,7 @@ class Address extends Component<Props, State> {
                                     })
                                 }}
                             >
-                                <Caption>Buscar Cep</Caption>
+                                <LinkText>Buscar Cep</LinkText>
                             </SearchButton>
                             <Button onPress={handleSubmit} >
                                 <SubmitText>Salvar</SubmitText>

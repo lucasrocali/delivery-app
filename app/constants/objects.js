@@ -134,7 +134,7 @@ export const MapCategory = (raw) => {
     return {
         id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
-        img_url: raw && raw.img_url || ''
+        img_url: raw && raw.img_url ? `${raw.img_url}?id=${raw.id}` : '',
     }
 }
 
@@ -143,7 +143,7 @@ export const MapStore = (raw, full) => {
         id: raw && raw.id ? raw.id : null,
         name: raw && raw.name ? raw.name : '',
         foo: 'store',
-        img_url: raw && raw.img_url ? raw.img_url : '',
+        img_url: raw && raw.img_url ? `${raw.img_url}?id=${raw.id}` : '',
         price_type: raw && raw.price_type ? raw.price_type : '$',
         phone_number: raw && raw.phone_number ? raw.phone_number : '',
         delivery_estimation: raw && raw.delivery_estimation ? `${raw.delivery_estimation}` : '',
@@ -177,7 +177,7 @@ export const MapProduct = (raw) => {
         price_text: raw && raw.price ? MapPrice(raw.price) : '',
         promo_price: raw && raw.promo_price ? raw.promo_price : '',
         promo_price_text: raw && raw.promo_price ? MapPrice(raw.promo_price) : '',
-        img_url: raw && raw.img_url ? raw.img_url : '',
+        img_url: raw && raw.img_url ? `${raw.img_url}?id=${raw.id}` : '',
         options: raw && raw.options ? raw.options.map(option => MapOption(option)) : []
     }
 }

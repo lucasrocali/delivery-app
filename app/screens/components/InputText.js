@@ -9,6 +9,11 @@ const InputCell = styled(Cell) `
     flex: 1;
     padding-vertical: 0;
 `
+
+const InputText = styled.TextInput`
+
+`
+
 type Props = {
     onChangeText: Function,
     value: string,
@@ -20,14 +25,15 @@ export default Base = (props: Props) => {
     const { onChangeText, value, label, editable, secureTextEntry, onTouchStart } = props
     return (
         <InputCell pointerEvents={typeof editable == 'boolean' && !editable ? 'none' : 'auto'}>
-            <FloatingLabel
+            <InputText
                 inputStyle={{ borderWidth: 0 }}
                 onChangeText={onChangeText}
                 value={value}
+                placeholder={label}
                 editable={typeof editable == 'boolean' ? editable : true}
                 selectTextOnFocus={typeof editable == 'boolean' ? editable : true}
                 secureTextEntry={secureTextEntry}
-            >{label}</FloatingLabel>
+                underlineColorAndroid='transparent' />
         </InputCell>
     );
 }

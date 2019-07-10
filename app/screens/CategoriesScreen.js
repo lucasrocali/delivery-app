@@ -94,6 +94,7 @@ class Categories extends Component<Props, State> {
                         onChangeText={(value) => this.setState({ searchingText: value })}
                         value={searchingText}
                         placeholder="Busque por restaurante"
+                        underlineColorAndroid='transparent'
                     />
                     <SearchBtn
                         activeOpacity={0.8}

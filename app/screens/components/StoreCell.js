@@ -10,10 +10,7 @@ import FastImage from 'react-native-fast-image'
 const Container = styled.TouchableOpacity`
     width: ${props => props.full ? dimensions.estabCellFullWidth : dimensions.estabCellWidth}
     background-color: ${colors.white};
-    margin-vertical: 10;
-    margin-horizontal: 10; 
-    border-radius: 15;
-    border-width: 1;
+    border-bottom-width: 1;
     border-color: ${colors.gray5};
     overflow: hidden;
 `

@@ -19,7 +19,7 @@ const Image = styled(FastImage) `
     background-color: ${colors.gray5}; 
     width: 100;
     height: 60;
-    border-radius: 12;
+    border-radius: 4;
 `
 
 type Props = {
