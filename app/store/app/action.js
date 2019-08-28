@@ -38,3 +38,10 @@ export function displayToastMsg(toast_msg) {
         toast_msg
     }
 }
+
+export function setSelectedCity(city) {
+    return {
+        type: actionTypes.SET_SELECTED_CITY,
+        city
+    }
+}

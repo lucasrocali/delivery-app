@@ -6,3 +6,7 @@ export function getCredentials(state) {
 export function getToastMsg(state) {
     return state.app_reducer.toast_msg
 }
+
+export function getSelectedCity(state) {
+    return state.app_reducer.selected_city
+}
