@@ -28,6 +28,6 @@ export default {
     gray50: '#666',
     gray60: '#444',
     gray70: '#222',
-    link: '#417285',
-    link2: '#417285'
+    link: '#ee1d24',
+    link2: '#ee1d24' //fec90a
 };

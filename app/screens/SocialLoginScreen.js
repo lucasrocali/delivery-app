@@ -74,6 +74,7 @@ const WhiteText = styled(ButtonText) `
 
 const LogoImage = styled.Image`
     width: ${dimensions.width * 0.7};
+    height: 200;
     margin-vertical: ${spacing.large42}
 `
 

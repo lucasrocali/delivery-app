@@ -3,7 +3,8 @@ import * as userActionTypes from '../user/actionType';
 
 const initialState = {
     user_credentials: {},
-    toast_msg: null
+    toast_msg: null,
+    selected_city: null
 }
 
 export default function appReducer(state = initialState, action) {
@@ -27,6 +28,12 @@ export default function appReducer(state = initialState, action) {
             return {
                 ...state,
                 toast_msg
+            }
+        case actionTypes.SET_SELECTED_CITY:
+            const { city } = action
+            return {
+                ...state,
+                selected_city: city
             }
         default:
             return state

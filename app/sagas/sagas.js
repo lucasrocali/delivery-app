@@ -180,8 +180,10 @@ const loadStores = function* (action) {
 
         const category_id = yield select(getSelectedCategoryId)
         const searchingText = yield select(getSearchingText)
+        const city = yield select(state => appSelectors.getSelectedCity(state))
+        const city_id = city.id
 
-        console.log('category_id', category_id, searchingText)
+        console.log('category_id', category_id, searchingText, 'city_id', city_id)
 
         let data = {}
 
@@ -191,6 +193,10 @@ const loadStores = function* (action) {
 
         if (searchingText) {
             data.query = searchingText
+        }
+
+        if (city_id) {
+            data.city_id = city_id
         }
 
         const response = yield call(api.getStoresRequest, data)
