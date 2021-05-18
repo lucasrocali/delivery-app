@@ -23,7 +23,7 @@
         "react-native": "0.55.4",
         "react-native-code-push": "^5.4.2",
         "react-native-dropdownalert": "^3.5.0",
-        "react-native-fast-image": "^5.0.10",
+        "react-native-fast-image": "^8.3.0",
         "react-native-fbsdk": "^0.8.0",
         "react-native-floating-labels": "^1.1.8",
         "react-native-google-sign-in": "^1.0.16",
